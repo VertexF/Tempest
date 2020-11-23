@@ -4,8 +4,18 @@
 
 namespace Tempest
 {
-    void test()
+    Application::Application() 
     {
-        std::cout << "red world" << std::endl;
+    
+    }
+
+    Application::~Application()
+    {
+    
+    }
+
+    void Application::run()
+    {
+        std::cout << "I'm so sorry that I failed you and I did not mean for that to happen, world." << std::endl;
     }
 }
