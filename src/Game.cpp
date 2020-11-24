@@ -1,17 +1,18 @@
 #include <iostream>
-#include "Tempest/Application.h"
+#include <Tempest.h>
 
 class Game : public Tempest::Application
 {
+public:
     Game() {}
     ~Game() {}
 };
 
-int main() 
+int main(int argc, char* argv[]) 
 {
-    Tempest::Application *tempest = new Tempest::Application();
-    tempest->run();
-    delete tempest;
+    Game* game = new Game();
+    game->run();
+    delete game;
 
     return 0;
 }
