@@ -8,11 +8,7 @@ public:
     ~Game() {}
 };
 
-int main(int argc, char* argv[]) 
+Tempest::Application* Tempest::createApplication() 
 {
-    Game* game = new Game();
-    game->run();
-    delete game;
-
-    return 0;
+    return new Game();
 }

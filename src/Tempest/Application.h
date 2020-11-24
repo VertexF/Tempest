@@ -14,6 +14,9 @@ namespace Tempest
 
         void run();
     };
+
+    //To be defined in the client.
+    Application* createApplication();
 }
 
 #endif // TEST_HDR
