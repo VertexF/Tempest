@@ -3,6 +3,10 @@
 
 #include "Application.h"
 #include "Log.h"
+#include "Events/Event.h"
+#include "Events/ApplicationEvents.h"
+#include "Events/KeyEvents.h"
+#include "Events/MouseEvents.h"
 
 #ifdef WIN32
 

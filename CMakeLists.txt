@@ -5,7 +5,7 @@ project(Tempest
         LANGUAGES CXX
         DESCRIPTION "Tempest Engine")
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #Sets ups the module path to work with the a custom on so the defualt CMake modules work.
@@ -22,7 +22,7 @@ set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT G
 
 if(WIN32)
     add_custom_command(TARGET Game POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        COMMAND ${CMAKE_COMMAND} -E copy
             "${PROJECT_BINARY_DIR}/src/Tempest/Debug/Tempest.dll"
             $<TARGET_FILE_DIR:Game>)
 endif()

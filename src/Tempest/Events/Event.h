@@ -1,24 +1,22 @@
 #ifndef EVENT_HDR
 #define EVENT_HDR
 
-#include <string>
-#include <functional>
 #include <tempest_export.h>
+#include <string>
 
 namespace Tempest
 {
     enum class EventType
     {
-        NONE = 0,
-        WINDOW_CLOSE, WINDOW_RESIZE, WINDOW_FOCUS, WINDOW_FOCUS_LOST, WINDOW_MOVED,
+        None = 0,
+        WINDOW_CLOSED, WINDOW_RESIZE, WINDOW_FOCUS, WINDOW_FOCUS_LOST, WINDOW_MOVED,
         APP_TICK, APP_UPDATE, APP_RENDER,
-        KEY_PRESSED, KEY_RELEASED,
-        MOUSE_BUTTON_PRESSED, MOUSE_BUTTON_RELEASED, MOUSE_MOVED, MOUSE_SCROLLED
+        KEY_PRESSED, KEY_RELEASED, KEY_TYPED,
+        MOUSE_BUTTON_PRESSED, MOUSE_BUTTON_RELEASED, MOVED_MOUSE, MOUSED_SCROLLED
     };
 
-    enum EventTypeCatgory
+    enum EventCategory
     {
-        //Maybe consider adding the bit shifts into a maths function inside core.h
         None = 0,
         EVENT_CATEGORY_APPLICATION = (1 << 0),
         EVENT_CATEGORY_INPUT = (1 << 1),
@@ -27,23 +25,29 @@ namespace Tempest
         EVENT_CATEGORY_MOUSEBUTTON = (1 << 4)
     };
 
-    class TEMPEST_EXPORT Events
+    class TEMPEST_EXPORT Event
     {
-        friend  class EventDispatcher;
     public:
+        Event(int category) : category(category)
+        {
+        }
+        virtual ~Event() = default;
+
+        bool isHandled = false;
+
         virtual EventType getEventType() const = 0;
         virtual const char* getName() const = 0;
         virtual int getCategoryFlag() const = 0;
         virtual std::string toString() const { return getName(); }
 
-        inline bool isInCategory(int category)
+        bool isInCategory(EventCategory category)
         {
             return getCategoryFlag() & category;
         }
+
     protected:
-        bool isHandled;
+        int category;
     };
-}
 }
 
 #endif // !EVENT_HDR
