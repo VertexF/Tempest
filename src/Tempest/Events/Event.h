@@ -1,10 +1,7 @@
 #ifndef EVENT_HDR
 #define EVENT_HDR
 
-#include <tempest_export.h>
-#include <string>
-#include <functional>
-#include <ostream>
+#include "PreComp.h"
 
 namespace Tempest
 {
@@ -40,7 +37,7 @@ namespace Tempest
 
         virtual EventType getEventType() const = 0;
         virtual const char* getName() const = 0;
-        virtual int getCategoryFlag() const { return category; }
+        int getCategoryFlag() const { return category; }
         virtual std::string toString() const { return getName(); }
 
         bool isInCategory(EventCategory category)

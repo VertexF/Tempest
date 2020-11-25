@@ -1,11 +1,7 @@
 #ifndef LOG_HDR
 #define LOG_HDR
 
-#include <memory>
-
-#include <tempest_export.h>
-#include <spdlog/spdlog.h>
-#include <spdlog/fmt/ostr.h>
+#include "PreComp.h"
 
 namespace Tempest
 {

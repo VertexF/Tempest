@@ -1,9 +1,7 @@
 #ifndef APPLICTION_EVENTS_HDR
 #define APPLICTION_EVENTS_HDR
 
-#include <tempest_export.h>
-#include <string>
-#include <sstream>
+#include "PreComp.h"
 
 #include "Event.h"
 

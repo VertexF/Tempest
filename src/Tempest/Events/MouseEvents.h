@@ -1,9 +1,7 @@
 #ifndef MOUSE_EVENTS_HDR
 #define MOUSE_EVENTS_HDR
 
-#include <tempest_export.h>
-#include <string>
-#include <sstream>
+#include "PreComp.h"
 
 #include "Event.h"
 
@@ -16,7 +14,6 @@ namespace Tempest
             x(x), y(y) 
         {
         }
-
 
         std::string toString() const override
         {
@@ -109,6 +106,5 @@ namespace Tempest
     };
 
 }
-
 
 #endif // !MOUSE_EVENTS_HDR

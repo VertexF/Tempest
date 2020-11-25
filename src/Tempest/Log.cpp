@@ -1,4 +1,4 @@
-#include "spdlog/sinks/stdout_color_sinks.h"
+#include "PreComp.h"
 
 #include "Log.h"
 #include "Core.h"

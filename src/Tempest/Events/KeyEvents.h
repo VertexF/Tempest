@@ -1,9 +1,7 @@
 #ifndef KEY_EVENTS_HDR
 #define KEY_EVENTS_HDR
 
-#include <tempest_export.h>
-#include <string>
-#include <sstream>
+#include "PreComp.h"
 
 #include "Event.h"
 

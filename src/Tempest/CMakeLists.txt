@@ -24,6 +24,8 @@ source_group("Public" FILES ${TEMPEST_PUBLIC})
 
 add_library(Tempest SHARED ${TEMPEST_SOURCE})
 
+target_precompile_headers(Tempest PUBLIC PreComp.h)
+
 generate_export_header(Tempest)
 
 target_include_directories(Tempest PUBLIC ${PROJECT_BINARY_DIR}/src/Tempest ${SPDLOG_INCLUDE_DIR})

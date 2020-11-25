@@ -1,7 +1,7 @@
 #ifndef APPLICATION_HDR
 #define APPLICATION_HDR
 
-#include <tempest_export.h>
+#include "PreComp.h"
 
 namespace Tempest
 {
