@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "Log.h"
+
 namespace Tempest
 {
     Application::Application() 
@@ -16,6 +18,6 @@ namespace Tempest
 
     void Application::run()
     {
-        std::cout << "I'm so sorry that I failed you and I did not mean for that to happen, world." << std::endl;
+
     }
 }
