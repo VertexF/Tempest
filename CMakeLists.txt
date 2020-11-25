@@ -5,7 +5,7 @@ project(Tempest
         LANGUAGES CXX
         DESCRIPTION "Tempest Engine")
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #Sets ups the module path to work with the a custom on so the defualt CMake modules work.

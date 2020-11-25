@@ -24,8 +24,8 @@ namespace Tempest
             return ss.str();
         }
 
-        static inline EventType getStaticType() { return EventType::WINDOW_RESIZE; }
-        inline EventType getEventType() const override { getStaticType(); };
+        static EventType getStaticType() { return EventType::WINDOW_RESIZE; }
+        virtual EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Window resize"; }
     public:
         unsigned int _width;
@@ -38,8 +38,8 @@ namespace Tempest
         WindowClosedEvent() : Event(EVENT_CATEGORY_APPLICATION)
         {}
 
-        static inline EventType getStaticType() { return EventType::WINDOW_RESIZE; }
-        inline EventType getEventType() const override { getStaticType(); };
+        static EventType getStaticType() { return EventType::WINDOW_CLOSED; }
+        virtual EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Window close"; }
     };
 
@@ -50,7 +50,7 @@ namespace Tempest
         {}
 
         static inline EventType getStaticType() { return EventType::APP_UPDATE; }
-        inline EventType getEventType() const override { getStaticType(); };
+        virtual EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Application update"; }
     };
 
@@ -61,7 +61,7 @@ namespace Tempest
         {}
 
         static inline EventType getStaticType() { return EventType::APP_TICK; }
-        inline EventType getEventType() const override { getStaticType(); };
+        virtual EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Application tick"; }
     };
 
@@ -72,7 +72,7 @@ namespace Tempest
         {}
 
         static inline EventType getStaticType() { return EventType::APP_RENDER; }
-        inline EventType getEventType() const override { getStaticType(); };
+        virtual EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Window render"; }
     };
 }

@@ -14,7 +14,6 @@ namespace Tempest
     public:
         inline int getKeyCode() const { return keyCode; }
 
-        virtual int getCategoryFlag() const override { return category; }
     protected:
         KeyEvent(int keyCode) : Event(EVENT_CATEGORY_KEYBOARD | EVENT_CATEGORY_INPUT), keyCode(keyCode)
         {
@@ -40,7 +39,7 @@ namespace Tempest
         }
 
         static inline EventType getStaticType() { return EventType::KEY_PRESSED; }
-        inline EventType getEventType() const override { getStaticType(); };
+        inline EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Key Pressed"; }
     private:
         int _repeatedNum;
@@ -53,7 +52,6 @@ namespace Tempest
         {
         }
 
-
         std::string toString() const override
         {
             std::stringstream ss;
@@ -62,7 +60,7 @@ namespace Tempest
         }
 
         static inline EventType getStaticType() { return EventType::KEY_RELEASED; }
-        virtual EventType getEventType() const override { getStaticType(); };
+        virtual EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Key Released"; }
     };
 }

@@ -5,6 +5,7 @@
 
 #include <tempest_export.h>
 #include <spdlog/spdlog.h>
+#include <spdlog/fmt/ostr.h>
 
 namespace Tempest
 {

@@ -26,7 +26,7 @@ namespace Tempest
         }
 
         static inline EventType getStaticType() { return EventType::MOVED_MOUSE; }
-        inline EventType getEventType() const override { getStaticType(); };
+        inline EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Mouse Moved"; }
     public:
         float x;
@@ -48,8 +48,8 @@ namespace Tempest
             return ss.str();
         }
 
-        static inline EventType getStaticType() { return EventType::MOVED_MOUSE; }
-        inline EventType getEventType() const override { getStaticType(); };
+        static inline EventType getStaticType() { return EventType::MOUSED_SCROLLED; }
+        inline EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Mouse Moved"; }
     public:
         float x;
@@ -85,7 +85,7 @@ namespace Tempest
         }
 
         static inline EventType getStaticType() { return EventType::MOUSE_BUTTON_PRESSED; }
-        inline EventType getEventType() const override { getStaticType(); };
+        inline EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Mouse button pressed"; }
     };
 
@@ -104,7 +104,7 @@ namespace Tempest
         }
 
         static inline EventType getStaticType() { return EventType::MOUSE_BUTTON_RELEASED; }
-        inline EventType getEventType() const override { getStaticType(); };
+        inline EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Mouse button released"; }
     };
 
