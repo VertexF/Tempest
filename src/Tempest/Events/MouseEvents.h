@@ -1,0 +1,4 @@
+#ifndef MOUSE_EVENTS_HDR
+#define MOUSE_EVENTS_HDR
+
+#endif // !MOUSE_EVENTS_HDR
