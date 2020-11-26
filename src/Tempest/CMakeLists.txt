@@ -4,23 +4,12 @@ set(SPDLOG_LIBRARIES "${CMAKE_SOURCE_DIR}../../../loggingLibrary/logStaticLib/sp
 
 include(GenerateExportHeader)
 
-file(GLOB_RECURSE TEMPEST_PUBLIC
-    "${CMAKE_CURRENT_SOURCE_DIR}/Public/*.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/Public/*.h"
-)
-
-file(GLOB_RECURSE TEMPEST_EVENTS
-    "${CMAKE_CURRENT_SOURCE_DIR}/Events/*.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/Events/*.h"
-)
-
 file(GLOB_RECURSE TEMPEST_SOURCE
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.h"
 )
 
-source_group("Events" FILES ${TEMPEST_EVENTS})
-source_group("Public" FILES ${TEMPEST_PUBLIC})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${TEMPEST_SOURCE})
 
 #Sets ups the module path to work with the a custom on so the defualt CMake modules work.
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/modules")
