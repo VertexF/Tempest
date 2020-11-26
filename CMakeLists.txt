@@ -20,7 +20,5 @@ if(WIN32)
             $<TARGET_FILE_DIR:Game>)
 endif()
 
-target_include_directories(Game PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/Tempest/Public)
-
 target_link_libraries(Game PRIVATE Tempest)
 
