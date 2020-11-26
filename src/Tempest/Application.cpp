@@ -5,6 +5,8 @@
 #include "Events/KeyEvents.h"
 #include "Events/MouseEvents.h"
 
+#include <glfw/glfw3.h>
+
 namespace Tempest
 {
     Application::Application() 
