@@ -2,6 +2,7 @@
 #define APPLICATION_HDR
 
 #include "PreComp.h"
+#include "Window.h"
 
 namespace Tempest
 {
@@ -13,6 +14,9 @@ namespace Tempest
         virtual ~Application();
 
         void run();
+
+    private:
+        std::unique_ptr<Window> _window;
     };
 
     //To be defined in the client.

@@ -36,7 +36,7 @@ namespace Tempest
 
         //Window attributes.
         virtual void setCallbackFunction(const EventCallbackFunc &callback) = 0;
-        virtual void setVSync() = 0;
+        virtual void setVSync(bool vsync) = 0;
         virtual bool isVSync() const = 0;
 
         static Window* create(const WindowProps& props = WindowProps());

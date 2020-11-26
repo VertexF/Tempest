@@ -1,8 +1,10 @@
 #ifndef ENTRY_POINT_HDR
 #define ENTRY_POINT_HDR
 
+#include "PreComp.h"
+
 #include "Application.h"
-#include "Log.h"
+
 
 #ifdef WIN32
 

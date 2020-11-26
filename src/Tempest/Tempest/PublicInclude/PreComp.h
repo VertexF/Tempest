@@ -24,6 +24,8 @@
 #include <spdlog/fmt/ostr.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 
+#include "../Log.h"
+
 #ifdef WIN32
     #define WIN32_LEAN_AND_MEAN
     #include <Windows.h>

@@ -22,7 +22,7 @@ namespace Tempest
 
         //Window attributes.
         inline void setCallbackFunction(const EventCallbackFunc& callback) override { _windowData.eventCallback = callback; }
-        virtual void setVSync() override;
+        virtual void setVSync(bool vsync) override;
         virtual bool isVSync() const override;
     private:
         virtual void init(const WindowProps& props);
@@ -35,6 +35,7 @@ namespace Tempest
             std::string title;
             unsigned int width;
             unsigned int height;
+            bool vSync;
 
             EventCallbackFunc eventCallback;
         };

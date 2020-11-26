@@ -1,6 +1,6 @@
 #include "Application.h"
 
-#include "Log.h"
+#include "PreComp.h"
 #include "Events/ApplicationEvents.h"
 #include "Events/KeyEvents.h"
 #include "Events/MouseEvents.h"
@@ -11,7 +11,7 @@ namespace Tempest
 {
     Application::Application() 
     {
-    
+        _window = std::unique_ptr<Window>(Window::create());
     }
 
     Application::~Application()
@@ -21,13 +21,13 @@ namespace Tempest
 
     void Application::run()
     {
-        WindowResizeEvent winEvent(1280, 790);
-        TEMPEST_INFO(winEvent);
+        bool running = true;
 
-        PressedKeyEvent pressKey(2, 1);
-        TEMPEST_TRACE(pressKey);
-
-        MouseMovedEvent moved(2.f, 1.f);
-        TEMPEST_ERROR(moved);
+        while (running)
+        {
+            glClearColor(0.f, 1.f, 0.f, 1.f);
+            glClear(GL_COLOR_BUFFER_BIT);
+            _window->onUpdate();
+        }
     }
 }
