@@ -5,6 +5,7 @@
 #include "Events/KeyEvents.h"
 #include "Events/MouseEvents.h"
 #include "Events/Event.h"
+#include "Layer.h"
 
 #include <glfw/glfw3.h>
 
@@ -26,7 +27,17 @@ namespace Tempest
         EventDispatcher eventDispatcher(e);
         eventDispatcher.dispatch<WindowClosedEvent>(std::bind(&Application::onWindowClosed, this, std::placeholders::_1));
 
-        TEMPEST_TRACE("{0}", e);
+        TEMPEST_TRACE("Tempest Event: {0}", e);
+
+        //This is meant to go in reserve to handle events like keypresses.
+        for (auto it = _layerStack.end(); it != _layerStack.begin();) 
+        {
+            (*--it)->onEvent(e);
+            if (e.isHandled)
+            {
+                break;
+            }
+        }
     }
 
     void Application::run()
@@ -36,6 +47,12 @@ namespace Tempest
         {
             glClearColor(0.f, 1.f, 0.f, 1.f);
             glClear(GL_COLOR_BUFFER_BIT);
+
+            for(Layer *layer : _layerStack)
+            {
+                layer->onUpdate();
+            }
+
             _window->onUpdate();
         }
     }
@@ -44,5 +61,15 @@ namespace Tempest
     {
         _running = false;
         return true;
+    }
+
+    void Application::pushLayer(Layer *layer)
+    {
+        _layerStack.pushLayer(layer);
+    }
+
+    void Application::pushOverlay(Layer *layer)
+    {
+        _layerStack.pushOverlay(layer);
     }
 }

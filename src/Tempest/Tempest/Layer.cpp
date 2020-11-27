@@ -3,7 +3,31 @@
 
 namespace Tempest
 {
-    Layer::Layer(const std::string& layerName = "Layer") : _debugName(layerName)
+    Layer::Layer(const std::string& layerName) : _debugName(layerName)
     {
+    }
+
+    Layer::~Layer() 
+    {
+    }
+
+    void Layer::onAttach() 
+    {
+    
+    }
+
+    void Layer::onDeattach() 
+    {
+    
+    }
+
+    void Layer::onUpdate() 
+    {
+    
+    }
+
+    void Layer::onEvent(Event& e) 
+    {
+    
     }
 }
