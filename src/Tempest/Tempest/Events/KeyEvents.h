@@ -46,7 +46,7 @@ namespace Tempest
     class TEMPEST_EXPORT ReleasedKeyEvent : public KeyEvent
     {
     public:
-        ReleasedKeyEvent(int keyCode, int repeats) : KeyEvent(keyCode)
+        ReleasedKeyEvent(int keyCode) : KeyEvent(keyCode)
         {
         }
 

@@ -62,7 +62,7 @@ namespace Tempest
         template<typename T>
         bool dispatch(eventFu<T> func)
         {
-            if (_event.getEventType() == T::getEventType()) 
+            if (_event.getEventType() == T::getStaticType()) 
             {
                 _event.isHandled = func(*(T*)&_event);
                 return true;
