@@ -33,6 +33,7 @@ namespace Tempest
     {
         shutdown();
     }
+
     void WindowsWindow::init(const WindowProps& props) 
     {
         _windowData.title = props.title;
@@ -52,11 +53,20 @@ namespace Tempest
             GLFWIntialised = true;
         }
 
-        _window = glfwCreateWindow(static_cast<int>(_windowData.width), static_cast<int>(_windowData.height), 
-                                   _windowData.title.c_str(), nullptr, nullptr);
+        _window = glfwCreateWindow(static_cast<int>(_windowData.width), static_cast<int>(_windowData.height),
+            _windowData.title.c_str(), nullptr, nullptr);
+
         glfwMakeContextCurrent(_window);
         glfwSetWindowUserPointer(_window, &_windowData);
         setVSync(true);
+
+        //Here we are starting up glew.
+        glewExperimental = GL_TRUE;
+        GLenum error = glewInit();
+        if (GLEW_OK != error)
+        {
+            TEMPEST_ERROR("GLEW could not start! {0}", glewGetErrorString(error));
+        }
 
         glfwSetWindowSizeCallback(_window, [](GLFWwindow *wind, int width, int height) 
             {

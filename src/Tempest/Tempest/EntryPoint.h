@@ -5,7 +5,6 @@
 
 #include "Application.h"
 
-
 #ifdef WIN32
 
 extern Tempest::Application* Tempest::createApplication();
