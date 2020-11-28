@@ -14,6 +14,9 @@ add_executable(Game src/Game.cpp)
 set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Game)
 
 if(WIN32)
+    #Using a bit of post-processing we can select the varaiables we need to
+    #get the correct version of the share library after compiling it.
+    #As we have already built the Game target it will know where to copy it to.
     add_custom_command(TARGET Game POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
             "$<TARGET_FILE_DIR:Tempest>/Tempest.dll"
