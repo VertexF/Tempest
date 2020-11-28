@@ -10,7 +10,7 @@ if(MSVC)
     set(SPDLOG_INCLUDE_DIR "${CMAKE_SOURCE_DIR}../../../loggingLibrary/spdlog/include")
     set(SPDLOG_LIBRARIES "${CMAKE_SOURCE_DIR}../../../loggingLibrary/logStaticLib/spdlog.lib")
     set(GLEW_USE_STATIC_LIBS True)
-    source_group(TREE "${CMAKE_CURRENT_SOURCE_DIR}" FILES ${TEMPEST_SOURCE})
+    source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${TEMPEST_SOURCE})
 endif()
 
 #Sets ups the module path to work with the a custom on so the defualt CMake modules work.

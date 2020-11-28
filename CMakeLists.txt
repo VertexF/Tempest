@@ -15,8 +15,8 @@ set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT G
 
 if(WIN32)
     add_custom_command(TARGET Game POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy
-            "${PROJECT_BINARY_DIR}/src/Tempest/Debug/Tempest.dll"
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "$<TARGET_FILE_DIR:Tempest>/Tempest.dll"
             $<TARGET_FILE_DIR:Game>)
 endif()
 

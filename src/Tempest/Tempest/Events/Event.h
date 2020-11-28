@@ -3,8 +3,12 @@
 
 #include "PreComp.h"
 
+/*This file contains the event handler and dispatcher.*/
+
 namespace Tempest
 {
+    //These are the different types of events that can happen across the
+    //engine.
     enum class EventType
     {
         None = 0,
@@ -14,6 +18,7 @@ namespace Tempest
         MOUSE_BUTTON_PRESSED, MOUSE_BUTTON_RELEASED, MOVED_MOUSE, MOUSED_SCROLLED
     };
 
+    //This allows use to categories the different events.
     enum EventCategory
     {
         //(1 << 0) magic numbers need to be refactored.
@@ -25,9 +30,12 @@ namespace Tempest
         EVENT_CATEGORY_MOUSEBUTTON = (1 << 4)
     };
 
+    //This is the interface of what an event can look like.
     class TEMPEST_EXPORT Event
     {
     public:
+        //The category is just a number but every other event need to tell 
+        //the event handler what type of event it.
         Event(int category) : category(category)
         {
         }
@@ -49,8 +57,13 @@ namespace Tempest
         int category;
     };
 
+    //The event dispatcher is a template pattern as we have an common interface
+    //but depending on the event type we dispatch that even with a different
+    //function.
     class EventDispatcher 
     {
+        //Every event must return a bool to tell the dispatcher if has been dealt
+        //with.
         template<typename T>
         using eventFu = std::function<bool(T&)>;
 
@@ -59,6 +72,8 @@ namespace Tempest
         {
         }
 
+        //If they event type matches the one needing to be ran, then we run that 
+        //event function.
         template<typename T>
         bool dispatch(eventFu<T> func)
         {
@@ -74,6 +89,8 @@ namespace Tempest
         Event &_event;
     };
 
+    //This allows our event dispatcher to print to the logger. Meant for 
+    //debuggin only.
     inline std::ostream& operator<<(std::ostream& os, const Event& e) 
     {
         return os << e.toString();
