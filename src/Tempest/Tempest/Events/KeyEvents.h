@@ -7,12 +7,14 @@
 
 namespace Tempest
 {
+    //This class handles the window key events. This is a interface class.
     class TEMPEST_EXPORT KeyEvent : public Event
     {
     public:
         inline int getKeyCode() const { return keyCode; }
 
     protected:
+        //A key event is both an input event and a keyboard event.
         KeyEvent(int keyCode) : Event(EVENT_CATEGORY_KEYBOARD | EVENT_CATEGORY_INPUT), keyCode(keyCode)
         {
         }
@@ -20,6 +22,7 @@ namespace Tempest
         int keyCode;
     };
 
+    //This class handles the window key pressed events.
     class TEMPEST_EXPORT PressedKeyEvent : public KeyEvent 
     {
     public:
@@ -29,6 +32,8 @@ namespace Tempest
 
         inline int getTimeseRepeated() const { return _repeatedNum; }
 
+        //This is a debugging function which allows coders to see what this 
+        //event does.
         std::string toString() const override
         {
             std::stringstream ss;
@@ -36,6 +41,9 @@ namespace Tempest
             return ss.str();
         }
 
+        //The static return is used to get the event type. Every instance will
+        //share the same event type of this class. This is needed for the event
+        //dispatcher to work correctly.
         static inline EventType getStaticType() { return EventType::KEY_PRESSED; }
         inline EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Key Pressed"; }
@@ -43,6 +51,7 @@ namespace Tempest
         int _repeatedNum;
     };
 
+    //This class handles the window key released events.
     class TEMPEST_EXPORT ReleasedKeyEvent : public KeyEvent
     {
     public:
@@ -50,6 +59,8 @@ namespace Tempest
         {
         }
 
+        //This is a debugging function which allows coders to see what this 
+        //event does.
         std::string toString() const override
         {
             std::stringstream ss;
@@ -57,6 +68,9 @@ namespace Tempest
             return ss.str();
         }
 
+        //The static return is used to get the event type. Every instance will
+        //share the same event type of this class. This is needed for the event
+        //dispatcher to work correctly.
         static inline EventType getStaticType() { return EventType::KEY_RELEASED; }
         virtual EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Key Released"; }

@@ -7,14 +7,18 @@
 
 namespace Tempest
 {
+    //This handles the movement of the mouse.
     class TEMPEST_EXPORT MouseMovedEvent : public Event
     {
     public:
+        //This event belongs to both input and mouse events.
         MouseMovedEvent(float x, float y) : Event(EVENT_CATEGORY_MOUSE | EVENT_CATEGORY_INPUT),
             x(x), y(y) 
         {
         }
 
+        //This is a debugging function which allows coders to see what this 
+        //event does.
         std::string toString() const override
         {
             std::stringstream ss;
@@ -22,6 +26,9 @@ namespace Tempest
             return ss.str();
         }
 
+        //The static return is used to get the event type. Every instance will
+        //share the same event type of this class. This is needed for the event
+        //dispatcher to work correctly.
         static inline EventType getStaticType() { return EventType::MOVED_MOUSE; }
         inline EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Mouse Moved"; }
@@ -33,18 +40,26 @@ namespace Tempest
     class TEMPEST_EXPORT MouseScrolledEvent : public Event
     {
     public:
+        //This event belongs to both input and mouse events.
+        //The y value is for the rare occasion that a user has a scroll whell
+        //that goes left to right as well as up and down.
         MouseScrolledEvent(float x, float y) : Event(EVENT_CATEGORY_MOUSE | EVENT_CATEGORY_INPUT),
             x(x), y(y)
         {
         }
 
-            std::string toString() const override
+        //This is a debugging function which allows coders to see what this 
+        //event does.
+        std::string toString() const override
         {
             std::stringstream ss;
             ss << "Mouses scroll position: " << x << " , " << y;
             return ss.str();
         }
 
+        //The static return is used to get the event type. Every instance will
+        //share the same event type of this class. This is needed for the event
+        //dispatcher to work correctly.
         static inline EventType getStaticType() { return EventType::MOUSED_SCROLLED; }
         inline EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Mouse Moved"; }
@@ -53,12 +68,14 @@ namespace Tempest
         float y;
     };
 
+    //This class is a interface class to mouse button events.
     class TEMPEST_EXPORT MouseButtonEvent : public Event
     {
     public:
         inline int getMouseEvent() const { return _button; }
 
     protected:
+        //This event belongs to both input and mouse events.
         MouseButtonEvent(int button) : Event(EVENT_CATEGORY_MOUSE | EVENT_CATEGORY_INPUT),
             _button(button)
         {
@@ -67,6 +84,7 @@ namespace Tempest
         int _button;
     };
 
+    //This class handles mouse pressed events.
     class TEMPEST_EXPORT MouseButtonEventPressed : public MouseButtonEvent
     {
     public:
@@ -74,6 +92,8 @@ namespace Tempest
         {
         }
 
+        //This is a debugging function which allows coders to see what this 
+        //event does.
         std::string toString() const override
         {
             std::stringstream ss;
@@ -81,11 +101,15 @@ namespace Tempest
             return ss.str();
         }
 
+        //The static return is used to get the event type. Every instance will
+        //share the same event type of this class. This is needed for the event
+        //dispatcher to work correctly.
         static inline EventType getStaticType() { return EventType::MOUSE_BUTTON_PRESSED; }
         inline EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Mouse button pressed"; }
     };
 
+    //This class handles mouse released events.
     class TEMPEST_EXPORT MouseButtonEventReleased : public MouseButtonEvent
     {
     public:
@@ -93,6 +117,8 @@ namespace Tempest
         {
         }
 
+        //This is a debugging function which allows coders to see what this 
+        //event does.
         std::string toString() const override
         {
             std::stringstream ss;
@@ -100,6 +126,9 @@ namespace Tempest
             return ss.str();
         }
 
+        //The static return is used to get the event type. Every instance will
+        //share the same event type of this class. This is needed for the event
+        //dispatcher to work correctly.
         static inline EventType getStaticType() { return EventType::MOUSE_BUTTON_RELEASED; }
         inline EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Mouse button released"; }
