@@ -11,6 +11,9 @@
 
 namespace Tempest
 {
+    //First we intialise the window which sets up all the stuff needed to run.
+    //Then we set up callback functions to the on event function in this class.
+    //This allows events to be sent GLFW from our onEvent function.
     Application::Application() 
     {
         _window = std::unique_ptr<Window>(Window::create());
@@ -19,9 +22,11 @@ namespace Tempest
 
     Application::~Application()
     {
-    
     }
 
+    //The only event we need to dispatch is our windows close event.
+    //This sends out a signal, that goes through the dispatcher and gets handled
+    //by running the WindowClosedEvent function as a callback.
     void Application::onEvent(Event &e) 
     {
         EventDispatcher eventDispatcher(e);
@@ -33,6 +38,8 @@ namespace Tempest
         for (auto it = _layerStack.end(); it != _layerStack.begin();) 
         {
             (*--it)->onEvent(e);
+            //When the event is handled we don't need to continue looping
+            //through the layer stack.
             if (e.isHandled)
             {
                 break;
@@ -40,6 +47,8 @@ namespace Tempest
         }
     }
 
+    //The main loop function. Every layer need to be updated in order so we 
+    //render layers on top of each other correctly.
     void Application::run()
     {
         _running = true;
@@ -57,6 +66,8 @@ namespace Tempest
         }
     }
 
+    //This is what actually gets ran in the event dispatcher when the signal 
+    //is sent on the event of a closed window.
     bool Application::onWindowClosed(WindowClosedEvent &closed)
     {
         _running = false;

@@ -11,6 +11,7 @@ namespace Tempest
 {
     class Layer;
 
+    //This is the main coordinator class.
     class TEMPEST_EXPORT Application
     {
     public:
@@ -30,7 +31,7 @@ namespace Tempest
         LayerStack _layerStack;
     };
 
-    //To be defined in the client.
+    //To be defined in the client. This is how you use the shared library.
     Application* createApplication();
 }
 

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <Tempest.h>
 
+//The client also create it own layers depending on what it needs.
 class ExampleLayer : public Tempest::Layer 
 {
 public:
@@ -19,6 +20,7 @@ public:
     }
 };
 
+//The client uses the application as a template to create the game.
 class Game : public Tempest::Application
 {
 public:
@@ -30,6 +32,8 @@ public:
     ~Game() {}
 };
 
+//We kick start the engine by using our client class that is 
+//inherited from the the engine.
 Tempest::Application* Tempest::createApplication() 
 {
     return new Game();
