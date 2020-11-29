@@ -28,6 +28,9 @@ namespace Tempest
             return ss.str();
         }
 
+        inline unsigned int getWidth() const { return _width; }
+        inline unsigned int getHeight() const { return _height; }
+
         //The static return is used to get the event type. Every instance will
         //share the same event type of this class. This is needed for the event
         //dispatcher to work correctly.

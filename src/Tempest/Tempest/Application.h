@@ -23,12 +23,17 @@ namespace Tempest
 
         void pushLayer(Layer *layer);
         void pushOverlay(Layer *layer);
+
+        inline static Application& get() { return *_instance; }
+        inline Window& getWindow() const { return *_window;  }
     private:
         bool onWindowClosed(WindowClosedEvent &closed);
 
         bool _running;
         std::unique_ptr<Window> _window;
         LayerStack _layerStack;
+
+        static Application* _instance;
     };
 
     //To be defined in the client. This is how you use the shared library.

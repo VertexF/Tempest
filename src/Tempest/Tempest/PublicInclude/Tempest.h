@@ -4,6 +4,7 @@
 #include "../Application.h"
 #include "../Layer.h"
 #include "../Core.h"
+#include "../Debug/ImGUILayer.h"
 
 /*****************************Entry Point**********************************/
 

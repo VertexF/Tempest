@@ -11,11 +11,15 @@
 
 namespace Tempest
 {
+    Application *Application::_instance = nullptr;
+
     //First we intialise the window which sets up all the stuff needed to run.
     //Then we set up callback functions to the on event function in this class.
     //This allows events to be sent GLFW from our onEvent function.
     Application::Application() 
     {
+        _instance = this;
+
         _window = std::unique_ptr<Window>(Window::create());
         _window->setCallbackFunction(std::bind(&Application::onEvent, this, std::placeholders::_1));
     }
@@ -77,10 +81,12 @@ namespace Tempest
     void Application::pushLayer(Layer *layer)
     {
         _layerStack.pushLayer(layer);
+        layer->onAttach();
     }
 
     void Application::pushOverlay(Layer *layer)
     {
         _layerStack.pushOverlay(layer);
+        layer->onAttach();
     }
 }

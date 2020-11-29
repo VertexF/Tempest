@@ -124,6 +124,14 @@ namespace Tempest
                 }
             });
 
+        glfwSetCharCallback(_window, [](GLFWwindow* wind, unsigned int character) 
+            {
+                WindowData& windowData = *(static_cast<WindowData*>(glfwGetWindowUserPointer(wind)));
+
+                TypedKeyEvent typedEvent(character);
+                windowData.eventCallback(typedEvent);
+            });
+
         glfwSetMouseButtonCallback(_window, [](GLFWwindow *wind, int button, int action, int mods)
             {
                 WindowData& windowData = *(static_cast<WindowData*>(glfwGetWindowUserPointer(wind)));

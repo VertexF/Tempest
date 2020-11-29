@@ -75,6 +75,33 @@ namespace Tempest
         virtual EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Key Released"; }
     };
+
+    //This class handles the window key typed events.
+    class TEMPEST_EXPORT TypedKeyEvent : public KeyEvent
+    {
+    public:
+        TypedKeyEvent(int keyCode) : KeyEvent(keyCode)
+        {
+        }
+
+        //This is a debugging function which allows coders to see what this 
+        //event does.
+        std::string toString() const override
+        {
+            std::stringstream ss;
+            ss << "Key pressed: " << keyCode;
+            return ss.str();
+        }
+
+        //The static return is used to get the event type. Every instance will
+        //share the same event type of this class. This is needed for the event
+        //dispatcher to work correctly.
+        static inline EventType getStaticType() { return EventType::KEY_TYPED; }
+        inline EventType getEventType() const override { return getStaticType(); };
+        virtual const char* getName() const override { return "Key Pressed"; }
+    private:
+        
+    };
 }
 
 #endif // !KEY_EVENTS_HDR
