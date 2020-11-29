@@ -9,6 +9,7 @@
 
 namespace
 {
+    //Makes sure the intialisation of GLFW happens only once.
     bool GLFWIntialised = false;
 
     void GLFWErrorCallBack(int error, const char *errorString) 
@@ -19,6 +20,7 @@ namespace
 
 namespace Tempest
 {
+    //Here we are constructing a window with the default properties.
     Window* Window::create(const WindowProps& props) 
     { 
         return new WindowsWindow(props);
@@ -34,6 +36,13 @@ namespace Tempest
         shutdown();
     }
 
+    //The windows properties is just the basic properties this window need to 
+    //be created.
+    //Very important to note that the order of intailsation here:
+    //1) You need to intialise GLFW 
+    //2) You need to create the window GLFW 
+    //3) You need to create an OpenGL context with GLFW
+    //4) You need to intialise GLEW 
     void WindowsWindow::init(const WindowProps& props) 
     {
         _windowData.title = props.title;
@@ -48,6 +57,7 @@ namespace Tempest
                 TEMPEST_ERROR("GLFW could not start!");
             }
 
+            //With this set up we now set up the errors to use our logger.
             glfwSetErrorCallback(GLFWErrorCallBack);
 
             GLFWIntialised = true;
@@ -68,6 +78,7 @@ namespace Tempest
             TEMPEST_ERROR("GLEW could not start! {0}", glewGetErrorString(error));
         }
 
+        //All these function are using predicates to use our custom event handlers. 
         glfwSetWindowSizeCallback(_window, [](GLFWwindow *wind, int width, int height) 
             {
                 WindowData &windowData = *(static_cast<WindowData *>(glfwGetWindowUserPointer(wind)));
