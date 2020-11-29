@@ -6,6 +6,9 @@
 
 namespace Tempest 
 {
+    //Every thing in the engine is layered. 
+    //Each layer contains away to detach and attach itself.
+    //TODO: Add the functionality for layering to be useful.
     class TEMPEST_EXPORT Layer 
     {
     public:
@@ -17,6 +20,7 @@ namespace Tempest
         virtual void onUpdate();
         virtual void onEvent(Event& e);
 
+        //Only really used for debugging and shouldn't be used in release.
         inline std::string getLayer() const { return _debugName; }
     private:
         std::string _debugName;

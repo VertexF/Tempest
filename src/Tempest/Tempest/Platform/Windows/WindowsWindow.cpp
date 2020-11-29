@@ -167,6 +167,7 @@ namespace Tempest
         glfwDestroyWindow(_window);
     }
 
+    //Currently just swaps the back buffer.
     void WindowsWindow::onUpdate() 
     {
         glfwPollEvents();

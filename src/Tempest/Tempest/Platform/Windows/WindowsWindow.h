@@ -3,6 +3,7 @@
 
 #include "PreComp.h"
 
+//Needed to make the GLEW linking is linking to the static version.
 #define GLEW_STATIC 1
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -11,6 +12,7 @@
 
 namespace Tempest 
 {
+    //This is the Windows OS windo versoin.
     class WindowsWindow : public Window
     {
     public:
@@ -32,6 +34,9 @@ namespace Tempest
     private:
         GLFWwindow *_window;
 
+        //This structure allow use to pass in the window data to GLFW
+        //without the need to pass in the WindowsWindow class meaning we can
+        //cut down on how much data is being handled by GLFW internally.
         struct WindowData 
         {
             std::string title;
@@ -39,6 +44,7 @@ namespace Tempest
             unsigned int height;
             bool vSync;
 
+            //This allows use to use function callback to events.
             EventCallbackFunc eventCallback;
         };
 

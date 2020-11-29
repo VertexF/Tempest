@@ -7,6 +7,8 @@ namespace Tempest
 {
     class Layer;
 
+    //This is a wrapper around a vector. This will handle navigation of
+    // the layers.
     class TEMPEST_EXPORT LayerStack 
     {
     public:
