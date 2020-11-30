@@ -30,7 +30,7 @@ namespace Tempest
         double xPos, yPos = 0.0;
         glfwGetCursorPos(window, &xPos, &yPos);
 
-        return std::pair<float, float>(xPos, yPos);
+        return std::pair<float, float>(static_cast<float>(xPos), static_cast<float>(yPos));
     }
 
     float WindowsInput::getMouseXImpl()

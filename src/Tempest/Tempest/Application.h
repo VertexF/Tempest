@@ -7,6 +7,8 @@
 #include "Events/ApplicationEvents.h"
 #include "LayerStack.h"
 
+#include <glm/glm.hpp>
+
 namespace Tempest
 {
     class Layer;

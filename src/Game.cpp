@@ -11,12 +11,15 @@ public:
 
     void onUpdate() override 
     {
-        //TEMPEST_INFO("ExampleLayer::Update");
+        if (Tempest::Input::isKeyPressed(TEMP_KEY_TAB)) 
+        {
+            TEMPEST_TRACE("Tab is pressed");
+        }
     }
 
     void onEvent(Tempest::Event &e) override
     {
-        //TEMPEST_TRACE("Game Event :{0} ", e);
+        
     }
 };
 

@@ -7,6 +7,8 @@
 #include "../../Events/MouseEvents.h"
 #include "../../Events/Event.h"
 
+#include <glfw/glfw3.h>
+
 namespace
 {
     //Makes sure the intialisation of GLFW happens only once.

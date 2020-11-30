@@ -67,9 +67,6 @@ namespace Tempest
                 layer->onUpdate();
             }
 
-            auto [x, y] = Input::getMousePosition();
-            TEMPEST_TRACE("{0}, {1}", x, y);
-
             _window->onUpdate();
         }
     }

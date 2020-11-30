@@ -5,6 +5,9 @@
 #include "../Layer.h"
 #include "../Core.h"
 #include "../Debug/ImGUILayer.h"
+#include "../Input.h"
+#include "../KeyCodes.h"
+#include "../MouseButtonCodes.h"
 
 /*****************************Entry Point**********************************/
 
