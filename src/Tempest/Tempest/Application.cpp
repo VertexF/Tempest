@@ -6,6 +6,7 @@
 #include "Events/MouseEvents.h"
 #include "Events/Event.h"
 #include "Layer.h"
+#include "Input.h"
 
 #include <glfw/glfw3.h>
 
@@ -36,7 +37,7 @@ namespace Tempest
         EventDispatcher eventDispatcher(e);
         eventDispatcher.dispatch<WindowClosedEvent>(std::bind(&Application::onWindowClosed, this, std::placeholders::_1));
 
-        TEMPEST_TRACE("Tempest Event: {0}", e);
+        //TEMPEST_TRACE("Tempest Event: {0}", e);
 
         //This is meant to go in reserve to handle events like keypresses.
         for (auto it = _layerStack.end(); it != _layerStack.begin();) 
@@ -65,6 +66,9 @@ namespace Tempest
             {
                 layer->onUpdate();
             }
+
+            auto [x, y] = Input::getMousePosition();
+            TEMPEST_TRACE("{0}, {1}", x, y);
 
             _window->onUpdate();
         }

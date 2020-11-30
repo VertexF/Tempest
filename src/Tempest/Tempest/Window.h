@@ -40,6 +40,8 @@ namespace Tempest
         virtual void setVSync(bool vsync) = 0;
         virtual bool isVSync() const = 0;
 
+        virtual void *getNativeWindow() const = 0;
+
         //As every window need to be create with properties this static
         //function should be implemented on the platform specific class.
         static Window* create(const WindowProps& props = WindowProps());

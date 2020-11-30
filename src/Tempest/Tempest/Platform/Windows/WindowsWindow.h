@@ -28,6 +28,8 @@ namespace Tempest
         inline void setCallbackFunction(const EventCallbackFunc& callback) override { _windowData.eventCallback = callback; }
         virtual void setVSync(bool vsync) override;
         virtual bool isVSync() const override;
+
+        inline virtual void* getNativeWindow() const override { return _window; }
     private:
         virtual void init(const WindowProps& props);
         virtual void shutdown();
