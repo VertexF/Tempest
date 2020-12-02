@@ -6,8 +6,7 @@
 #include "Events/Event.h"
 #include "Events/ApplicationEvents.h"
 #include "LayerStack.h"
-
-#include <glm/glm.hpp>
+#include "Debug/ImGUILayer.h"
 
 namespace Tempest
 {
@@ -32,6 +31,7 @@ namespace Tempest
         bool onWindowClosed(WindowClosedEvent &closed);
 
         bool _running;
+        ImGuiLayer* _imGuiLayer;
         std::unique_ptr<Window> _window;
         LayerStack _layerStack;
 

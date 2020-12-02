@@ -17,23 +17,20 @@ namespace Tempest
         ImGuiLayer();
         ~ImGuiLayer();
 
-        void onEvent(Event& e);
-        void onUpdate();
-        void onAttach();
-        void onDetach();
-    private:
-        bool onMouseButtonPressedEvent(MouseButtonEventPressed &pressEvent);
-        bool onMouseButtonReleaseEvent(MouseButtonEventReleased& releaseEvent);
-        bool onMouseMovedEvent(MouseMovedEvent& mouseMoved);
-        bool onMouseScrollEvent(MouseScrolledEvent& mouseScrolled);
+        //void onImGuiRender();
+        virtual void onAttach() override;
+        virtual void onDetach() override;
+        virtual void onImGuiRender() override;
 
-        bool onKeyPressedEvent(PressedKeyEvent& keyPressed);
-        bool onKeyReleasedEvent(ReleasedKeyEvent& keyReleased);
-        bool onKeyTypedEvent(TypedKeyEvent& keyTyped);
-        bool onWindowResizeEvent(WindowResizeEvent& windowResized);
+        void begin();
+        void end();
 
+        void blockEvents(bool block) { _blockEvents = block; }
+
+        void setDarkThemeColors();
     private:
         float _time = 0.f;
+        bool _blockEvents = true;
     };
 }
 

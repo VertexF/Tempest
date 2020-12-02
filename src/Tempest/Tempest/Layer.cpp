@@ -16,7 +16,7 @@ namespace Tempest
     
     }
 
-    void Layer::onDeattach() 
+    void Layer::onDetach()
     {
     
     }

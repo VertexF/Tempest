@@ -30,7 +30,6 @@ public:
     Game() 
     {
         pushLayer(new ExampleLayer());
-        pushOverlay(new Tempest::ImGuiLayer());
     }
 
     ~Game() {}

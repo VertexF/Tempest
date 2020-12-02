@@ -5,7 +5,6 @@ namespace Tempest
 {
     LayerStack::LayerStack() 
     {
-        _layerIterator = _layers.begin();
     }
 
     //Layers are only raw pointer because we want to be able to remove them 
@@ -24,7 +23,8 @@ namespace Tempest
     //iterator. 
     void LayerStack::pushLayer(Layer* layer) 
     {
-        _layerIterator = _layers.emplace(_layerIterator, layer);
+        _layers.emplace(_layers.begin() + _layerIteratorIndex, layer);
+        _layerIteratorIndex++;
     }
 
     //We want overlay layers to be added to the back of the vector always.
@@ -40,7 +40,7 @@ namespace Tempest
         if (it != _layers.end()) 
         {
             _layers.erase(it);
-            _layerIterator--;
+            _layerIteratorIndex--;
         }
     }
 

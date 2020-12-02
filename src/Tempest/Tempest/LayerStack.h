@@ -24,7 +24,7 @@ namespace Tempest
         std::vector<Layer*>::iterator end() { return _layers.end(); }
     private:
         std::vector<Layer*> _layers;
-        std::vector<Layer*>::iterator _layerIterator;
+        unsigned int _layerIteratorIndex = 0;
     };
 }
 

@@ -9,6 +9,7 @@
 #include "Input.h"
 
 #include <glfw/glfw3.h>
+#include "imgui.h"
 
 namespace Tempest
 {
@@ -23,6 +24,9 @@ namespace Tempest
 
         _window = std::unique_ptr<Window>(Window::create());
         _window->setCallbackFunction(std::bind(&Application::onEvent, this, std::placeholders::_1));
+
+        _imGuiLayer = new ImGuiLayer();
+        pushOverlay(_imGuiLayer);
     }
 
     Application::~Application()
@@ -59,13 +63,26 @@ namespace Tempest
         _running = true;
         while (_running)
         {
-            glClearColor(0.f, 1.f, 0.f, 1.f);
             glClear(GL_COLOR_BUFFER_BIT);
+            glClearColor(1.f, 0.f, 0.f, 1.f);
 
             for(Layer *layer : _layerStack)
             {
                 layer->onUpdate();
             }
+            glBegin(GL_TRIANGLES);
+            glColor3f(0.1, 0.2, 0.3);
+            glVertex3f(0, 0, 0);
+            glVertex3f(1, 0, 0);
+            glVertex3f(0, 1, 0);
+            glEnd();
+
+            _imGuiLayer->begin();
+            for (Layer* layer : _layerStack)
+            {
+                _imGuiLayer->onImGuiRender();
+            }
+            _imGuiLayer->end();
 
             _window->onUpdate();
         }
