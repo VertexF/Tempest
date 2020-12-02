@@ -8,7 +8,7 @@
 namespace Tempest
 {
     //This handles the movement of the mouse.
-    class TEMPEST_EXPORT MouseMovedEvent : public Event
+    class MouseMovedEvent : public Event
     {
     public:
         //This event belongs to both input and mouse events.
@@ -37,7 +37,7 @@ namespace Tempest
         float y;
     };
 
-    class TEMPEST_EXPORT MouseScrolledEvent : public Event
+    class MouseScrolledEvent : public Event
     {
     public:
         //This event belongs to both input and mouse events.
@@ -69,7 +69,7 @@ namespace Tempest
     };
 
     //This class is a interface class to mouse button events.
-    class TEMPEST_EXPORT MouseButtonEvent : public Event
+    class MouseButtonEvent : public Event
     {
     public:
         inline int getMouseEvent() const { return _button; }
@@ -85,7 +85,7 @@ namespace Tempest
     };
 
     //This class handles mouse pressed events.
-    class TEMPEST_EXPORT MouseButtonEventPressed : public MouseButtonEvent
+    class MouseButtonEventPressed : public MouseButtonEvent
     {
     public:
         MouseButtonEventPressed(int button) : MouseButtonEvent(button)
@@ -110,7 +110,7 @@ namespace Tempest
     };
 
     //This class handles mouse released events.
-    class TEMPEST_EXPORT MouseButtonEventReleased : public MouseButtonEvent
+    class MouseButtonEventReleased : public MouseButtonEvent
     {
     public:
         MouseButtonEventReleased(int button) : MouseButtonEvent(button)

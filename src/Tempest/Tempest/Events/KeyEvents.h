@@ -8,7 +8,7 @@
 namespace Tempest
 {
     //This class handles the window key events. This is a interface class.
-    class TEMPEST_EXPORT KeyEvent : public Event
+    class KeyEvent : public Event
     {
     public:
         inline int getKeyCode() const { return keyCode; }
@@ -23,7 +23,7 @@ namespace Tempest
     };
 
     //This class handles the window key pressed events.
-    class TEMPEST_EXPORT PressedKeyEvent : public KeyEvent 
+    class PressedKeyEvent : public KeyEvent 
     {
     public:
         PressedKeyEvent(int keyCode, int repeats) : KeyEvent(keyCode), _repeatedNum(repeats)
@@ -52,7 +52,7 @@ namespace Tempest
     };
 
     //This class handles the window key released events.
-    class TEMPEST_EXPORT ReleasedKeyEvent : public KeyEvent
+    class ReleasedKeyEvent : public KeyEvent
     {
     public:
         ReleasedKeyEvent(int keyCode) : KeyEvent(keyCode)
@@ -77,7 +77,7 @@ namespace Tempest
     };
 
     //This class handles the window key typed events.
-    class TEMPEST_EXPORT TypedKeyEvent : public KeyEvent
+    class TypedKeyEvent : public KeyEvent
     {
     public:
         TypedKeyEvent(int keyCode) : KeyEvent(keyCode)

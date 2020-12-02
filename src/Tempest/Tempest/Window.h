@@ -23,7 +23,7 @@ namespace Tempest
     };
 
     //This is just an interface class for how you should write platform windowing.
-    class TEMPEST_EXPORT Window 
+    class Window 
     {
     public:
         using EventCallbackFunc = std::function<void(Event&)>;

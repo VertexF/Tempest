@@ -17,7 +17,7 @@ public:
         }
     }
 
-    void onEvent(Tempest::Event &e) override
+    void onEvent(Tempest::Event &/*e*/) override
     {
         
     }

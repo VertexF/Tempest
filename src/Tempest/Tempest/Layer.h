@@ -9,7 +9,7 @@ namespace Tempest
     //Every thing in the engine is layered. 
     //Each layer contains away to detach and attach itself.
     //TODO: Add the functionality for layering to be useful.
-    class TEMPEST_EXPORT Layer 
+    class Layer 
     {
     public:
         Layer(const std::string &layerName = "Layer");

@@ -13,7 +13,7 @@ namespace Tempest
     class Layer;
 
     //This is the main coordinator class.
-    class TEMPEST_EXPORT Application
+    class Application
     {
     public:
         Application();

@@ -1,6 +1,4 @@
 
-include(GenerateExportHeader)
-
 file(GLOB_RECURSE TEMPEST_SOURCE
     "${CMAKE_CURRENT_SOURCE_DIR}/Tempest/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/Tempest/*.h"
@@ -27,13 +25,12 @@ find_package(OpenGL REQUIRED)
 
 add_subdirectory(vender/imgui)
 
-add_library(Tempest SHARED ${TEMPEST_SOURCE})
+add_library(Tempest STATIC ${TEMPEST_SOURCE})
+
+set_property(TARGET Tempest PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
 set(PRECOMPILED_HEADER Tempest/PublicInclude)
-
 target_precompile_headers(Tempest PUBLIC "${PRECOMPILED_HEADER}/PreComp.h")
 
-generate_export_header(Tempest)
-
 target_include_directories(Tempest PUBLIC ${PROJECT_BINARY_DIR}/src/Tempest ${SPDLOG_INCLUDE_DIR} ${PRECOMPILED_HEADER} ${IMGUI_INCLUDE_DIR} ${GML_INCLUDE_DIR} ${GLFW_INCLUDE_DIR} ${GLEW_INCLUDE_DIRS})
-target_link_libraries(Tempest PRIVATE OpenGL::GL OpenGL::GLU ${GLEW_STATIC_LIBRARIES} ${SPDLOG_LIBRARIES} IMGUI) 
+target_link_libraries(Tempest PRIVATE  ${SPDLOG_LIBRARIES} IMGUI) 

@@ -6,7 +6,7 @@
 //This class sets up the logger to initalised to have the format we want.
 namespace Tempest
 {
-    class TEMPEST_EXPORT Log
+    class Log
     {
     public:
         static void init();

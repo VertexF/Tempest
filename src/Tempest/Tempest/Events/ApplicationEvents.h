@@ -8,7 +8,7 @@
 namespace Tempest
 {
     //This class handles the window resize events
-    class TEMPEST_EXPORT WindowResizeEvent : public Event
+    class WindowResizeEvent : public Event
     {
     public:
         //Height and width are the new size of the resized event.
@@ -43,7 +43,7 @@ namespace Tempest
     };
 
     //This class handles the window close events
-    class TEMPEST_EXPORT WindowClosedEvent : public Event
+    class WindowClosedEvent : public Event
     {
     public:
         //The constructure of the event class is taking in the Event category
@@ -62,7 +62,7 @@ namespace Tempest
     //This class handles the window update events. Current these don't 
     //do anything.
     //TODO: Expand the events functionality.
-    class TEMPEST_EXPORT AppUpdateEvent : public Event
+    class AppUpdateEvent : public Event
     {
     public:
         //The constructure of the event class is taking in the Event category
@@ -81,7 +81,7 @@ namespace Tempest
     //This class handles the window frames/timing events. 
     //Current these don't do anything.
     //TODO: Expand the events functionality.
-    class TEMPEST_EXPORT AppTickEvent : public Event
+    class AppTickEvent : public Event
     {
     public:
         AppTickEvent() : Event(EVENT_CATEGORY_APPLICATION)
@@ -95,7 +95,7 @@ namespace Tempest
     //This class handles the window render events. 
     //Current these don't do anything.
     //TODO: Expand the events functionality.
-    class TEMPEST_EXPORT AppRenderEvent : public Event
+    class AppRenderEvent : public Event
     {
     public:
         //The constructure of the event class is taking in the Event category

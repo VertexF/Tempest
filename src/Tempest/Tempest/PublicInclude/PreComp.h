@@ -1,8 +1,6 @@
 #ifndef PRECOMP_HDR
 #define PRECOMP_HDR
 
-#include <tempest_export.h>
-
 #include <utility>
 #include <algorithm>
 #include <functional>

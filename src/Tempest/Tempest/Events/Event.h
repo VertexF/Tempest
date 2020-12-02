@@ -31,7 +31,7 @@ namespace Tempest
     };
 
     //This is the interface of what an event can look like.
-    class TEMPEST_EXPORT Event
+    class Event
     {
     public:
         //The category is just a number but every other event need to tell 
@@ -48,9 +48,9 @@ namespace Tempest
         int getCategoryFlag() const { return category; }
         virtual std::string toString() const { return getName(); }
 
-        bool isInCategory(EventCategory category)
+        bool isInCategory(EventCategory cat)
         {
-            return getCategoryFlag() & category;
+            return getCategoryFlag() & cat;
         }
 
     protected:

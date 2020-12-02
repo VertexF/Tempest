@@ -11,7 +11,7 @@
 
 namespace Tempest 
 {
-    class TEMPEST_EXPORT ImGuiLayer : public Layer 
+    class ImGuiLayer : public Layer 
     {
     public:
         ImGuiLayer();

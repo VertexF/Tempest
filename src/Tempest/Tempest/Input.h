@@ -5,7 +5,7 @@
 
 namespace Tempest 
 {
-    class TEMPEST_EXPORT Input
+    class Input
     {
     public:
         inline static bool isKeyPressed(int keyCode) { return _input->isKeyPressedImpl(keyCode); }
