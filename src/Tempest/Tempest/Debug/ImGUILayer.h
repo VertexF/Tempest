@@ -17,7 +17,6 @@ namespace Tempest
         ImGuiLayer();
         ~ImGuiLayer();
 
-        //void onImGuiRender();
         virtual void onAttach() override;
         virtual void onDetach() override;
         virtual void onImGuiRender() override;
