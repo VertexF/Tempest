@@ -12,6 +12,8 @@
 
 namespace Tempest 
 {
+    class GraphicsContext;
+
     //This is the Windows OS windo versoin.
     class WindowsWindow : public Window
     {
@@ -35,6 +37,7 @@ namespace Tempest
         virtual void shutdown();
     private:
         GLFWwindow *_window;
+        GraphicsContext *_context;
 
         //This structure allow use to pass in the window data to GLFW
         //without the need to pass in the WindowsWindow class meaning we can

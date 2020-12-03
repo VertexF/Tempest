@@ -7,7 +7,7 @@
 #include "../../Events/MouseEvents.h"
 #include "../../Events/Event.h"
 
-#include <glfw/glfw3.h>
+#include "../../Renderer/OpenGLContext.h"
 
 namespace
 {
@@ -52,6 +52,7 @@ namespace Tempest
         _windowData.height = props.height;
 
         TEMPEST_INFO("Creating window: {0} [{1}, {2}]", _windowData.title, _windowData.width, _windowData.height);
+
         if (GLFWIntialised == false)
         {
             if (glfwInit() == false)
@@ -68,17 +69,11 @@ namespace Tempest
         _window = glfwCreateWindow(static_cast<int>(_windowData.width), static_cast<int>(_windowData.height),
             _windowData.title.c_str(), nullptr, nullptr);
 
-        glfwMakeContextCurrent(_window);
+        _context = new OpenGLContext(_window);
+        _context->init();
+
         glfwSetWindowUserPointer(_window, &_windowData);
         setVSync(true);
-
-        //Here we are starting up glew.
-        glewExperimental = GL_TRUE;
-        GLenum error = glewInit();
-        if (GLEW_OK != error)
-        {
-            TEMPEST_ERROR("GLEW could not start! {0}", glewGetErrorString(error));
-        }
 
         //All these function are using predicates to use our custom event handlers. 
         glfwSetWindowSizeCallback(_window, [](GLFWwindow *wind, int width, int height) 
@@ -181,7 +176,7 @@ namespace Tempest
     void WindowsWindow::onUpdate() 
     {
         glfwPollEvents();
-        glfwSwapBuffers(_window);
+        _context->swapBuffers();
     }
 
     void WindowsWindow::setVSync(bool vsync) 
