@@ -36,6 +36,11 @@ namespace Tempest
         LayerStack _layerStack;
 
         static Application* _instance;
+
+        //OpenGL stuff
+        unsigned int _vertexArray;
+        unsigned int _vertexBuffer;
+        unsigned int _indexBuffer;
     };
 
     //To be defined in the client. This is how you use the shared library.

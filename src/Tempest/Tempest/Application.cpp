@@ -8,6 +8,9 @@
 #include "Layer.h"
 #include "Input.h"
 
+#define GLEW_STATIC 1
+#include <gl/glew.h>
+
 #include <glfw/glfw3.h>
 #include "imgui.h"
 
@@ -27,6 +30,31 @@ namespace Tempest
 
         _imGuiLayer = new ImGuiLayer();
         pushOverlay(_imGuiLayer);
+
+        glGenVertexArrays(1, &_vertexArray);
+        glBindVertexArray(_vertexArray);
+
+        glGenBuffers(1, &_vertexBuffer);
+        glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
+
+        float vertices[3 * 3] =
+        {
+            -0.5f, -0.5f, 0.0f,
+            0.5f, -0.5f, 0.0f,
+            0.0f, 0.5f, 0.0f
+        };
+
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, false, 3 * sizeof(float), nullptr);
+
+        glGenBuffers(1, &_indexBuffer);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
+
+        unsigned int indices[3] = {0, 1, 2};
+
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
     }
 
     Application::~Application()
@@ -65,6 +93,9 @@ namespace Tempest
         {
             glClear(GL_COLOR_BUFFER_BIT);
             glClearColor(1.f, 0.f, 0.f, 1.f);
+
+            glBindVertexArray(_vertexArray);
+            glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
 
             for(Layer *layer : _layerStack)
             {
