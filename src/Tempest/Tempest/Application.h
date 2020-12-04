@@ -8,6 +8,8 @@
 #include "LayerStack.h"
 #include "Debug/ImGUILayer.h"
 
+#include "Renderer/Shader.h"
+
 namespace Tempest
 {
     class Layer;
@@ -41,6 +43,7 @@ namespace Tempest
         unsigned int _vertexArray;
         unsigned int _vertexBuffer;
         unsigned int _indexBuffer;
+        std::unique_ptr<Shader> _shader;
     };
 
     //To be defined in the client. This is how you use the shared library.

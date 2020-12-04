@@ -8,6 +8,8 @@
 #include "Layer.h"
 #include "Input.h"
 
+#include "Renderer/Shader.h"
+
 #define GLEW_STATIC 1
 #include <gl/glew.h>
 
@@ -55,6 +57,33 @@ namespace Tempest
         unsigned int indices[3] = {0, 1, 2};
 
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+        std::string vertexSource = R"(
+            #version 330 core
+            
+            layout(location = 0) in vec3 position;
+            out vec3 v_position;
+            
+            void main()
+            {
+                v_position = position;
+                gl_Position = vec4(position, 1.0);
+            }
+        )";
+
+        std::string fragmentSource = R"(
+            #version 330 core
+            
+            layout(location = 0) out vec4 colour;
+            in vec3 v_position;
+            
+            void main()
+            {
+                colour = vec4(v_position * 0.5 + 0.5, 1.0);
+            }
+        )";
+
+        _shader = std::make_unique<Shader>(vertexSource, fragmentSource);
     }
 
     Application::~Application()
@@ -92,8 +121,9 @@ namespace Tempest
         while (_running)
         {
             glClear(GL_COLOR_BUFFER_BIT);
-            glClearColor(1.f, 0.f, 0.f, 1.f);
+            glClearColor(0.2f, 0.2f, 0.2f, 1.f);
 
+            _shader->bind();
             glBindVertexArray(_vertexArray);
             glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
 

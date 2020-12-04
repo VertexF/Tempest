@@ -7,7 +7,7 @@
 #include "../../Events/MouseEvents.h"
 #include "../../Events/Event.h"
 
-#include "../../Renderer/OpenGLContext.h"
+#include "../Platform/OpenGL/OpenGLContext.h"
 
 namespace
 {

@@ -1,7 +1,7 @@
 #ifndef OPENGL_CONTEXT_HDR
 #define OPENGL_CONTEXT_HDR
 
-#include "GraphicsContext.h"
+#include "../Renderer/GraphicsContext.h"
 
 struct GLFWwindow;
 
