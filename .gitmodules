@@ -4,3 +4,6 @@
 [submodule "src/Tempest/vender/glew"]
 	path = src/Tempest/vender/glew
 	url = https://github.com/nigels-com/glew.git
+[submodule "src/Tempest/vender/glfw"]
+	path = src/Tempest/vender/glfw
+	url = https://github.com/glfw/glfw.git

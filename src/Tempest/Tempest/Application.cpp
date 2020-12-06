@@ -118,8 +118,9 @@ namespace Tempest
             glClearColor(0.2f, 0.2f, 0.2f, 1.f);
 
             _shader->bind();
-            _vertexBuffer->bind();
-            _indexBuffer->bind();
+            //_vertexBuffer->bind();
+            //_indexBuffer->bind();
+            glBindVertexArray(_vertexArray);
             glDrawElements(GL_TRIANGLES, _indexBuffer->getCount(), GL_UNSIGNED_INT, nullptr);
 
             for(Layer *layer : _layerStack)

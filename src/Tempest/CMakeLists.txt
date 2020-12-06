@@ -7,25 +7,20 @@ file(GLOB_RECURSE TEMPEST_SOURCE
 if(MSVC)
     set(SPDLOG_INCLUDE_DIR "${CMAKE_SOURCE_DIR}../../../loggingLibrary/spdlog/include")
     set(SPDLOG_LIBRARIES "${CMAKE_SOURCE_DIR}../../../loggingLibrary/logStaticLib/spdlog.lib")
-    set(IMGUI_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vender/imgui")
     set(GML_INCLUDE_DIR "${CMAKE_SOURCE_DIR}../../../glm-master")
-    set(GLEW_USE_STATIC_LIBS True)
-    set(GLEW_INCLUDE_DIR "${CMAKE_SOURCE_DIR}/src/Tempest/vender/glew-2.1.0/include")
+    #set(GLEW_USE_STATIC_LIBS True)
+    set(IMGUI_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vender/imgui")
+    set(GLEW_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vender/glew-2.1.0/include")
+    set(GLFW_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vender/glfw/include")
     source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${TEMPEST_SOURCE})
 endif()
 
 #Sets ups the module path to work with the a custom on so the defualt CMake modules work.
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/modules")
-list(APPEND CMAKE_PREFIX_PATH "${CMAKE_SOURCE_DIR}../../../glew-2.1.0/")
-
-set(GLFW_LOCATION "${CMAKE_SOURCE_DIR}../../../glfw-3.3.2")
-
-find_package(GLFW REQUIRED)
-find_package(GLEW REQUIRED)
-find_package(OpenGL REQUIRED)
 
 add_subdirectory(vender/glew-2.1.0)
 add_subdirectory(vender/imgui)
+add_subdirectory(vender/glfw)
 
 add_library(Tempest STATIC ${TEMPEST_SOURCE})
 
@@ -41,4 +36,4 @@ set(PRECOMPILED_HEADER Tempest/PublicInclude)
 target_precompile_headers(Tempest PUBLIC "${PRECOMPILED_HEADER}/PreComp.h")
 
 target_include_directories(Tempest PUBLIC ${PROJECT_BINARY_DIR}/src/Tempest ${SPDLOG_INCLUDE_DIR} ${PRECOMPILED_HEADER} ${IMGUI_INCLUDE_DIR} ${GML_INCLUDE_DIR} ${GLFW_INCLUDE_DIR} ${GLEW_INCLUDE_DIR})
-target_link_libraries(Tempest PRIVATE  ${SPDLOG_LIBRARIES} IMGUI GLEW) 
+target_link_libraries(Tempest PRIVATE  ${SPDLOG_LIBRARIES} IMGUI GLEW GLFW) 
