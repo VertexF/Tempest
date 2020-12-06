@@ -9,8 +9,8 @@
 #include "Input.h"
 
 #include "Renderer/Shader.h"
+#include "Platform/OpenGL/OpenGLBuffer.h"
 
-#define GLEW_STATIC 1
 #include <gl/glew.h>
 
 #include <glfw/glfw3.h>
@@ -30,14 +30,12 @@ namespace Tempest
         _window = std::unique_ptr<Window>(Window::create());
         _window->setCallbackFunction(std::bind(&Application::onEvent, this, std::placeholders::_1));
 
+        
         _imGuiLayer = new ImGuiLayer();
         pushOverlay(_imGuiLayer);
 
         glGenVertexArrays(1, &_vertexArray);
         glBindVertexArray(_vertexArray);
-
-        glGenBuffers(1, &_vertexBuffer);
-        glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
 
         float vertices[3 * 3] =
         {
@@ -46,17 +44,13 @@ namespace Tempest
             0.0f, 0.5f, 0.0f
         };
 
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+        _vertexBuffer.reset(VertexBuffer::create(vertices, sizeof(vertices)));
 
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 3, GL_FLOAT, false, 3 * sizeof(float), nullptr);
 
-        glGenBuffers(1, &_indexBuffer);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _indexBuffer);
-
-        unsigned int indices[3] = {0, 1, 2};
-
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+        uint32_t indices[3] = {0, 1, 2};
+        _indexBuffer.reset(IndexBuffer::create(indices, sizeof(indices) / sizeof(uint32_t)));
 
         std::string vertexSource = R"(
             #version 330 core
@@ -124,8 +118,9 @@ namespace Tempest
             glClearColor(0.2f, 0.2f, 0.2f, 1.f);
 
             _shader->bind();
-            glBindVertexArray(_vertexArray);
-            glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+            _vertexBuffer->bind();
+            _indexBuffer->bind();
+            glDrawElements(GL_TRIANGLES, _indexBuffer->getCount(), GL_UNSIGNED_INT, nullptr);
 
             for(Layer *layer : _layerStack)
             {

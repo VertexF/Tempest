@@ -1,7 +1,6 @@
 #include "PreComp.h"
 #include "OpenGLContext.h"
 
-#define GLEW_STATIC 1
 #include <gl/glew.h>
 #include <glfw/glfw3.h>
 

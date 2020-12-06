@@ -1,3 +1,6 @@
 [submodule "src/Tempest/vender/imgui"]
 	path = src/Tempest/vender/imgui
 	url = https://github.com/ocornut/imgui.git
+[submodule "src/Tempest/vender/glew"]
+	path = src/Tempest/vender/glew
+	url = https://github.com/nigels-com/glew.git

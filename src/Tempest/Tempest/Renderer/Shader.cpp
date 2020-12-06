@@ -1,7 +1,7 @@
 #include "PreComp.h"
 #include "Shader.h"
 
-#define STATIC_GLEW 1
+#define GLEW_STATIC 1
 #include <gl/glew.h>
 
 namespace Tempest 

@@ -9,6 +9,7 @@
 #include "Debug/ImGUILayer.h"
 
 #include "Renderer/Shader.h"
+#include "Renderer/Buffer.h"
 
 namespace Tempest
 {
@@ -41,9 +42,9 @@ namespace Tempest
 
         //OpenGL stuff
         unsigned int _vertexArray;
-        unsigned int _vertexBuffer;
-        unsigned int _indexBuffer;
         std::unique_ptr<Shader> _shader;
+        std::unique_ptr<VertexBuffer> _vertexBuffer;
+        std::unique_ptr<IndexBuffer> _indexBuffer;
     };
 
     //To be defined in the client. This is how you use the shared library.
