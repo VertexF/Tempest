@@ -30,7 +30,6 @@ namespace Tempest
         _window = std::unique_ptr<Window>(Window::create());
         _window->setCallbackFunction(std::bind(&Application::onEvent, this, std::placeholders::_1));
 
-        
         _imGuiLayer = new ImGuiLayer();
         pushOverlay(_imGuiLayer);
 
@@ -118,8 +117,6 @@ namespace Tempest
             glClearColor(0.2f, 0.2f, 0.2f, 1.f);
 
             _shader->bind();
-            //_vertexBuffer->bind();
-            //_indexBuffer->bind();
             glBindVertexArray(_vertexArray);
             glDrawElements(GL_TRIANGLES, _indexBuffer->getCount(), GL_UNSIGNED_INT, nullptr);
 
