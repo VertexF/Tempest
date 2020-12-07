@@ -13,9 +13,6 @@ if(MSVC)
     source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${TEMPEST_SOURCE})
 endif()
 
-#Sets ups the module path to work with the a custom on so the defualt CMake modules work.
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/modules")
-
 add_subdirectory(vender/glew-2.1.0)
 add_subdirectory(vender/imgui)
 add_subdirectory(vender/glfw)
