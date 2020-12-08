@@ -10,6 +10,7 @@
 
 #include "Renderer/Shader.h"
 #include "Renderer/Buffer.h"
+#include "Renderer/VertexArray.h"
 
 namespace Tempest
 {
@@ -41,10 +42,12 @@ namespace Tempest
         static Application* _instance;
 
         //OpenGL stuff
-        unsigned int _vertexArray;
+        //unsigned int _vertexArray;
         std::unique_ptr<Shader> _shader;
-        std::unique_ptr<VertexBuffer> _vertexBuffer;
-        std::unique_ptr<IndexBuffer> _indexBuffer;
+        std::unique_ptr<Shader> _squareShader;
+
+        std::unique_ptr<VertexArray> _vertexArray;
+        std::unique_ptr<VertexArray> _squareVA;
     };
 
     //To be defined in the client. This is how you use the shared library.

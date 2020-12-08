@@ -20,30 +20,6 @@ namespace Tempest
 {
     Application *Application::_instance = nullptr;
 
-    static GLenum shaderDataTypeToOpenGL(ShaderDataType type)
-    {
-        switch (type)
-        {
-            case ShaderDataType::FLOAT: return GL_FLOAT; break;
-            case ShaderDataType::FLOAT2: return GL_FLOAT; break;
-            case ShaderDataType::FLOAT3: return GL_FLOAT; break;
-            case ShaderDataType::FLOAT4: return GL_FLOAT; break;
-
-            case ShaderDataType::INT: return GL_INT; break;
-            case ShaderDataType::INT2: return GL_INT; break;
-            case ShaderDataType::INT3: return GL_INT; break;
-            case ShaderDataType::INT4: return GL_INT; break;
-
-            case ShaderDataType::MAT3x3: return GL_FLOAT; break;
-            case ShaderDataType::MAT4x4: return GL_FLOAT; break;
-
-            case ShaderDataType::BOOL: return GL_BOOL; break;
-        }
-
-        TEMPEST_ERROR("Shader data type not supported!");
-        return 0;
-    }
-
     //First we intialise the window which sets up all the stuff needed to run.
     //Then we set up callback functions to the on event function in this class.
     //This allows events to be sent GLFW from our onEvent function.
@@ -57,8 +33,8 @@ namespace Tempest
         _imGuiLayer = new ImGuiLayer();
         pushOverlay(_imGuiLayer);
 
-        glGenVertexArrays(1, &_vertexArray);
-        glBindVertexArray(_vertexArray);
+        _vertexArray.reset(VertexArray::create());
+        _squareVA.reset(VertexArray::create());
 
         float vertices[3 * 7] =
         {
@@ -67,30 +43,43 @@ namespace Tempest
              0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
         };
 
-        _vertexBuffer.reset(VertexBuffer::create(vertices, sizeof(vertices)));
+        float vertices2[3 * 4] =
+        {
+            -0.75f, -0.75f, 0.0f,
+             0.75f, -0.75f, 0.0f,
+             0.75f,  0.75f, 0.0f,
+             -0.75f,  0.75f, 0.0f
+        };
+
+        std::shared_ptr<VertexBuffer> vertexBuffer;
+        vertexBuffer.reset(VertexBuffer::create(vertices, sizeof(vertices)));
+        std::shared_ptr<VertexBuffer> squareVB;
+        squareVB.reset(VertexBuffer::create(vertices2, sizeof(vertices2)));
 
         BufferLayout layout = {
             { ShaderDataType::FLOAT3, "position" },
             { ShaderDataType::FLOAT4, "inColour" }
         };
 
-        _vertexBuffer->setLayout(layout);
+        BufferLayout layoutSquare = {
+            { ShaderDataType::FLOAT3, "position" }
+        };
 
-        uint32_t index = 0;
-        for (const auto &element : _vertexBuffer->getLayout())
-        {
-            glEnableVertexAttribArray(index);
-            glVertexAttribPointer(index, 
-                                  element.getCompomentCount(),
-                                  shaderDataTypeToOpenGL(element.type),
-                                  element.normalised ? GL_TRUE : GL_FALSE, 
-                                  _vertexBuffer->getLayout().getStride(),
-                                  reinterpret_cast<const void *>(element.offset));
-            index++;
-        }
+        vertexBuffer->setLayout(layout);
+        squareVB->setLayout(layoutSquare);
+
+        _vertexArray->addVertexBuffer(vertexBuffer);
+        _squareVA->addVertexBuffer(squareVB);
 
         uint32_t indices[3] = {0, 1, 2};
-        _indexBuffer.reset(IndexBuffer::create(indices, sizeof(indices) / sizeof(uint32_t)));
+        std::shared_ptr<IndexBuffer> indexBuffer;
+        indexBuffer.reset(IndexBuffer::create(indices, sizeof(indices) / sizeof(uint32_t)));
+        _vertexArray->setIndexBuffer(indexBuffer);
+
+        uint32_t indices2[6] = { 0, 1, 2, 2, 3, 0 };
+        std::shared_ptr<IndexBuffer> squareIB;
+        squareIB.reset(IndexBuffer::create(indices2, sizeof(indices2) / sizeof(uint32_t)));
+        _squareVA->setIndexBuffer(squareIB);
 
         std::string vertexSource = R"(
             #version 330 core
@@ -124,6 +113,34 @@ namespace Tempest
         )";
 
         _shader = std::make_unique<Shader>(vertexSource, fragmentSource);
+
+        std::string vertexSource2 = R"(
+            #version 330 core
+            
+            layout(location = 0) in vec3 position;
+
+            out vec3 _position;
+            
+            void main()
+            {
+                _position = position;
+                gl_Position = vec4(_position, 1.0);
+            }
+        )";
+
+        std::string fragmentSource2 = R"(
+            #version 330 core
+            
+            layout(location = 0) out vec4 colour;
+            in vec3 _position;
+            
+            void main()
+            {
+                colour = vec4(0.2f, 0.3f, 0.8f, 1.0f);
+            }
+        )";
+
+        _squareShader = std::make_unique<Shader>(vertexSource2, fragmentSource2);
     }
 
     Application::~Application()
@@ -163,9 +180,14 @@ namespace Tempest
             glClear(GL_COLOR_BUFFER_BIT);
             glClearColor(0.2f, 0.2f, 0.2f, 1.f);
 
+            _squareShader->bind();
+            _squareVA->bind();
+            glDrawElements(GL_TRIANGLES, _squareVA->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);
+
             _shader->bind();
-            glBindVertexArray(_vertexArray);
-            glDrawElements(GL_TRIANGLES, _indexBuffer->getCount(), GL_UNSIGNED_INT, nullptr);
+            _vertexArray->bind();
+            glDrawElements(GL_TRIANGLES, _vertexArray->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);
+
 
             for(Layer *layer : _layerStack)
             {
