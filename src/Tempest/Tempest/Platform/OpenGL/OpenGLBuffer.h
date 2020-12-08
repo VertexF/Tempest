@@ -15,8 +15,13 @@ namespace Tempest
 
         virtual void bind() const override;
         virtual void unbind() const override;
+
+        virtual void setLayout(const BufferLayout& bufferLayout) override { _bufferLayout = bufferLayout; }
+        virtual const BufferLayout getLayout() const override { return _bufferLayout; }
+
     private:
         uint32_t _vertexBuffer;
+        BufferLayout _bufferLayout;
     };
 
     class OpenGLIndexBuffer : public IndexBuffer

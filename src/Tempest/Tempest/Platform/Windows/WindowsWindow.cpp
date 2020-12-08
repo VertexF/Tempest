@@ -16,7 +16,7 @@ namespace
 
     void GLFWErrorCallBack(int error, const char *errorString) 
     {
-        //TEMPEST_ERROR("GLFW Error ({0}): {1}", error, errorString);
+        TEMPEST_ERROR("GLFW Error ({0}): {1}", error, errorString);
     }
 }
 

@@ -20,6 +20,30 @@ namespace Tempest
 {
     Application *Application::_instance = nullptr;
 
+    static GLenum shaderDataTypeToOpenGL(ShaderDataType type)
+    {
+        switch (type)
+        {
+            case ShaderDataType::FLOAT: return GL_FLOAT; break;
+            case ShaderDataType::FLOAT2: return GL_FLOAT; break;
+            case ShaderDataType::FLOAT3: return GL_FLOAT; break;
+            case ShaderDataType::FLOAT4: return GL_FLOAT; break;
+
+            case ShaderDataType::INT: return GL_INT; break;
+            case ShaderDataType::INT2: return GL_INT; break;
+            case ShaderDataType::INT3: return GL_INT; break;
+            case ShaderDataType::INT4: return GL_INT; break;
+
+            case ShaderDataType::MAT3x3: return GL_FLOAT; break;
+            case ShaderDataType::MAT4x4: return GL_FLOAT; break;
+
+            case ShaderDataType::BOOL: return GL_BOOL; break;
+        }
+
+        TEMPEST_ERROR("Shader data type not supported!");
+        return 0;
+    }
+
     //First we intialise the window which sets up all the stuff needed to run.
     //Then we set up callback functions to the on event function in this class.
     //This allows events to be sent GLFW from our onEvent function.
@@ -36,17 +60,34 @@ namespace Tempest
         glGenVertexArrays(1, &_vertexArray);
         glBindVertexArray(_vertexArray);
 
-        float vertices[3 * 3] =
+        float vertices[3 * 7] =
         {
-            -0.5f, -0.5f, 0.0f,
-            0.5f, -0.5f, 0.0f,
-            0.0f, 0.5f, 0.0f
+            -0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
+             0.5f, -0.5f, 0.0f, 0.2f, 0.3f, 0.8f, 1.0f,
+             0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
         };
 
         _vertexBuffer.reset(VertexBuffer::create(vertices, sizeof(vertices)));
 
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, false, 3 * sizeof(float), nullptr);
+        BufferLayout layout = {
+            { ShaderDataType::FLOAT3, "position" },
+            { ShaderDataType::FLOAT4, "inColour" }
+        };
+
+        _vertexBuffer->setLayout(layout);
+
+        uint32_t index = 0;
+        for (const auto &element : _vertexBuffer->getLayout())
+        {
+            glEnableVertexAttribArray(index);
+            glVertexAttribPointer(index, 
+                                  element.getCompomentCount(),
+                                  shaderDataTypeToOpenGL(element.type),
+                                  element.normalised ? GL_TRUE : GL_FALSE, 
+                                  _vertexBuffer->getLayout().getStride(),
+                                  reinterpret_cast<const void *>(element.offset));
+            index++;
+        }
 
         uint32_t indices[3] = {0, 1, 2};
         _indexBuffer.reset(IndexBuffer::create(indices, sizeof(indices) / sizeof(uint32_t)));
@@ -55,12 +96,16 @@ namespace Tempest
             #version 330 core
             
             layout(location = 0) in vec3 position;
-            out vec3 v_position;
+            layout(location = 1) in vec4 inColour;
+
+            out vec3 _position;
+            out vec4 _colour;
             
             void main()
             {
-                v_position = position;
-                gl_Position = vec4(position, 1.0);
+                _colour = inColour;
+                _position = position;
+                gl_Position = vec4(_position, 1.0);
             }
         )";
 
@@ -68,11 +113,13 @@ namespace Tempest
             #version 330 core
             
             layout(location = 0) out vec4 colour;
-            in vec3 v_position;
+            in vec3 _position;
+            in vec4 _colour;
             
             void main()
             {
-                colour = vec4(v_position * 0.5 + 0.5, 1.0);
+                colour = vec4(_position * 0.5 + 0.5, 1.0);
+                colour = _colour;
             }
         )";
 
