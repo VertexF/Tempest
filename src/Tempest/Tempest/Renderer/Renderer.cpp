@@ -3,5 +3,19 @@
 
 namespace Tempest 
 {
-    RendererAPI Renderer::_rendererID = RendererAPI::OPENGL;
+    void Renderer::beginScene()
+    {
+        
+    }
+
+    void Renderer::endScene()
+    {
+        
+    }
+
+    void Renderer::submit(const std::shared_ptr<VertexArray>& vertexArray)
+    {
+        vertexArray->bind();
+        RendererCommands::drawIndexed(vertexArray);
+    }
 }

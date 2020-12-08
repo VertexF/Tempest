@@ -46,8 +46,8 @@ namespace Tempest
         std::unique_ptr<Shader> _shader;
         std::unique_ptr<Shader> _squareShader;
 
-        std::unique_ptr<VertexArray> _vertexArray;
-        std::unique_ptr<VertexArray> _squareVA;
+        std::shared_ptr<VertexArray> _vertexArray;
+        std::shared_ptr<VertexArray> _squareVA;
     };
 
     //To be defined in the client. This is how you use the shared library.

@@ -1,20 +1,20 @@
 #ifndef RENDERER_HDR
 #define RENDERER_HDR
 
+#include "RendererCommands.h"
+#include "RendererAPI.h"
+
 namespace Tempest 
 {
-    enum class RendererAPI 
-    {
-        NONE = 0,
-        OPENGL = 1
-    };
-
     class Renderer 
     {
     public:
-        inline static RendererAPI getAPI() { return _rendererID; }
-    private:
-        static RendererAPI _rendererID;
+        static void beginScene();
+        static void endScene();
+
+        static void submit(const std::shared_ptr<VertexArray> &vertexArray);
+
+        inline static RendererAPI::API getAPI() { return RendererAPI::getAPI(); }
     };
 }
 

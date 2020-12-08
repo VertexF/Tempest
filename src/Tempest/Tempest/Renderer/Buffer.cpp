@@ -10,11 +10,11 @@ namespace Tempest
     {
         switch (Renderer::getAPI()) 
         {
-        case RendererAPI::NONE:
+        case RendererAPI::API::NONE:
             TEMPEST_ERROR("Renderer Type None is not supported!");
             return nullptr;
             break;
-        case RendererAPI::OPENGL:
+        case RendererAPI::API::OPENGL:
             return new OpenGLVertexBuffer(vertices, size);
             break;
         }
@@ -27,11 +27,11 @@ namespace Tempest
     {
         switch (Renderer::getAPI())
         {
-        case RendererAPI::NONE:
+        case RendererAPI::API::NONE:
             TEMPEST_ERROR("Renderer Type None is not supported!");
             return nullptr;
             break;
-        case RendererAPI::OPENGL:
+        case RendererAPI::API::OPENGL:
             return new OpenGLIndexBuffer(indices, size);
             break;
         }

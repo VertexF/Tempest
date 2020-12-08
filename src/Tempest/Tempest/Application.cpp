@@ -10,11 +10,8 @@
 
 #include "Renderer/Shader.h"
 #include "Platform/OpenGL/OpenGLBuffer.h"
-
-#include <gl/glew.h>
-
-#include <glfw/glfw3.h>
-#include "imgui.h"
+#include "Renderer/Renderer.h"
+#include "Renderer/RendererCommands.h"
 
 namespace Tempest
 {
@@ -177,17 +174,18 @@ namespace Tempest
         _running = true;
         while (_running)
         {
-            glClear(GL_COLOR_BUFFER_BIT);
-            glClearColor(0.2f, 0.2f, 0.2f, 1.f);
+            RendererCommands::setClearColour({ 0.2f, 0.2f, 0.2f, 1.f });
+            RendererCommands::clear();
+            
+            Renderer::beginScene();
 
             _squareShader->bind();
-            _squareVA->bind();
-            glDrawElements(GL_TRIANGLES, _squareVA->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);
+            Renderer::submit(_squareVA);
 
             _shader->bind();
-            _vertexArray->bind();
-            glDrawElements(GL_TRIANGLES, _vertexArray->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);
+            Renderer::submit(_vertexArray);
 
+            Renderer::endScene();
 
             for(Layer *layer : _layerStack)
             {
