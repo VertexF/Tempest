@@ -3,6 +3,8 @@
 
 #include "PreComp.h"
 
+#include <glm/glm.hpp>
+
 namespace Tempest
 {
     class Shader 
@@ -14,6 +16,7 @@ namespace Tempest
         void bind();
         void unbind();
 
+        void setMatrix4Uniform(const std::string &name, const glm::mat4x4& matrix);
     private:
         uint32_t _rendererID;
     };

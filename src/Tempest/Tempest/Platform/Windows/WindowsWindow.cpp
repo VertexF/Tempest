@@ -108,7 +108,7 @@ namespace Tempest
                 break;
                 case GLFW_RELEASE:
                 {
-                    PressedKeyEvent releaseEvent(key, 1);
+                    PressedKeyEvent releaseEvent(key, 0);
                     windowData.eventCallback(releaseEvent);
                 }
                 break;

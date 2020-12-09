@@ -62,11 +62,6 @@ namespace Tempest
     //function.
     class EventDispatcher 
     {
-        //Every event must return a bool to tell the dispatcher if has been dealt
-        //with.
-        template<typename T>
-        using eventFu = std::function<bool(T&)>;
-
     public:
         EventDispatcher(Event &events) : _event(events)
         {
@@ -74,12 +69,12 @@ namespace Tempest
 
         //If they event type matches the one needing to be ran, then we run that 
         //event function.
-        template<typename T>
-        bool dispatch(eventFu<T> func)
+        template<typename T, typename F>
+        bool dispatch(const F &func)
         {
             if (_event.getEventType() == T::getStaticType()) 
             {
-                _event.isHandled = func(*(T*)&_event);
+                _event.isHandled = func(static_cast<T&>(_event));
                 return true;
             }
 

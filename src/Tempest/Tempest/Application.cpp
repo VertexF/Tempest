@@ -20,7 +20,8 @@ namespace Tempest
     //First we intialise the window which sets up all the stuff needed to run.
     //Then we set up callback functions to the on event function in this class.
     //This allows events to be sent GLFW from our onEvent function.
-    Application::Application() 
+    Application::Application() :
+        _camera(-1.6f, 1.6f, -0.9f, 0.9f)
     {
         _instance = this;
 
@@ -84,6 +85,8 @@ namespace Tempest
             layout(location = 0) in vec3 position;
             layout(location = 1) in vec4 inColour;
 
+            uniform mat4 uViewProjectmatrix;
+
             out vec3 _position;
             out vec4 _colour;
             
@@ -91,7 +94,7 @@ namespace Tempest
             {
                 _colour = inColour;
                 _position = position;
-                gl_Position = vec4(_position, 1.0);
+                gl_Position = uViewProjectmatrix * vec4(_position, 1.0);
             }
         )";
 
@@ -116,12 +119,14 @@ namespace Tempest
             
             layout(location = 0) in vec3 position;
 
+            uniform mat4 uViewProjectmatrix;
+
             out vec3 _position;
             
             void main()
             {
                 _position = position;
-                gl_Position = vec4(_position, 1.0);
+                gl_Position = uViewProjectmatrix * vec4(_position, 1.0);
             }
         )";
 
@@ -177,13 +182,13 @@ namespace Tempest
             RendererCommands::setClearColour({ 0.2f, 0.2f, 0.2f, 1.f });
             RendererCommands::clear();
             
-            Renderer::beginScene();
+            Renderer::beginScene(_camera);
 
-            _squareShader->bind();
-            Renderer::submit(_squareVA);
+            _camera.setPosition({-0.5f, 0.5f, 0.f});
+            _camera.setRotation(-90.f);
 
-            _shader->bind();
-            Renderer::submit(_vertexArray);
+            Renderer::submit(_squareVA, _squareShader);
+            Renderer::submit(_vertexArray, _shader);
 
             Renderer::endScene();
 

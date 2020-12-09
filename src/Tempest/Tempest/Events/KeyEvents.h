@@ -99,8 +99,6 @@ namespace Tempest
         static inline EventType getStaticType() { return EventType::KEY_TYPED; }
         inline EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Key Pressed"; }
-    private:
-        
     };
 }
 

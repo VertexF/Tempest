@@ -1,9 +1,9 @@
 #include "PreComp.h"
 #include "Shader.h"
 
-#define GLEW_STATIC 1
 #include <gl/glew.h>
 
+#include <glm/gtc/type_ptr.hpp>
 namespace Tempest 
 {
     Shader::Shader(const std::string& vertexSrc, const std::string& fragmentSrc) 
@@ -119,5 +119,11 @@ namespace Tempest
     void Shader::unbind() 
     {
         glUseProgram(0);
+    }
+
+    void Shader::setMatrix4Uniform(const std::string& name, const glm::mat4x4& matrix)
+    {
+        int uniformLocation = glGetUniformLocation(_rendererID, name.c_str());
+        glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(matrix));
     }
 }

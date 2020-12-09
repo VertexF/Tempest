@@ -11,6 +11,7 @@
 #include "Renderer/Shader.h"
 #include "Renderer/Buffer.h"
 #include "Renderer/VertexArray.h"
+#include "Renderer/OrthographicCamera.h"
 
 namespace Tempest
 {
@@ -43,11 +44,13 @@ namespace Tempest
 
         //OpenGL stuff
         //unsigned int _vertexArray;
-        std::unique_ptr<Shader> _shader;
-        std::unique_ptr<Shader> _squareShader;
+        std::shared_ptr<Shader> _shader;
+        std::shared_ptr<Shader> _squareShader;
 
         std::shared_ptr<VertexArray> _vertexArray;
         std::shared_ptr<VertexArray> _squareVA;
+
+        OrthographicCamera _camera;
     };
 
     //To be defined in the client. This is how you use the shared library.

@@ -70,7 +70,7 @@ namespace Tempest
                     shaderDataTypeToOpenGL(element.type),
                     element.normalised ? GL_TRUE : GL_FALSE,
                     vertexBuffer->getLayout().getStride(),
-                    reinterpret_cast<const void*>(element.offset));
+                    reinterpret_cast<const void*>((intptr_t)element.offset));
                 index++;
             }
 
