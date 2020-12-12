@@ -45,7 +45,7 @@ namespace Tempest
         bool normalised;
         ShaderDataType type;
 
-        BufferElement() {}
+        //BufferElement() {}
 
         BufferElement(ShaderDataType type, const std::string& name, bool normalised = false) :
             name(name), type(type), size(shaderDataTypeSize(type)), offset(0), normalised(normalised)

@@ -2,8 +2,8 @@
 #include "Shader.h"
 
 #include <gl/glew.h>
-
 #include <glm/gtc/type_ptr.hpp>
+
 namespace Tempest 
 {
     Shader::Shader(const std::string& vertexSrc, const std::string& fragmentSrc) 

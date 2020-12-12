@@ -9,6 +9,16 @@
 #include "../KeyCodes.h"
 #include "../MouseButtonCodes.h"
 
+//RenderingAPI
+#include "../Renderer/Buffer.h"
+#include "../Renderer/GraphicsContext.h"
+#include "../Renderer/OrthographicCamera.h"
+#include "../Renderer/Renderer.h"
+#include "../Renderer/RendererAPI.h"
+#include "../Renderer/RendererCommands.h"
+#include "../Renderer/Shader.h"
+#include "../Renderer/VertexArray.h"
+
 /*****************************Entry Point**********************************/
 
 #include "../EntryPoint.h"

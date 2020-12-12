@@ -22,9 +22,9 @@ namespace Tempest
 
         virtual void drawIndexed(const std::shared_ptr<VertexArray> &vertexArray) = 0;
 
-        inline static API getAPI() { return _API; }
+        constexpr static API getAPI() { return _API; }
     private:
-        static API _API;
+        static constexpr API _API = API::OPENGL;
     };
 }
 
