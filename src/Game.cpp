@@ -122,30 +122,40 @@ public:
         _squareShader = std::make_unique<Tempest::Shader>(vertexSource2, fragmentSource2);
     }
 
-    virtual void onUpdate() override 
+    virtual void onUpdate(Tempest::TimeStep timeStep) override
     {
         if (Tempest::Input::isKeyPressed(TEMP_KEY_LEFT))
         {
-            _cameraPos.x -= _cameraSpeed;
+            _cameraPos.x -= _cameraSpeed * timeStep;
         }
         else if (Tempest::Input::isKeyPressed(TEMP_KEY_RIGHT))
         {
-            _cameraPos.x += _cameraSpeed;
+            _cameraPos.x += _cameraSpeed * timeStep;
         }
 
         if (Tempest::Input::isKeyPressed(TEMP_KEY_DOWN))
         {
-            _cameraPos.y -= _cameraSpeed;
+            _cameraPos.y -= _cameraSpeed * timeStep;
         }
         else if (Tempest::Input::isKeyPressed(TEMP_KEY_UP))
         {
-            _cameraPos.y += _cameraSpeed;
+            _cameraPos.y += _cameraSpeed * timeStep;
+        }
+
+        if (Tempest::Input::isKeyPressed(TEMP_KEY_D))
+        {
+            _cameraRot -= _cameraRotSpeed * timeStep;
+        }
+        else if (Tempest::Input::isKeyPressed(TEMP_KEY_A))
+        {
+            _cameraRot += _cameraRotSpeed * timeStep;
         }
 
         Tempest::RendererCommands::setClearColour({ 0.2f, 0.2f, 0.2f, 1.f });
         Tempest::RendererCommands::clear();
 
         _camera.setPosition(_cameraPos);
+        _camera.setRotation(_cameraRot);
 
         Tempest::Renderer::beginScene(_camera);
 
@@ -175,7 +185,9 @@ private:
     Tempest::OrthographicCamera _camera;
     glm::vec3 _cameraPos;
 
-    float _cameraSpeed = 0.1f;
+    float _cameraSpeed = 2.f;
+    float _cameraRotSpeed = 20.f;
+    float _cameraRot = 0.f;
 };
 
 //The client uses the application as a template to create the game.

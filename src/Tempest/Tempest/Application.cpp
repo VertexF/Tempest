@@ -13,6 +13,8 @@
 #include "Renderer/Renderer.h"
 #include "Renderer/RendererCommands.h"
 
+#include <GLFW/glfw3.h>
+
 namespace Tempest
 {
     Application *Application::_instance = nullptr;
@@ -65,9 +67,13 @@ namespace Tempest
         _running = true;
         while (_running)
         {
+            float time = static_cast<float>(glfwGetTime());
+            TimeStep timestep(time - _lastFrameTime);
+            _lastFrameTime = time;
+
             for(Layer *layer : _layerStack)
             {
-                layer->onUpdate();
+                layer->onUpdate(timestep);
             }
 
             _imGuiLayer->begin();

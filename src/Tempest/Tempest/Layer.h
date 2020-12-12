@@ -4,6 +4,8 @@
 #include "PreComp.h"
 #include "Events/Event.h"
 
+#include "Core/TimeStep.h"
+
 namespace Tempest 
 {
     //Every thing in the engine is layered. 
@@ -17,7 +19,7 @@ namespace Tempest
 
         virtual void onAttach();
         virtual void onDetach();
-        virtual void onUpdate();
+        virtual void onUpdate(TimeStep timeStep);
         virtual void onEvent(Event& e);
         virtual void onImGuiRender() {}
 

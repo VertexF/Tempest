@@ -13,6 +13,8 @@
 #include "Renderer/VertexArray.h"
 #include "Renderer/OrthographicCamera.h"
 
+#include "Core/TimeStep.h"
+
 namespace Tempest
 {
     class Layer;
@@ -35,11 +37,13 @@ namespace Tempest
     private:
         bool onWindowClosed(WindowClosedEvent &closed);
 
+    private:
         bool _running;
         ImGuiLayer* _imGuiLayer;
         std::unique_ptr<Window> _window;
         LayerStack _layerStack;
 
+        float _lastFrameTime  = 0.f;
         static Application* _instance;
     };
 

@@ -21,7 +21,7 @@ namespace Tempest
     
     }
 
-    void Layer::onUpdate() 
+    void Layer::onUpdate(TimeStep timeStep)
     {
     
     }

@@ -9,6 +9,8 @@
 #include "../KeyCodes.h"
 #include "../MouseButtonCodes.h"
 
+#include "../Core/TimeStep.h"
+
 //RenderingAPI
 #include "../Renderer/Buffer.h"
 #include "../Renderer/GraphicsContext.h"
