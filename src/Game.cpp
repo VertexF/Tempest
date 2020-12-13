@@ -1,12 +1,14 @@
 #include <iostream>
 #include <Tempest.h>
 
+#include <glm/gtc/matrix_transform.hpp>
+
 //The client also create it own layers depending on what it needs.
 class ExampleLayer : public Tempest::Layer 
 {
 public:
     ExampleLayer() : Layer("Example Layer"),
-        _camera(-1.6f, 1.6f, -0.9f, 0.9f), _cameraPos(0.f)
+        _camera(-1.6f, 1.6f, -0.9f, 0.9f), _cameraPos(0.f), _squarePosition(0.f)
     {
         _vertexArray.reset(Tempest::VertexArray::create());
         _squareVA.reset(Tempest::VertexArray::create());
@@ -20,10 +22,10 @@ public:
 
         float vertices2[3 * 4] =
         {
-            -0.75f, -0.75f, 0.0f,
-             0.75f, -0.75f, 0.0f,
-             0.75f,  0.75f, 0.0f,
-             -0.75f,  0.75f, 0.0f
+            -0.5f, -0.5f, 0.0f,
+             0.5f, -0.5f, 0.0f,
+             0.5f,  0.5f, 0.0f,
+            -0.5f,  0.5f, 0.0f
         };
 
         std::shared_ptr<Tempest::VertexBuffer> vertexBuffer;
@@ -63,6 +65,7 @@ public:
             layout(location = 1) in vec4 inColour;
 
             uniform mat4 uViewProjectmatrix;
+            uniform mat4 uModelMatrix;
 
             out vec3 _position;
             out vec4 _colour;
@@ -71,7 +74,7 @@ public:
             {
                 _colour = inColour;
                 _position = position;
-                gl_Position = uViewProjectmatrix * vec4(_position, 1.0);
+                gl_Position = uViewProjectmatrix * uModelMatrix * vec4(_position, 1.0);
             }
         )";
 
@@ -97,13 +100,14 @@ public:
             layout(location = 0) in vec3 position;
 
             uniform mat4 uViewProjectmatrix;
+            uniform mat4 uModelMatrix;
 
             out vec3 _position;
             
             void main()
             {
                 _position = position;
-                gl_Position = uViewProjectmatrix * vec4(_position, 1.0);
+                gl_Position = uViewProjectmatrix * uModelMatrix * vec4(_position, 1.0);
             }
         )";
 
@@ -142,13 +146,32 @@ public:
             _cameraPos.y += _cameraSpeed * timeStep;
         }
 
-        if (Tempest::Input::isKeyPressed(TEMP_KEY_D))
+        if (Tempest::Input::isKeyPressed(TEMP_KEY_Z))
         {
             _cameraRot -= _cameraRotSpeed * timeStep;
         }
-        else if (Tempest::Input::isKeyPressed(TEMP_KEY_A))
+        else if (Tempest::Input::isKeyPressed(TEMP_KEY_X))
         {
             _cameraRot += _cameraRotSpeed * timeStep;
+        }
+
+        //Square movement
+        if (Tempest::Input::isKeyPressed(TEMP_KEY_W))
+        {
+            _squarePosition.y += _squareMoveSpeed * timeStep;
+        }
+        else if (Tempest::Input::isKeyPressed(TEMP_KEY_S))
+        {
+            _squarePosition.y -= _squareMoveSpeed * timeStep;
+        }
+
+        if (Tempest::Input::isKeyPressed(TEMP_KEY_A))
+        {
+            _squarePosition.x -= _squareMoveSpeed * timeStep;
+        }
+        else if (Tempest::Input::isKeyPressed(TEMP_KEY_D))
+        {
+            _squarePosition.x += _squareMoveSpeed * timeStep;
         }
 
         Tempest::RendererCommands::setClearColour({ 0.2f, 0.2f, 0.2f, 1.f });
@@ -159,8 +182,20 @@ public:
 
         Tempest::Renderer::beginScene(_camera);
 
-        Tempest::Renderer::submit(_squareVA, _squareShader);
-        Tempest::Renderer::submit(_vertexArray, _shader);
+        glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+
+        for (int y = 0; y < 20; y++)
+        {
+            for (int x = 0; x < 20; x++)
+            {
+                glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
+                glm::mat4 squareTransform = glm::translate(glm::mat4(1.0f), pos) * scale;
+                Tempest::Renderer::submit(_squareVA, _squareShader, squareTransform);
+            }
+        }
+
+        glm::mat4 tryTransform = glm::translate(glm::mat4(1.0f), _squarePosition) * scale;
+        Tempest::Renderer::submit(_vertexArray, _shader, tryTransform);
 
         Tempest::Renderer::endScene();
     }
@@ -188,6 +223,9 @@ private:
     float _cameraSpeed = 2.f;
     float _cameraRotSpeed = 20.f;
     float _cameraRot = 0.f;
+
+    glm::vec3 _squarePosition;
+    float _squareMoveSpeed = 2.f;
 };
 
 //The client uses the application as a template to create the game.

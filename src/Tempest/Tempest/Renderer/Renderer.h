@@ -15,7 +15,7 @@ namespace Tempest
         static void beginScene(OrthographicCamera &camera);
         static void endScene();
 
-        static void submit(const std::shared_ptr<VertexArray> &vertexArray, const std::shared_ptr<Shader>& shader);
+        static void submit(const std::shared_ptr<VertexArray> &vertexArray, const std::shared_ptr<Shader>& shader, const glm::mat4x4& transform = glm::mat4x4(1.f));
 
         inline static RendererAPI::API getAPI() { return RendererAPI::getAPI(); }
     private:
