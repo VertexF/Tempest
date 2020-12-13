@@ -17,6 +17,7 @@ namespace Tempest
         void unbind();
 
         void setMatrix4Uniform(const std::string &name, const glm::mat4x4& matrix);
+        void setVec4Uniform(const std::string &name, const glm::vec4& vector);
     private:
         uint32_t _rendererID;
     };

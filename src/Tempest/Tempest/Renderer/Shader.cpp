@@ -121,9 +121,15 @@ namespace Tempest
         glUseProgram(0);
     }
 
-    void Shader::setMatrix4Uniform(const std::string& name, const glm::mat4x4& matrix)
+    void Shader::setMatrix4Uniform(const std::string &name, const glm::mat4x4 &matrix)
     {
         int uniformLocation = glGetUniformLocation(_rendererID, name.c_str());
         glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, glm::value_ptr(matrix));
+    }
+
+    void Shader::setVec4Uniform(const std::string &name, const glm::vec4 &vector) 
+    {
+        int uniformLocation = glGetUniformLocation(_rendererID, name.c_str());
+        glUniform4fv(uniformLocation, 1, glm::value_ptr(vector));
     }
 }

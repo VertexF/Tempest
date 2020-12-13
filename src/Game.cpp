@@ -103,7 +103,7 @@ public:
             uniform mat4 uModelMatrix;
 
             out vec3 _position;
-            
+
             void main()
             {
                 _position = position;
@@ -116,10 +116,11 @@ public:
             
             layout(location = 0) out vec4 colour;
             in vec3 _position;
-            
+            uniform vec4 uColour;
+
             void main()
             {
-                colour = vec4(0.2f, 0.3f, 0.8f, 1.0f);
+                colour = uColour;
             }
         )";
 
@@ -182,6 +183,9 @@ public:
 
         Tempest::Renderer::beginScene(_camera);
 
+        glm::vec4 redColour(0.8f, 0.3f, 0.2f, 1.0f);
+        glm::vec4 blueColour(0.2f, 0.3f, 0.8f, 1.0f);
+
         glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
         for (int y = 0; y < 20; y++)
@@ -190,6 +194,14 @@ public:
             {
                 glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
                 glm::mat4 squareTransform = glm::translate(glm::mat4(1.0f), pos) * scale;
+                if (y % 2 == 0)
+                {
+                    _squareShader->setVec4Uniform("uColour", redColour);
+                }
+                else 
+                {
+                    _squareShader->setVec4Uniform("uColour", blueColour);
+                }
                 Tempest::Renderer::submit(_squareVA, _squareShader, squareTransform);
             }
         }
