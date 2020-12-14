@@ -36,9 +36,9 @@ public:
             -0.5f,  0.5f, 0.0f
         };
 
-        std::shared_ptr<Tempest::VertexBuffer> vertexBuffer;
+        Tempest::ref<Tempest::VertexBuffer> vertexBuffer;
         vertexBuffer.reset(Tempest::VertexBuffer::create(vertices, sizeof(vertices)));
-        std::shared_ptr<Tempest::VertexBuffer> squareVB;
+        Tempest::ref<Tempest::VertexBuffer> squareVB;
         squareVB.reset(Tempest::VertexBuffer::create(vertices2, sizeof(vertices2)));
 
         Tempest::BufferLayout layout = {
@@ -57,12 +57,12 @@ public:
         _squareVA->addVertexBuffer(squareVB);
 
         uint32_t indices[3] = { 0, 1, 2 };
-        std::shared_ptr<Tempest::IndexBuffer> indexBuffer;
+        Tempest::ref<Tempest::IndexBuffer> indexBuffer;
         indexBuffer.reset(Tempest::IndexBuffer::create(indices, sizeof(indices) / sizeof(uint32_t)));
         _vertexArray->setIndexBuffer(indexBuffer);
 
         uint32_t indices2[6] = { 0, 1, 2, 2, 3, 0 };
-        std::shared_ptr<Tempest::IndexBuffer> squareIB;
+        Tempest::ref<Tempest::IndexBuffer> squareIB;
         squareIB.reset(Tempest::IndexBuffer::create(indices2, sizeof(indices2) / sizeof(uint32_t)));
         _squareVA->setIndexBuffer(squareIB);
 
@@ -224,11 +224,11 @@ public:
     }
 private:
     //OpenGL stuff
-    std::shared_ptr<Tempest::Shader> _shader;
-    std::shared_ptr<Tempest::Shader> _squareShader;
+    Tempest::ref<Tempest::Shader> _shader;
+    Tempest::ref<Tempest::Shader> _squareShader;
 
-    std::shared_ptr<Tempest::VertexArray> _vertexArray;
-    std::shared_ptr<Tempest::VertexArray> _squareVA;
+    Tempest::ref<Tempest::VertexArray> _vertexArray;
+    Tempest::ref<Tempest::VertexArray> _squareVA;
 
     Tempest::OrthographicCamera _camera;
     glm::vec3 _cameraPos;

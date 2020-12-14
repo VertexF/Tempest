@@ -15,7 +15,7 @@ namespace Tempest
         glClearColor(colour.r, colour.g, colour.b, colour.a);
     }
 
-    void OpenGLRendererAPI::drawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
+    void OpenGLRendererAPI::drawIndexed(const ref<VertexArray>& vertexArray)
     {
         glDrawElements(GL_TRIANGLES, vertexArray->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);
     }

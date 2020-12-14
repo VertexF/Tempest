@@ -10,7 +10,7 @@ namespace Tempest
         virtual void clear() override;
         virtual void setClearColour(const glm::vec4& colour) override;
 
-        virtual void drawIndexed(const std::shared_ptr<VertexArray>& vertexArray) override;
+        virtual void drawIndexed(const ref<VertexArray>& vertexArray) override;
     };
 }
 

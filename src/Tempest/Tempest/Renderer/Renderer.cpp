@@ -17,7 +17,7 @@ namespace Tempest
         
     }
 
-    void Renderer::submit(const std::shared_ptr<VertexArray>& vertexArray, const std::shared_ptr<Shader>& shader, const glm::mat4x4 &transform)
+    void Renderer::submit(const ref<VertexArray>& vertexArray, const ref<Shader>& shader, const glm::mat4x4 &transform)
     {
         shader->bind();
         std::dynamic_pointer_cast<OpenGLShader>(shader)->setMatrix4Uniform("uViewProjectmatrix", _sceneData->_viewProjectMatrix);

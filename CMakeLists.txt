@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.19.0)
 
 project(Tempest 
-        VERSION 0.1.1
+        VERSION 0.1.3
         LANGUAGES CXX C
         DESCRIPTION "Tempest Engine")
 

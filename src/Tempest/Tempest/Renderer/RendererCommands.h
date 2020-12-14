@@ -6,6 +6,8 @@
 #include <glm/glm.hpp>
 #include "RendererAPI.h"
 
+#include "../Core.h"
+
 namespace Tempest 
 {
     class RendererCommands 
@@ -21,7 +23,7 @@ namespace Tempest
             _rendererAPI->clear();
         }
 
-        inline static void drawIndexed(const std::shared_ptr<VertexArray> &vertexArray) 
+        inline static void drawIndexed(const ref<VertexArray> &vertexArray) 
         {
             _rendererAPI->drawIndexed(vertexArray);
         }

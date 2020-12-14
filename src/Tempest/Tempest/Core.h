@@ -1,9 +1,15 @@
 #ifndef CORE_HDR
 #define CORE_HDR
 
+#include <memory>
+
 namespace Tempest 
 {
-    //TODO: Add maths and other core functionality to the engine when needed.
+    template<typename T>
+    using scope = std::unique_ptr<T>;
+
+    template<typename T>
+    using ref = std::shared_ptr<T>;
 }
 
 #endif // !CORE_HDR
