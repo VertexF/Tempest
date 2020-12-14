@@ -74,7 +74,7 @@ namespace Tempest
         {
             if (_event.getEventType() == T::getStaticType()) 
             {
-                _event.isHandled = func(static_cast<T&>(_event));
+                _event.isHandled |= func(static_cast<T&>(_event));
                 return true;
             }
 

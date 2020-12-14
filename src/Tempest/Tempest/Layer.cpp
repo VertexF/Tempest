@@ -30,4 +30,8 @@ namespace Tempest
     {
     
     }
+
+    void Layer::onImGuiRender() 
+    {
+    }
 }

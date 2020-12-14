@@ -1,6 +1,7 @@
 #include "WindowsInput.h"
 
 #include <glfw/glfw3.h>
+#include <glm/glm.hpp>
 
 #include "../../Application.h"
 
@@ -24,26 +25,22 @@ namespace Tempest
         return state == GLFW_PRESS;
     }
 
-    std::pair<float, float> WindowsInput::getMousePositionImpl()
+    glm::vec2 WindowsInput::getMousePositionImpl()
     {
         auto window = static_cast<GLFWwindow*>(Application::get().getWindow().getNativeWindow());
         double xPos, yPos = 0.0;
         glfwGetCursorPos(window, &xPos, &yPos);
 
-        return std::pair<float, float>(static_cast<float>(xPos), static_cast<float>(yPos));
+        return { static_cast<float>(xPos), static_cast<float>(yPos) };
     }
 
     float WindowsInput::getMouseXImpl()
     {
-        auto [x, y] = getMousePositionImpl();
-        return x;
+        return getMousePositionImpl().x;
     }
 
     float WindowsInput::getMouseYImpl()
     {
-        auto [x, y] = getMousePositionImpl();
-        return x;
-
-        return y;
+        return getMousePositionImpl().y;
     }
 }

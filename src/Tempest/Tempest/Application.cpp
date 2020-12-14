@@ -45,18 +45,17 @@ namespace Tempest
         EventDispatcher eventDispatcher(e);
         eventDispatcher.dispatch<WindowClosedEvent>(std::bind(&Application::onWindowClosed, this, std::placeholders::_1));
 
-        //TEMPEST_TRACE("Tempest Event: {0}", e);
-
         //This is meant to go in reserve to handle events like keypresses.
-        for (auto it = _layerStack.end(); it != _layerStack.begin();) 
+        for (auto it = _layerStack.rbegin(); it != _layerStack.rend(); ++it) 
         {
-            (*--it)->onEvent(e);
             //When the event is handled we don't need to continue looping
             //through the layer stack.
             if (e.isHandled)
             {
                 break;
             }
+
+            (*it)->onEvent(e);
         }
     }
 
@@ -79,7 +78,7 @@ namespace Tempest
             _imGuiLayer->begin();
             for (Layer* layer : _layerStack)
             {
-                _imGuiLayer->onImGuiRender();
+                layer->onImGuiRender();
             }
             _imGuiLayer->end();
 

@@ -2,13 +2,21 @@
 #include <Tempest.h>
 
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+#include "imgui.h"
+#include "backends/imgui_impl_opengl3.h"
+#include "backends/imgui_impl_glfw.h"
+
+
+#include "Tempest/Tempest/Platform/OpenGL/OpenGLShader.h"
 
 //The client also create it own layers depending on what it needs.
 class ExampleLayer : public Tempest::Layer 
 {
 public:
     ExampleLayer() : Layer("Example Layer"),
-        _camera(-1.6f, 1.6f, -0.9f, 0.9f), _cameraPos(0.f), _squarePosition(0.f)
+        _camera(-1.6f, 1.6f, -0.9f, 0.9f), _cameraPos(0.f), _squarePosition(0.f), _squareColour({0.8f, 0.3f, 0.2f})
     {
         _vertexArray.reset(Tempest::VertexArray::create());
         _squareVA.reset(Tempest::VertexArray::create());
@@ -92,7 +100,7 @@ public:
             }
         )";
 
-        _shader = std::make_unique<Tempest::Shader>(vertexSource, fragmentSource);
+        _shader.reset(Tempest::Shader::create(vertexSource, fragmentSource));
 
         std::string vertexSource2 = R"(
             #version 330 core
@@ -102,12 +110,9 @@ public:
             uniform mat4 uViewProjectmatrix;
             uniform mat4 uModelMatrix;
 
-            out vec3 _position;
-
             void main()
             {
-                _position = position;
-                gl_Position = uViewProjectmatrix * uModelMatrix * vec4(_position, 1.0);
+                gl_Position = uViewProjectmatrix * uModelMatrix * vec4(position, 1.0);
             }
         )";
 
@@ -115,16 +120,16 @@ public:
             #version 330 core
             
             layout(location = 0) out vec4 colour;
-            in vec3 _position;
-            uniform vec4 uColour;
+
+            uniform vec3 uColour;
 
             void main()
             {
-                colour = uColour;
+                colour = vec4(uColour, 1.0);
             }
         )";
 
-        _squareShader = std::make_unique<Tempest::Shader>(vertexSource2, fragmentSource2);
+        _squareShader.reset(Tempest::Shader::create(vertexSource2, fragmentSource2));
     }
 
     virtual void onUpdate(Tempest::TimeStep timeStep) override
@@ -183,10 +188,10 @@ public:
 
         Tempest::Renderer::beginScene(_camera);
 
-        glm::vec4 redColour(0.8f, 0.3f, 0.2f, 1.0f);
-        glm::vec4 blueColour(0.2f, 0.3f, 0.8f, 1.0f);
-
         glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+
+        std::dynamic_pointer_cast<Tempest::OpenGLShader>(_squareShader)->bind();
+        std::dynamic_pointer_cast<Tempest::OpenGLShader>(_squareShader)->setVec3Uniform("uColour", _squareColour);
 
         for (int y = 0; y < 20; y++)
         {
@@ -194,14 +199,6 @@ public:
             {
                 glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
                 glm::mat4 squareTransform = glm::translate(glm::mat4(1.0f), pos) * scale;
-                if (y % 2 == 0)
-                {
-                    _squareShader->setVec4Uniform("uColour", redColour);
-                }
-                else 
-                {
-                    _squareShader->setVec4Uniform("uColour", blueColour);
-                }
                 Tempest::Renderer::submit(_squareVA, _squareShader, squareTransform);
             }
         }
@@ -212,9 +209,13 @@ public:
         Tempest::Renderer::endScene();
     }
 
-    virtual void onImGuiRender() override 
+    virtual void onImGuiRender() override
     {
-        
+        ImGui::Begin("Settings");
+
+        ImGui::ColorEdit3("Square Colour Picker", glm::value_ptr(_squareColour));
+
+        ImGui::End();
     }
 
     virtual void onEvent(Tempest::Event &e) override
@@ -238,6 +239,8 @@ private:
 
     glm::vec3 _squarePosition;
     float _squareMoveSpeed = 2.f;
+
+    glm::vec3 _squareColour;
 };
 
 //The client uses the application as a template to create the game.

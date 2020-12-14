@@ -3,23 +3,17 @@
 
 #include "PreComp.h"
 
-#include <glm/glm.hpp>
-
 namespace Tempest
 {
     class Shader 
     {
     public:
-        Shader(const std::string &vertexSrc, const std::string& fragmentSrc);
-        ~Shader();
+        virtual ~Shader() = default;
 
-        void bind();
-        void unbind();
+        virtual void bind() const = 0;
+        virtual void unbind() const = 0;
 
-        void setMatrix4Uniform(const std::string &name, const glm::mat4x4& matrix);
-        void setVec4Uniform(const std::string &name, const glm::vec4& vector);
-    private:
-        uint32_t _rendererID;
+        static Shader *create(const std::string &vertexSrc, const std::string& fragmentSrc);
     };
 }
 

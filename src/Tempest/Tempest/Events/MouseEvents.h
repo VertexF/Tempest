@@ -76,7 +76,7 @@ namespace Tempest
 
     protected:
         //This event belongs to both input and mouse events.
-        MouseButtonEvent(int button) : Event(EVENT_CATEGORY_MOUSE | EVENT_CATEGORY_INPUT),
+        MouseButtonEvent(int button) : Event(EVENT_CATEGORY_MOUSE | EVENT_CATEGORY_INPUT | EVENT_CATEGORY_MOUSEBUTTON),
             _button(button)
         {
         }

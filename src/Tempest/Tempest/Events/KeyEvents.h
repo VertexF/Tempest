@@ -30,14 +30,14 @@ namespace Tempest
         {
         }
 
-        inline int getTimeseRepeated() const { return _repeatedNum; }
+        int getTimeseRepeated() const { return _repeatedNum; }
 
         //This is a debugging function which allows coders to see what this 
         //event does.
         std::string toString() const override
         {
             std::stringstream ss;
-            ss << "Key pressed: " << keyCode << " (" << _repeatedNum << " repeats)";
+            ss << "Key pressed: " << keyCode;// << " (" << _repeatedNum << " repeats)";
             return ss.str();
         }
 

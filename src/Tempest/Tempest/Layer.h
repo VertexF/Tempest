@@ -21,7 +21,7 @@ namespace Tempest
         virtual void onDetach();
         virtual void onUpdate(TimeStep timeStep);
         virtual void onEvent(Event& e);
-        virtual void onImGuiRender() {}
+        virtual void onImGuiRender();
 
         //Only really used for debugging and shouldn't be used in release.
         inline std::string getLayer() const { return _debugName; }

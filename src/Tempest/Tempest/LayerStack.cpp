@@ -25,20 +25,23 @@ namespace Tempest
     {
         _layers.emplace(_layers.begin() + _layerIteratorIndex, layer);
         _layerIteratorIndex++;
+        layer->onAttach();
     }
 
     //We want overlay layers to be added to the back of the vector always.
     void LayerStack::pushOverlay(Layer* overlay)
     {
         _layers.emplace_back(overlay);
+        overlay->onAttach();
     }
 
     //Layer will not be deleted if you pop it from the layer stack
     void LayerStack::popLayer(Layer* layer) 
     {
-        auto it = std::find(_layers.begin(), _layers.end(), layer);
+        auto it = std::find(_layers.begin(), _layers.begin() + _layerIteratorIndex, layer);
         if (it != _layers.end()) 
         {
+            layer->onDetach();
             _layers.erase(it);
             _layerIteratorIndex--;
         }
@@ -46,9 +49,10 @@ namespace Tempest
 
     void LayerStack::popOverlay(Layer* overlay) 
     {
-        auto it = std::find(_layers.begin(), _layers.end(), overlay);
+        auto it = std::find(_layers.begin() + _layerIteratorIndex, _layers.end(), overlay);
         if (it != _layers.end())
         {
+            overlay->onDetach();
             _layers.erase(it);
         }
     }

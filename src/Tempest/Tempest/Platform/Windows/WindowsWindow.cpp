@@ -8,6 +8,7 @@
 #include "../../Events/Event.h"
 
 #include "../Platform/OpenGL/OpenGLContext.h"
+#include <backends/imgui_impl_glfw.h>
 
 namespace
 {
@@ -78,7 +79,7 @@ namespace Tempest
         //All these function are using predicates to use our custom event handlers. 
         glfwSetWindowSizeCallback(_window, [](GLFWwindow *wind, int width, int height) 
             {
-                WindowData &windowData = *(static_cast<WindowData *>(glfwGetWindowUserPointer(wind)));
+                WindowData& windowData = *(WindowData*)(glfwGetWindowUserPointer(wind));
                 windowData.width = width;
                 windowData.height = height;
 
@@ -88,7 +89,7 @@ namespace Tempest
 
         glfwSetWindowCloseCallback(_window, [](GLFWwindow * wind) 
             {
-                WindowData& windowData = *(static_cast<WindowData*>(glfwGetWindowUserPointer(wind)));
+                WindowData& windowData = *(WindowData*)(glfwGetWindowUserPointer(wind));
                 WindowClosedEvent closeEvent;
 
                 windowData.eventCallback(closeEvent);
@@ -96,7 +97,7 @@ namespace Tempest
 
         glfwSetKeyCallback(_window, [](GLFWwindow* wind, int key, int scanCode, int action, int mods)
             {
-                WindowData& windowData = *(static_cast<WindowData*>(glfwGetWindowUserPointer(wind)));
+                WindowData& windowData = *(WindowData*)(glfwGetWindowUserPointer(wind));
 
                 switch (action)
                 {
@@ -104,26 +105,26 @@ namespace Tempest
                 {
                     PressedKeyEvent pressEvent(key, 0);
                     windowData.eventCallback(pressEvent);
+                    break;
                 }
-                break;
                 case GLFW_RELEASE:
                 {
-                    PressedKeyEvent releaseEvent(key, 0);
+                    ReleasedKeyEvent releaseEvent(key);
                     windowData.eventCallback(releaseEvent);
+                    break;
                 }
-                break;
                 case GLFW_REPEAT:
                 {
                     PressedKeyEvent repeatEvent(key, 1);
                     windowData.eventCallback(repeatEvent);
+                    break;
                 }
-                break;
                 }
             });
 
         glfwSetCharCallback(_window, [](GLFWwindow* wind, unsigned int character) 
             {
-                WindowData& windowData = *(static_cast<WindowData*>(glfwGetWindowUserPointer(wind)));
+                WindowData& windowData = *(WindowData*)(glfwGetWindowUserPointer(wind));
 
                 TypedKeyEvent typedEvent(character);
                 windowData.eventCallback(typedEvent);
@@ -131,7 +132,7 @@ namespace Tempest
 
         glfwSetMouseButtonCallback(_window, [](GLFWwindow *wind, int button, int action, int mods)
             {
-                WindowData& windowData = *(static_cast<WindowData*>(glfwGetWindowUserPointer(wind)));
+                WindowData& windowData = *(WindowData*)(glfwGetWindowUserPointer(wind));
 
                 switch (action) 
                 {
@@ -139,20 +140,20 @@ namespace Tempest
                 {
                     MouseButtonEventPressed pressEvent(button);
                     windowData.eventCallback(pressEvent);
+                    break;
                 }
-                break;
                 case GLFW_RELEASE:
                 {
                     MouseButtonEventReleased releaseEvent(button);
                     windowData.eventCallback(releaseEvent);
+                    break;
                 }
-                break;
                 }
             });
 
         glfwSetScrollCallback(_window, [](GLFWwindow *wind, double x, double y) 
             {
-                WindowData& windowData = *(static_cast<WindowData*>(glfwGetWindowUserPointer(wind)));
+                WindowData& windowData = *(WindowData*)(glfwGetWindowUserPointer(wind));
 
                 MouseScrolledEvent scrollEvent(static_cast<float>(x), static_cast<float>(y));
                 windowData.eventCallback(scrollEvent);
@@ -160,7 +161,7 @@ namespace Tempest
 
         glfwSetCursorPosCallback(_window, [](GLFWwindow* wind, double x, double y) 
             {
-                WindowData& windowData = *(static_cast<WindowData*>(glfwGetWindowUserPointer(wind)));
+                WindowData& windowData = *(WindowData*)(glfwGetWindowUserPointer(wind));
 
                 MouseMovedEvent mouseMoved(static_cast<float>(x), static_cast<float>(y));
                 windowData.eventCallback(mouseMoved);
