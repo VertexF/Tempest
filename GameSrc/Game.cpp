@@ -9,7 +9,7 @@
 #include "backends/imgui_impl_glfw.h"
 
 
-#include "Tempest/Tempest/Platform/OpenGL/OpenGLShader.h"
+#include "Tempest/Platform/OpenGL/OpenGLShader.h"
 
 //The client also create it own layers depending on what it needs.
 class ExampleLayer : public Tempest::Layer 
@@ -28,12 +28,12 @@ public:
              0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
         };
 
-        float vertices2[3 * 4] =
+        float vertices2[5 * 4] =
         {
-            -0.5f, -0.5f, 0.0f,
-             0.5f, -0.5f, 0.0f,
-             0.5f,  0.5f, 0.0f,
-            -0.5f,  0.5f, 0.0f
+            -0.5f, -0.5f, 0.0f, 0.f, 0.f,
+             0.5f, -0.5f, 0.0f, 1.f, 0.f,
+             0.5f,  0.5f, 0.0f, 1.f, 1.f,
+            -0.5f,  0.5f, 0.0f, 0.f, 1.f
         };
 
         Tempest::ref<Tempest::VertexBuffer> vertexBuffer;
@@ -47,7 +47,8 @@ public:
         };
 
         Tempest::BufferLayout layoutSquare = {
-            { Tempest::ShaderDataType::FLOAT3, "position" }
+            { Tempest::ShaderDataType::FLOAT3, "position" },
+            { Tempest::ShaderDataType::FLOAT2, "texCoord" }
         };
 
         vertexBuffer->setLayout(layout);
@@ -130,6 +131,46 @@ public:
         )";
 
         _squareShader.reset(Tempest::Shader::create(vertexSource2, fragmentSource2));
+
+        std::string vertexTextureSrc = R"(
+            #version 330 core
+            
+            layout(location = 0) in vec3 position;
+            layout(location = 1) in vec2 texCoord;
+
+            uniform mat4 uViewProjectmatrix;
+            uniform mat4 uModelMatrix;
+
+            out vec2 _texCoord;
+
+            void main()
+            {
+                _texCoord = texCoord;
+                gl_Position = uViewProjectmatrix * uModelMatrix * vec4(position, 1.0);
+            }
+        )";
+
+        std::string fragmentTextureSrc = R"(
+            #version 330 core
+            
+            layout(location = 0) out vec4 colour;
+
+            in vec2 _texCoord;
+
+            uniform sampler2D uTexture;
+
+            void main()
+            {
+                colour = texture(uTexture, _texCoord);
+            }
+        )";
+
+        _textureShader.reset(Tempest::Shader::create(vertexTextureSrc, fragmentTextureSrc));
+
+        _characterTexture = Tempest::Texture2D::create("../GameSrc/Assets/Textures/char.png");
+
+        std::dynamic_pointer_cast<Tempest::OpenGLShader>(_textureShader)->bind();
+        std::dynamic_pointer_cast<Tempest::OpenGLShader>(_textureShader)->setIntUniform("uTexture", 0);
     }
 
     virtual void onUpdate(Tempest::TimeStep timeStep) override
@@ -188,7 +229,7 @@ public:
 
         Tempest::Renderer::beginScene(_camera);
 
-        glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+        glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.2f));
 
         std::dynamic_pointer_cast<Tempest::OpenGLShader>(_squareShader)->bind();
         std::dynamic_pointer_cast<Tempest::OpenGLShader>(_squareShader)->setVec3Uniform("uColour", _squareColour);
@@ -197,14 +238,15 @@ public:
         {
             for (int x = 0; x < 20; x++)
             {
-                glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
+                glm::vec3 pos(x * 0.21f, y * 0.21f, 0.0f);
                 glm::mat4 squareTransform = glm::translate(glm::mat4(1.0f), pos) * scale;
                 Tempest::Renderer::submit(_squareVA, _squareShader, squareTransform);
             }
         }
 
+        _characterTexture->bind();
         glm::mat4 tryTransform = glm::translate(glm::mat4(1.0f), _squarePosition) * scale;
-        Tempest::Renderer::submit(_vertexArray, _shader, tryTransform);
+        Tempest::Renderer::submit(_squareVA, _textureShader, tryTransform);
 
         Tempest::Renderer::endScene();
     }
@@ -226,9 +268,12 @@ private:
     //OpenGL stuff
     Tempest::ref<Tempest::Shader> _shader;
     Tempest::ref<Tempest::Shader> _squareShader;
+    Tempest::ref<Tempest::Shader> _textureShader;
 
     Tempest::ref<Tempest::VertexArray> _vertexArray;
     Tempest::ref<Tempest::VertexArray> _squareVA;
+
+    Tempest::ref<Tempest::Texture2D> _characterTexture;
 
     Tempest::OrthographicCamera _camera;
     glm::vec3 _cameraPos;

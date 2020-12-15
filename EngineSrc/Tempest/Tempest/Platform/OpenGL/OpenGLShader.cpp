@@ -136,7 +136,14 @@ namespace Tempest
     void OpenGLShader::setIntUniform(const std::string& name, int value)
     {
         int uniformLocation = glGetUniformLocation(_rendererID, name.c_str());
-        glUniform1i(uniformLocation, value);
+        if (uniformLocation != -1)
+        {
+            glUniform1i(uniformLocation, value);
+        }
+        else
+        {
+            TEMPEST_ERROR("Could not find uniform.");
+        }
     }
 
     void OpenGLShader::setVec1Uniform(const std::string& name, const glm::vec1& vector)

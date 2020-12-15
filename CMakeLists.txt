@@ -1,16 +1,17 @@
 cmake_minimum_required(VERSION 3.19.0)
 
 project(Tempest 
-        VERSION 0.1.3
+        VERSION 0.1.2
         LANGUAGES CXX C
         DESCRIPTION "Tempest Engine")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(TEMPEST_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/EngineSrc/Tempest")
 
-add_subdirectory(src/Tempest)
+add_subdirectory(EngineSrc/Tempest)
 
-add_executable(Game src/Game.cpp)
+add_executable(Game GameSrc/Game.cpp)
 
 set_property(TARGET Game PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
@@ -26,5 +27,6 @@ set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT G
         PROPERTY COMPILE_DEFINITIONS GLEW_NO_GLU GLEW_STATIC
     )
 
+target_include_directories(Game PUBLIC ${TEMPEST_INCLUDE_DIR})
 target_link_libraries(Game PRIVATE Tempest)
 
