@@ -18,6 +18,8 @@ namespace Tempest
             OPENGL
         };
     public:
+        virtual void init() = 0;
+
         virtual void clear() = 0;
         virtual void setClearColour(const glm::vec4 &colour) = 0;
 

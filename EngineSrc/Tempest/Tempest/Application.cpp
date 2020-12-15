@@ -29,6 +29,8 @@ namespace Tempest
         _window = std::unique_ptr<Window>(Window::create());
         _window->setCallbackFunction(std::bind(&Application::onEvent, this, std::placeholders::_1));
 
+        Renderer::init();
+
         _imGuiLayer = new ImGuiLayer();
         pushOverlay(_imGuiLayer);
     }

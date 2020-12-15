@@ -13,6 +13,11 @@ namespace Tempest
     class RendererCommands 
     {
     public:
+        inline static void init() 
+        {
+            _rendererAPI->init();
+        }
+
         inline static void setClearColour(const glm::vec4 &colour) 
         {
             _rendererAPI->setClearColour(colour);

@@ -6,6 +6,11 @@
 namespace Tempest 
 {
     Renderer::SceneData* Renderer::_sceneData = new Renderer::SceneData;
+    
+    void Renderer::init()
+    {
+        RendererCommands::init();
+    }
 
     void Renderer::beginScene(OrthographicCamera& camera)
     {

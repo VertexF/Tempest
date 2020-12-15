@@ -167,7 +167,7 @@ public:
 
         _textureShader.reset(Tempest::Shader::create(vertexTextureSrc, fragmentTextureSrc));
 
-        _characterTexture = Tempest::Texture2D::create("../GameSrc/Assets/Textures/char.png");
+        _characterTexture = Tempest::Texture2D::create("../GameSrc/Assets/Textures/alpha.png");
 
         std::dynamic_pointer_cast<Tempest::OpenGLShader>(_textureShader)->bind();
         std::dynamic_pointer_cast<Tempest::OpenGLShader>(_textureShader)->setIntUniform("uTexture", 0);
@@ -229,7 +229,7 @@ public:
 
         Tempest::Renderer::beginScene(_camera);
 
-        glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.2f));
+        glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
         std::dynamic_pointer_cast<Tempest::OpenGLShader>(_squareShader)->bind();
         std::dynamic_pointer_cast<Tempest::OpenGLShader>(_squareShader)->setVec3Uniform("uColour", _squareColour);
@@ -238,7 +238,7 @@ public:
         {
             for (int x = 0; x < 20; x++)
             {
-                glm::vec3 pos(x * 0.21f, y * 0.21f, 0.0f);
+                glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
                 glm::mat4 squareTransform = glm::translate(glm::mat4(1.0f), pos) * scale;
                 Tempest::Renderer::submit(_squareVA, _squareShader, squareTransform);
             }

@@ -7,6 +7,8 @@ namespace Tempest
 {
     class OpenGLRendererAPI : public RendererAPI 
     {
+        virtual void init() override;
+
         virtual void clear() override;
         virtual void setClearColour(const glm::vec4& colour) override;
 
