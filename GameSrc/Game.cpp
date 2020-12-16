@@ -167,7 +167,7 @@ public:
 
         _textureShader.reset(Tempest::Shader::create(vertexTextureSrc, fragmentTextureSrc));
 
-        _characterTexture = Tempest::Texture2D::create("../GameSrc/Assets/Textures/alpha.png");
+        _characterTexture = Tempest::Texture2D::create("Assets/Textures/alpha.png"); 
 
         std::dynamic_pointer_cast<Tempest::OpenGLShader>(_textureShader)->bind();
         std::dynamic_pointer_cast<Tempest::OpenGLShader>(_textureShader)->setIntUniform("uTexture", 0);
