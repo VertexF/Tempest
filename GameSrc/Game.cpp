@@ -18,8 +18,8 @@ public:
     ExampleLayer() : Layer("Example Layer"),
         _camera(-1.6f, 1.6f, -0.9f, 0.9f), _cameraPos(0.f), _squarePosition(0.f), _squareColour({0.8f, 0.3f, 0.2f})
     {
-        _vertexArray.reset(Tempest::VertexArray::create());
-        _squareVA.reset(Tempest::VertexArray::create());
+        _vertexArray = Tempest::VertexArray::create();
+        _squareVA = Tempest::VertexArray::create();
 
         float vertices[3 * 7] =
         {
@@ -37,9 +37,9 @@ public:
         };
 
         Tempest::ref<Tempest::VertexBuffer> vertexBuffer;
-        vertexBuffer.reset(Tempest::VertexBuffer::create(vertices, sizeof(vertices)));
+        vertexBuffer = Tempest::VertexBuffer::create(vertices, sizeof(vertices));
         Tempest::ref<Tempest::VertexBuffer> squareVB;
-        squareVB.reset(Tempest::VertexBuffer::create(vertices2, sizeof(vertices2)));
+        squareVB = Tempest::VertexBuffer::create(vertices2, sizeof(vertices2));
 
         Tempest::BufferLayout layout = {
             { Tempest::ShaderDataType::FLOAT3, "position" },
@@ -59,113 +59,17 @@ public:
 
         uint32_t indices[3] = { 0, 1, 2 };
         Tempest::ref<Tempest::IndexBuffer> indexBuffer;
-        indexBuffer.reset(Tempest::IndexBuffer::create(indices, sizeof(indices) / sizeof(uint32_t)));
+        indexBuffer = Tempest::IndexBuffer::create(indices, sizeof(indices) / sizeof(uint32_t));
         _vertexArray->setIndexBuffer(indexBuffer);
 
         uint32_t indices2[6] = { 0, 1, 2, 2, 3, 0 };
         Tempest::ref<Tempest::IndexBuffer> squareIB;
-        squareIB.reset(Tempest::IndexBuffer::create(indices2, sizeof(indices2) / sizeof(uint32_t)));
+        squareIB = Tempest::IndexBuffer::create(indices2, sizeof(indices2) / sizeof(uint32_t));
         _squareVA->setIndexBuffer(squareIB);
 
-        std::string vertexSource = R"(
-            #version 330 core
-            
-            layout(location = 0) in vec3 position;
-            layout(location = 1) in vec4 inColour;
-
-            uniform mat4 uViewProjectmatrix;
-            uniform mat4 uModelMatrix;
-
-            out vec3 _position;
-            out vec4 _colour;
-            
-            void main()
-            {
-                _colour = inColour;
-                _position = position;
-                gl_Position = uViewProjectmatrix * uModelMatrix * vec4(_position, 1.0);
-            }
-        )";
-
-        std::string fragmentSource = R"(
-            #version 330 core
-            
-            layout(location = 0) out vec4 colour;
-            in vec3 _position;
-            in vec4 _colour;
-            
-            void main()
-            {
-                colour = vec4(_position * 0.5 + 0.5, 1.0);
-                colour = _colour;
-            }
-        )";
-
-        _shader.reset(Tempest::Shader::create(vertexSource, fragmentSource));
-
-        std::string vertexSource2 = R"(
-            #version 330 core
-            
-            layout(location = 0) in vec3 position;
-
-            uniform mat4 uViewProjectmatrix;
-            uniform mat4 uModelMatrix;
-
-            void main()
-            {
-                gl_Position = uViewProjectmatrix * uModelMatrix * vec4(position, 1.0);
-            }
-        )";
-
-        std::string fragmentSource2 = R"(
-            #version 330 core
-            
-            layout(location = 0) out vec4 colour;
-
-            uniform vec3 uColour;
-
-            void main()
-            {
-                colour = vec4(uColour, 1.0);
-            }
-        )";
-
-        _squareShader.reset(Tempest::Shader::create(vertexSource2, fragmentSource2));
-
-        std::string vertexTextureSrc = R"(
-            #version 330 core
-            
-            layout(location = 0) in vec3 position;
-            layout(location = 1) in vec2 texCoord;
-
-            uniform mat4 uViewProjectmatrix;
-            uniform mat4 uModelMatrix;
-
-            out vec2 _texCoord;
-
-            void main()
-            {
-                _texCoord = texCoord;
-                gl_Position = uViewProjectmatrix * uModelMatrix * vec4(position, 1.0);
-            }
-        )";
-
-        std::string fragmentTextureSrc = R"(
-            #version 330 core
-            
-            layout(location = 0) out vec4 colour;
-
-            in vec2 _texCoord;
-
-            uniform sampler2D uTexture;
-
-            void main()
-            {
-                colour = texture(uTexture, _texCoord);
-            }
-        )";
-
-        _textureShader.reset(Tempest::Shader::create(vertexTextureSrc, fragmentTextureSrc));
+        _shader = Tempest::Shader::create("Assets/Shaders/Triangle.glsl");
+        _squareShader = Tempest::Shader::create("Assets/Shaders/FlatColour.glsl");
+        _textureShader = Tempest::Shader::create("Assets/Shaders/Texture.glsl");
 
         _characterTexture = Tempest::Texture2D::create("Assets/Textures/alpha.png"); 
 

@@ -6,7 +6,7 @@
 
 namespace Tempest 
 {
-    VertexBuffer *VertexBuffer::create(float* vertices, uint32_t size)
+    ref<VertexBuffer> VertexBuffer::create(float* vertices, uint32_t size)
     {
         switch (Renderer::getAPI()) 
         {
@@ -15,7 +15,7 @@ namespace Tempest
             return nullptr;
             break;
         case RendererAPI::API::OPENGL:
-            return new OpenGLVertexBuffer(vertices, size);
+            return std::make_shared<OpenGLVertexBuffer>(vertices, size);
             break;
         }
 
@@ -23,7 +23,7 @@ namespace Tempest
         return nullptr;
     }
 
-    IndexBuffer* IndexBuffer::create(uint32_t *indices, uint32_t size)
+    ref<IndexBuffer> IndexBuffer::create(uint32_t *indices, uint32_t size)
     {
         switch (Renderer::getAPI())
         {
@@ -32,7 +32,7 @@ namespace Tempest
             return nullptr;
             break;
         case RendererAPI::API::OPENGL:
-            return new OpenGLIndexBuffer(indices, size);
+            return std::make_shared<OpenGLIndexBuffer>(indices, size);
             break;
         }
 

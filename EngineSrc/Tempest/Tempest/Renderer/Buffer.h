@@ -1,6 +1,8 @@
 #ifndef BUFFER_HDR
 #define BUFFER_HDR
 
+#include "../Core.h"
+
 namespace Tempest
 {
     enum class ShaderDataType
@@ -45,8 +47,6 @@ namespace Tempest
         bool normalised;
         ShaderDataType type;
 
-        //BufferElement() {}
-
         BufferElement(ShaderDataType type, const std::string& name, bool normalised = false) :
             name(name), type(type), size(shaderDataTypeSize(type)), offset(0), normalised(normalised)
         {
@@ -80,7 +80,7 @@ namespace Tempest
     class BufferLayout
     {
     public:
-        BufferLayout() {}
+        BufferLayout() = default;
 
         BufferLayout(const std::initializer_list<BufferElement> &element) 
             : _bufferElements(element)
@@ -116,7 +116,7 @@ namespace Tempest
     class VertexBuffer 
     {
     public:
-        virtual ~VertexBuffer() {}
+        virtual ~VertexBuffer() = default;
 
         virtual void setData() = 0;
 
@@ -126,7 +126,7 @@ namespace Tempest
         virtual void setLayout(const BufferLayout &bufferLayout) = 0; 
         virtual const BufferLayout getLayout() const = 0;
 
-        static VertexBuffer* create(float *vertices, uint32_t size);
+        static ref<VertexBuffer> create(float *vertices, uint32_t size);
     };
 
     class IndexBuffer 
@@ -141,7 +141,7 @@ namespace Tempest
 
         virtual uint32_t getCount() const = 0;
 
-        static IndexBuffer* create(uint32_t* indices, uint32_t size);
+        static ref<IndexBuffer> create(uint32_t* indices, uint32_t size);
     };
 }
 

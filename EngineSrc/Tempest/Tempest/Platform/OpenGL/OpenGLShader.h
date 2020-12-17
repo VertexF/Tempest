@@ -5,6 +5,7 @@
 
 #include "PreComp.h"
 
+#include <gl/glew.h>
 #include <glm/glm.hpp>
 
 namespace Tempest
@@ -13,6 +14,7 @@ namespace Tempest
     {
     public:
         OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc);
+        OpenGLShader(const std::string& path);
         virtual ~OpenGLShader();
 
         virtual void bind() const override;
@@ -27,6 +29,10 @@ namespace Tempest
         void setVec2Uniform(const std::string& name, const glm::vec2& vector);
         void setVec3Uniform(const std::string& name, const glm::vec3& vector);
         void setVec4Uniform(const std::string& name, const glm::vec4& vector);
+    private:
+        std::string readFile(const std::string& path);
+        std::unordered_map<GLenum, std::string> preProcess(const std::string& shaderSource);
+        void compile(const std::unordered_map<GLenum, std::string> &shaderSources);
     private:
         uint32_t _rendererID;
     };

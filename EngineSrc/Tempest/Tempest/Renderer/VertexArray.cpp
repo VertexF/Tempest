@@ -6,7 +6,7 @@
 
 namespace Tempest 
 {
-    VertexArray* VertexArray::create()
+    ref<VertexArray> VertexArray::create()
     {
         switch (Renderer::getAPI())
         {
@@ -15,7 +15,7 @@ namespace Tempest
             return nullptr;
             break;
         case RendererAPI::API::OPENGL:
-            return new OpenGLVertexArray();
+            return std::make_shared<OpenGLVertexArray>();
             break;
         }
 

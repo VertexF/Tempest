@@ -11,7 +11,7 @@ namespace Tempest
     class VertexArray
     {
     public:
-        virtual ~VertexArray() {}
+        virtual ~VertexArray() = default;
 
         virtual void bind() const = 0;
         virtual void unbind() const = 0;
@@ -22,7 +22,7 @@ namespace Tempest
         virtual const std::vector<ref<VertexBuffer>> &getVertexBuffers() const = 0;
         virtual ref<IndexBuffer> getIndexBuffer() const = 0;
 
-        static VertexArray* create();
+        static ref<VertexArray> create();
     };
 }
 

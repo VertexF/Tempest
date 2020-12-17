@@ -3,6 +3,8 @@
 
 #include "PreComp.h"
 
+#include "../Core.h"
+
 namespace Tempest
 {
     class Shader 
@@ -13,8 +15,8 @@ namespace Tempest
         virtual void bind() const = 0;
         virtual void unbind() const = 0;
 
-        static Shader *create(const std::string &vertexSrc, const std::string &fragmentSrc);
-        static Shader* create(const std::string &path);
+        static ref<Shader> create(const std::string& vertexSrc, const std::string& fragmentSrc);
+        static ref<Shader> create(const std::string& path);
     };
 }
 
