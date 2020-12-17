@@ -16,7 +16,7 @@ class ExampleLayer : public Tempest::Layer
 {
 public:
     ExampleLayer() : Layer("Example Layer"),
-        _camera(-1.6f, 1.6f, -0.9f, 0.9f), _cameraPos(0.f), _squarePosition(0.f), _squareColour({0.8f, 0.3f, 0.2f})
+        _camera(-1.6f, 1.6f, -0.9f, 0.9f), _playerPosition(0.f), _squareColour({0.8f, 0.3f, 0.2f})
     {
         _vertexArray = Tempest::VertexArray::create();
         _squareVA = Tempest::VertexArray::create();
@@ -79,57 +79,29 @@ public:
 
     virtual void onUpdate(Tempest::TimeStep timeStep) override
     {
-        if (Tempest::Input::isKeyPressed(TEMP_KEY_LEFT))
-        {
-            _cameraPos.x -= _cameraSpeed * timeStep;
-        }
-        else if (Tempest::Input::isKeyPressed(TEMP_KEY_RIGHT))
-        {
-            _cameraPos.x += _cameraSpeed * timeStep;
-        }
-
-        if (Tempest::Input::isKeyPressed(TEMP_KEY_DOWN))
-        {
-            _cameraPos.y -= _cameraSpeed * timeStep;
-        }
-        else if (Tempest::Input::isKeyPressed(TEMP_KEY_UP))
-        {
-            _cameraPos.y += _cameraSpeed * timeStep;
-        }
-
-        if (Tempest::Input::isKeyPressed(TEMP_KEY_Z))
-        {
-            _cameraRot -= _cameraRotSpeed * timeStep;
-        }
-        else if (Tempest::Input::isKeyPressed(TEMP_KEY_X))
-        {
-            _cameraRot += _cameraRotSpeed * timeStep;
-        }
-
         //Square movement
         if (Tempest::Input::isKeyPressed(TEMP_KEY_W))
         {
-            _squarePosition.y += _squareMoveSpeed * timeStep;
+            _playerPosition.y += _playerMoveSpeed * timeStep;
         }
         else if (Tempest::Input::isKeyPressed(TEMP_KEY_S))
         {
-            _squarePosition.y -= _squareMoveSpeed * timeStep;
+            _playerPosition.y -= _playerMoveSpeed * timeStep;
         }
 
         if (Tempest::Input::isKeyPressed(TEMP_KEY_A))
         {
-            _squarePosition.x -= _squareMoveSpeed * timeStep;
+            _playerPosition.x -= _playerMoveSpeed * timeStep;
         }
         else if (Tempest::Input::isKeyPressed(TEMP_KEY_D))
         {
-            _squarePosition.x += _squareMoveSpeed * timeStep;
+            _playerPosition.x += _playerMoveSpeed * timeStep;
         }
 
         Tempest::RendererCommands::setClearColour({ 0.2f, 0.2f, 0.2f, 1.f });
         Tempest::RendererCommands::clear();
 
-        _camera.setPosition(_cameraPos);
-        _camera.setRotation(_cameraRot);
+        _camera.setPosition(_playerPosition);
 
         Tempest::Renderer::beginScene(_camera);
 
@@ -151,7 +123,7 @@ public:
         auto textureShader = _shaderLibrary.get("Texture");
 
         _characterTexture->bind();
-        glm::mat4 tryTransform = glm::translate(glm::mat4(1.0f), _squarePosition) * scale;
+        glm::mat4 tryTransform = glm::translate(glm::mat4(1.0f), _playerPosition) * scale;
         Tempest::Renderer::submit(_squareVA, textureShader, tryTransform);
 
         Tempest::Renderer::endScene();
@@ -181,16 +153,11 @@ private:
     Tempest::ref<Tempest::Texture2D> _characterTexture;
 
     Tempest::OrthographicCamera _camera;
-    glm::vec3 _cameraPos;
 
     Tempest::ShaderLibrary _shaderLibrary;
 
-    float _cameraSpeed = 2.f;
-    float _cameraRotSpeed = 20.f;
-    float _cameraRot = 0.f;
-
-    glm::vec3 _squarePosition;
-    float _squareMoveSpeed = 2.f;
+    glm::vec3 _playerPosition;
+    float _playerMoveSpeed = 2.f;
 
     glm::vec3 _squareColour;
 };
