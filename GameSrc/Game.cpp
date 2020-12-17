@@ -8,8 +8,8 @@
 #include "backends/imgui_impl_opengl3.h"
 #include "backends/imgui_impl_glfw.h"
 
-
 #include "Tempest/Platform/OpenGL/OpenGLShader.h"
+#include "Tempest/Renderer/Shader.h"
 
 //The client also create it own layers depending on what it needs.
 class ExampleLayer : public Tempest::Layer 
@@ -69,12 +69,12 @@ public:
 
         _shader = Tempest::Shader::create("Assets/Shaders/Triangle.glsl");
         _squareShader = Tempest::Shader::create("Assets/Shaders/FlatColour.glsl");
-        _textureShader = Tempest::Shader::create("Assets/Shaders/Texture.glsl");
+        auto textureShader = _shaderLibrary.load("Assets/Shaders/Texture.glsl");
 
         _characterTexture = Tempest::Texture2D::create("Assets/Textures/alpha.png"); 
 
-        std::dynamic_pointer_cast<Tempest::OpenGLShader>(_textureShader)->bind();
-        std::dynamic_pointer_cast<Tempest::OpenGLShader>(_textureShader)->setIntUniform("uTexture", 0);
+        std::dynamic_pointer_cast<Tempest::OpenGLShader>(textureShader)->bind();
+        std::dynamic_pointer_cast<Tempest::OpenGLShader>(textureShader)->setIntUniform("uTexture", 0);
     }
 
     virtual void onUpdate(Tempest::TimeStep timeStep) override
@@ -148,9 +148,11 @@ public:
             }
         }
 
+        auto textureShader = _shaderLibrary.get("Texture");
+
         _characterTexture->bind();
         glm::mat4 tryTransform = glm::translate(glm::mat4(1.0f), _squarePosition) * scale;
-        Tempest::Renderer::submit(_squareVA, _textureShader, tryTransform);
+        Tempest::Renderer::submit(_squareVA, textureShader, tryTransform);
 
         Tempest::Renderer::endScene();
     }
@@ -172,7 +174,6 @@ private:
     //OpenGL stuff
     Tempest::ref<Tempest::Shader> _shader;
     Tempest::ref<Tempest::Shader> _squareShader;
-    Tempest::ref<Tempest::Shader> _textureShader;
 
     Tempest::ref<Tempest::VertexArray> _vertexArray;
     Tempest::ref<Tempest::VertexArray> _squareVA;
@@ -181,6 +182,8 @@ private:
 
     Tempest::OrthographicCamera _camera;
     glm::vec3 _cameraPos;
+
+    Tempest::ShaderLibrary _shaderLibrary;
 
     float _cameraSpeed = 2.f;
     float _cameraRotSpeed = 20.f;

@@ -3,6 +3,7 @@
 
 #include <glm/gtc/type_ptr.hpp>
 #include <fstream>
+#include <filesystem>
 
 namespace 
 {
@@ -26,7 +27,8 @@ namespace
 
 namespace Tempest
 {
-    OpenGLShader::OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc)
+    OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc) :
+        _name(name)
     {
         std::unordered_map<GLenum, std::string> shaderSources;
         shaderSources[GL_VERTEX_SHADER] = vertexSrc;
@@ -34,9 +36,12 @@ namespace Tempest
         compile(shaderSources);
     }
 
-    OpenGLShader::OpenGLShader(const std::string& path)
+    OpenGLShader::OpenGLShader(const std::string& filepath)
     {
-        std::string shaderCode = readFile(path);
+        std::filesystem::path path = filepath;
+        _name = path.stem().string(); // Returns the file's name stripped of the extension.
+
+        std::string shaderCode = readFile(filepath);
         auto shaderSources = preProcess(shaderCode);
         compile(shaderSources);
     }
@@ -117,8 +122,8 @@ namespace Tempest
     void OpenGLShader::compile(const std::unordered_map<GLenum, std::string>& shaderSources) 
     {
         _rendererID = glCreateProgram();
-        std::vector<GLenum> glShaderIDs;//(shaderSources.size());
-
+        std::array<GLenum, 2> glShaderIDs;
+        int shaderIDIndex = 0;
         for (auto& keyValue : shaderSources) 
         {
             GLenum shaderType = keyValue.first;
@@ -155,7 +160,7 @@ namespace Tempest
             }
 
             glAttachShader(_rendererID, shader);
-            glShaderIDs.push_back(shader);
+            glShaderIDs[shaderIDIndex++] = shader;
         }
 
         // Link our program
