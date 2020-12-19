@@ -15,6 +15,8 @@ namespace Tempest
         inline void setPosition(const glm::vec3& position) { _position = position;  recalculateViewMatrix(); }
         inline void setRotation(float rotation) { _rotation = rotation; recalculateViewMatrix(); }
 
+        void setProjection(float left, float right, float top, float bottom);
+
         inline const glm::mat4x4& getProjectionMatrix() { return _projectionMatrix; }
         inline const glm::mat4x4& getViewMatrix() { return _viewMatrix; }
         inline const glm::mat4x4& getViewProjectionMatrix() { return _viewProjectionMatrix; }

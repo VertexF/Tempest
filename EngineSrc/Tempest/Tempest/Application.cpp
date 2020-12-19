@@ -48,7 +48,7 @@ namespace Tempest
         eventDispatcher.dispatch<WindowClosedEvent>(std::bind(&Application::onWindowClosed, this, std::placeholders::_1));
 
         //This is meant to go in reserve to handle events like keypresses.
-        for (auto it = _layerStack.rbegin(); it != _layerStack.rend(); ++it) 
+        for (auto it = _layerStack.rbegin(); it != _layerStack.rend(); it++) 
         {
             //When the event is handled we don't need to continue looping
             //through the layer stack.

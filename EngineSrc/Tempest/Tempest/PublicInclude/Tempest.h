@@ -10,6 +10,7 @@
 #include "../MouseButtonCodes.h"
 
 #include "../Core/TimeStep.h"
+#include "Tempest/OrthoCameraController.h"
 
 //RenderingAPI
 #include "../Renderer/Buffer.h"

@@ -21,6 +21,7 @@ namespace
     }
 }
 
+//TODO: Fix IMGUI mouse positioning and mouse buttons.
 namespace Tempest
 {
     //Here we are constructing a window with the default properties.
@@ -99,16 +100,25 @@ namespace Tempest
             {
                 WindowData& windowData = *(WindowData*)(glfwGetWindowUserPointer(wind));
 
+                ImGuiIO& io = ImGui::GetIO();
+
+                // Modifiers are not reliable across systems
+                io.KeyCtrl = io.KeysDown[GLFW_KEY_LEFT_CONTROL] || io.KeysDown[GLFW_KEY_RIGHT_CONTROL];
+                io.KeyShift = io.KeysDown[GLFW_KEY_LEFT_SHIFT] || io.KeysDown[GLFW_KEY_RIGHT_SHIFT];
+                io.KeyAlt = io.KeysDown[GLFW_KEY_LEFT_ALT] || io.KeysDown[GLFW_KEY_RIGHT_ALT];
+
                 switch (action)
                 {
                 case GLFW_PRESS:
                 {
+                    io.KeysDown[key] = true;
                     PressedKeyEvent pressEvent(key, 0);
                     windowData.eventCallback(pressEvent);
                     break;
                 }
                 case GLFW_RELEASE:
                 {
+                    io.KeysDown[key] = false;
                     ReleasedKeyEvent releaseEvent(key);
                     windowData.eventCallback(releaseEvent);
                     break;
@@ -126,6 +136,9 @@ namespace Tempest
             {
                 WindowData& windowData = *(WindowData*)(glfwGetWindowUserPointer(wind));
 
+                ImGuiIO& io = ImGui::GetIO();
+                io.AddInputCharacter(character);
+
                 TypedKeyEvent typedEvent(character);
                 windowData.eventCallback(typedEvent);
             });
@@ -133,6 +146,9 @@ namespace Tempest
         glfwSetMouseButtonCallback(_window, [](GLFWwindow *wind, int button, int action, int mods)
             {
                 WindowData& windowData = *(WindowData*)(glfwGetWindowUserPointer(wind));
+
+                //if (action == GLFW_PRESS && button >= 0 && button < IM_ARRAYSIZE(g_MouseJustPressed))
+                //    g_MouseJustPressed[button] = true;
 
                 switch (action) 
                 {
@@ -154,6 +170,10 @@ namespace Tempest
         glfwSetScrollCallback(_window, [](GLFWwindow *wind, double x, double y) 
             {
                 WindowData& windowData = *(WindowData*)(glfwGetWindowUserPointer(wind));
+
+                ImGuiIO& io = ImGui::GetIO();
+                io.MouseWheelH += static_cast<float>(x);
+                io.MouseWheel += static_cast<float>(y);
 
                 MouseScrolledEvent scrollEvent(static_cast<float>(x), static_cast<float>(y));
                 windowData.eventCallback(scrollEvent);

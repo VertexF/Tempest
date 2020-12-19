@@ -20,7 +20,7 @@ add_subdirectory(vender/glfw)
 add_subdirectory(vender/spdlog)
 add_subdirectory(vender/stb)
 
-add_library(Tempest STATIC ${TEMPEST_SOURCE})
+add_library(Tempest STATIC ${TEMPEST_SOURCE}) 
 
 set_property(TARGET Tempest PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 

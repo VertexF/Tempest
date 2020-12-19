@@ -60,9 +60,9 @@ namespace Tempest
         //The static return is used to get the event type. Every instance will
         //share the same event type of this class. This is needed for the event
         //dispatcher to work correctly.
-        static inline EventType getStaticType() { return EventType::MOUSED_SCROLLED; }
-        inline EventType getEventType() const override { return getStaticType(); };
-        virtual const char* getName() const override { return "Mouse Moved"; }
+        static EventType getStaticType() { return EventType::MOUSED_SCROLLED; }
+        virtual EventType getEventType() const override { return getStaticType(); };
+        virtual const char* getName() const override { return "Mouse Scrolled"; }
     public:
         float x;
         float y;
@@ -72,7 +72,7 @@ namespace Tempest
     class MouseButtonEvent : public Event
     {
     public:
-        inline int getMouseEvent() const { return _button; }
+        int getMouseEvent() const { return _button; }
 
     protected:
         //This event belongs to both input and mouse events.
@@ -104,8 +104,8 @@ namespace Tempest
         //The static return is used to get the event type. Every instance will
         //share the same event type of this class. This is needed for the event
         //dispatcher to work correctly.
-        static inline EventType getStaticType() { return EventType::MOUSE_BUTTON_PRESSED; }
-        inline EventType getEventType() const override { return getStaticType(); };
+        static EventType getStaticType() { return EventType::MOUSE_BUTTON_PRESSED; }
+        virtual EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Mouse button pressed"; }
     };
 
@@ -129,8 +129,8 @@ namespace Tempest
         //The static return is used to get the event type. Every instance will
         //share the same event type of this class. This is needed for the event
         //dispatcher to work correctly.
-        static inline EventType getStaticType() { return EventType::MOUSE_BUTTON_RELEASED; }
-        inline EventType getEventType() const override { return getStaticType(); };
+        static EventType getStaticType() { return EventType::MOUSE_BUTTON_RELEASED; }
+        virtual EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Mouse button released"; }
     };
 

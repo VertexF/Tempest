@@ -11,7 +11,7 @@ namespace Tempest
     class KeyEvent : public Event
     {
     public:
-        inline int getKeyCode() const { return keyCode; }
+        int getKeyCode() const { return keyCode; }
 
     protected:
         //A key event is both an input event and a keyboard event.
@@ -44,8 +44,8 @@ namespace Tempest
         //The static return is used to get the event type. Every instance will
         //share the same event type of this class. This is needed for the event
         //dispatcher to work correctly.
-        static inline EventType getStaticType() { return EventType::KEY_PRESSED; }
-        inline EventType getEventType() const override { return getStaticType(); };
+        static EventType getStaticType() { return EventType::KEY_PRESSED; }
+        virtual EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Key Pressed"; }
     private:
         int _repeatedNum;
@@ -71,7 +71,7 @@ namespace Tempest
         //The static return is used to get the event type. Every instance will
         //share the same event type of this class. This is needed for the event
         //dispatcher to work correctly.
-        static inline EventType getStaticType() { return EventType::KEY_RELEASED; }
+        static EventType getStaticType() { return EventType::KEY_RELEASED; }
         virtual EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Key Released"; }
     };
@@ -96,8 +96,8 @@ namespace Tempest
         //The static return is used to get the event type. Every instance will
         //share the same event type of this class. This is needed for the event
         //dispatcher to work correctly.
-        static inline EventType getStaticType() { return EventType::KEY_TYPED; }
-        inline EventType getEventType() const override { return getStaticType(); };
+        static EventType getStaticType() { return EventType::KEY_TYPED; }
+        virtual EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Key Pressed"; }
     };
 }

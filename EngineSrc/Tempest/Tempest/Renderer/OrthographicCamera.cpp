@@ -11,6 +11,12 @@ namespace Tempest
         _viewProjectionMatrix = _projectionMatrix * _viewMatrix;
     }
 
+    void OrthographicCamera::setProjection(float left, float right, float top, float bottom)
+    {
+        _projectionMatrix = glm::ortho(left, right, top, bottom, 1.f, -1.f);
+        _viewProjectionMatrix = _projectionMatrix * _viewMatrix;
+    }
+
     void OrthographicCamera::recalculateViewMatrix()
     {
         glm::mat4x4 transform = glm::translate(glm::mat4x4(1.f), _position) * 

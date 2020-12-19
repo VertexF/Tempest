@@ -28,8 +28,8 @@ namespace Tempest
             return ss.str();
         }
 
-        inline unsigned int getWidth() const { return _width; }
-        inline unsigned int getHeight() const { return _height; }
+        unsigned int getWidth() const { return _width; }
+        unsigned int getHeight() const { return _height; }
 
         //The static return is used to get the event type. Every instance will
         //share the same event type of this class. This is needed for the event
@@ -37,7 +37,7 @@ namespace Tempest
         static EventType getStaticType() { return EventType::WINDOW_RESIZE; }
         virtual EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Window resize"; }
-    public:
+    private:
         unsigned int _width;
         unsigned int _height;
     };
@@ -73,7 +73,7 @@ namespace Tempest
         //The static return is used to get the event type. Every instance will
         //share the same event type of this class. This is needed for the event
         //dispatcher to work correctly.
-        static inline EventType getStaticType() { return EventType::APP_UPDATE; }
+        static EventType getStaticType() { return EventType::APP_UPDATE; }
         virtual EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Application update"; }
     };
@@ -87,7 +87,7 @@ namespace Tempest
         AppTickEvent() : Event(EVENT_CATEGORY_APPLICATION)
         {}
 
-        static inline EventType getStaticType() { return EventType::APP_TICK; }
+        static EventType getStaticType() { return EventType::APP_TICK; }
         virtual EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Application tick"; }
     };
@@ -106,7 +106,7 @@ namespace Tempest
         //The static return is used to get the event type. Every instance will
         //share the same event type of this class. This is needed for the event
         //dispatcher to work correctly.
-        static inline EventType getStaticType() { return EventType::APP_RENDER; }
+        static EventType getStaticType() { return EventType::APP_RENDER; }
         virtual EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Window render"; }
     };

@@ -52,7 +52,7 @@ namespace Tempest
         GLFWwindow* window = static_cast<GLFWwindow*>(app.getWindow().getNativeWindow());
 
         // Setup Platform/Renderer bindings
-        ImGui_ImplGlfw_InitForOpenGL(window, true);
+        ImGui_ImplGlfw_InitForOpenGL(window, false);
         ImGui_ImplOpenGL3_Init("#version 410");
     }
 

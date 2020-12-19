@@ -8,11 +8,6 @@
 #include "LayerStack.h"
 #include "Debug/ImGUILayer.h"
 
-#include "Renderer/Shader.h"
-#include "Renderer/Buffer.h"
-#include "Renderer/VertexArray.h"
-#include "Renderer/OrthographicCamera.h"
-
 #include "Core/TimeStep.h"
 
 namespace Tempest
