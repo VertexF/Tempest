@@ -4,8 +4,9 @@
 #include "VertexArray.h"
 #include "Shader.h"
 
-#include "Tempest/Platform/OpenGL/OpenGLShader.h"
 #include "Tempest/Renderer/RendererCommands.h"
+
+#include <glm/gtc/matrix_transform.hpp>
 
 namespace Tempest 
 {
@@ -13,6 +14,7 @@ namespace Tempest
     {
         ref<VertexArray> squareVA;
         ref<Shader> squareShader;
+        ref<Shader> textureShader;
     };
 
     static Renderer2DData* renderer2DData;
@@ -49,6 +51,10 @@ namespace Tempest
         renderer2DData->squareVA->setIndexBuffer(squareIB);
 
         renderer2DData->squareShader = Shader::create("Assets/Shaders/FlatColour.glsl");
+        renderer2DData->textureShader = Shader::create("Assets/Shaders/Texture.glsl");
+
+        renderer2DData->textureShader->bind();
+        renderer2DData->textureShader->setInt("uTexture", 0);
     }
 
     void Renderer2D::shutdown() 
@@ -58,10 +64,11 @@ namespace Tempest
 
     void Renderer2D::beginScene(const OrthographicCamera& camera) 
     {
-        std::dynamic_pointer_cast<OpenGLShader>(renderer2DData->squareShader)->bind();
-        std::dynamic_pointer_cast<OpenGLShader>(renderer2DData->squareShader)->setMatrix4Uniform("uViewProjectmatrix", camera.getViewProjectionMatrix());
-        std::dynamic_pointer_cast<OpenGLShader>(renderer2DData->squareShader)->setMatrix4Uniform("uModelMatrix", glm::mat4x4(1.f));
-        //uModelMatrix
+        renderer2DData->squareShader->bind();
+        renderer2DData->squareShader->setMatrix4("uViewProjectmatrix", camera.getViewProjectionMatrix());
+
+        renderer2DData->textureShader->bind();
+        renderer2DData->textureShader->setMatrix4("uViewProjectmatrix", camera.getViewProjectionMatrix());
     }
 
     void Renderer2D::endScene() 
@@ -76,8 +83,30 @@ namespace Tempest
 
     void Renderer2D::drawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& colour) 
     {
-        std::dynamic_pointer_cast<OpenGLShader>(renderer2DData->squareShader)->bind();
-        std::dynamic_pointer_cast<Tempest::OpenGLShader>(renderer2DData->squareShader)->setVec4Uniform("uColour", colour);
+        renderer2DData->squareShader->bind();
+        renderer2DData->squareShader->setVec4("uColour", colour);
+
+        glm::mat4x4 transform = glm::translate(glm::mat4x4(1.f), position) * glm::scale(glm::mat4x4(1.f), {size.x, size.y, 0.f});
+        renderer2DData->squareShader->setMatrix4("uModelMatrix", transform);
+
+        renderer2DData->squareVA->bind();
+        RendererCommands::drawIndexed(renderer2DData->squareVA);
+    }
+
+    void Renderer2D::drawQuad(const glm::vec2& position, const glm::vec2& size, const ref<Texture2D> texture)
+    {
+        drawQuad(glm::vec3(position.x, position.y, 0.f), size, texture);
+    }
+
+    void Renderer2D::drawQuad(const glm::vec3& position, const glm::vec2& size, const ref<Texture2D> texture)
+    {
+        renderer2DData->textureShader->bind();
+        //renderer2DData->textureShader->setVec2("uColour", texture);
+
+        glm::mat4x4 transform = glm::translate(glm::mat4x4(1.f), position) * glm::scale(glm::mat4x4(1.f), { size.x, size.y, 0.f });
+        renderer2DData->textureShader->setMatrix4("uModelMatrix", transform);
+
+        texture->bind();
 
         renderer2DData->squareVA->bind();
         RendererCommands::drawIndexed(renderer2DData->squareVA);

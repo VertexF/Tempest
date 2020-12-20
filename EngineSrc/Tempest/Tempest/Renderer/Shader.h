@@ -3,6 +3,8 @@
 
 #include "PreComp.h"
 
+#include <glm/glm.hpp>
+
 #include "Tempest/Core/Core.h"
 
 namespace Tempest
@@ -14,6 +16,12 @@ namespace Tempest
 
         virtual void bind() const = 0;
         virtual void unbind() const = 0;
+
+        virtual void setInt(const std::string& name, int value) = 0;
+        virtual void setMatrix4(const std::string& name, const glm::mat4x4& value) = 0;
+        virtual void setVec4(const std::string& name, const glm::vec4& value) = 0;
+        virtual void setVec3(const std::string& name, const glm::vec3& value) = 0;
+        virtual void setVec2(const std::string& name, const glm::vec2& value) = 0;
 
         virtual const std::string& getName() const = 0;
 

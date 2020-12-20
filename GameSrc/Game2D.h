@@ -7,7 +7,7 @@ class Game2D : public Tempest::Layer
 {
 public:
     Game2D();
-    virtual ~Game2D() {}
+    virtual ~Game2D() = default;
 
     virtual void onAttach() override;
     virtual void onDetach() override;
@@ -18,6 +18,8 @@ private:
     Tempest::ref<Tempest::Shader> _squareShader;
     Tempest::ref<Tempest::VertexArray> _squareVA;
     glm::vec4 _squareColour;
+
+    Tempest::ref<Tempest::Texture2D> _backgroundTexture;
 
     Tempest::OrthographicalCameraController _cameraController;
 };

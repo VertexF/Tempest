@@ -52,7 +52,7 @@ namespace Tempest
         glDeleteProgram(_rendererID);
     }
 
-    std::string OpenGLShader::readFile(const std::string& path) 
+    std::string OpenGLShader::readFile(const std::string& path)
     {
         std::string result;
         std::ifstream in(path, std::ios::in | std::ios::binary);
@@ -67,7 +67,7 @@ namespace Tempest
                 in.seekg(0, std::ios::beg);
                 in.read(&result[0], size);
             }
-            else 
+            else
             {
                 TEMPEST_ERROR("Could read data from: {0}", path);
             }
@@ -88,7 +88,7 @@ namespace Tempest
         size_t typeTokenLength = strlen(typeToken);
         size_t pos = shaderSource.find(typeToken, 0);
 
-        while (pos != std::string::npos) 
+        while (pos != std::string::npos)
         {
             size_t eol = shaderSource.find_first_of("\r\n", pos); //End of shader type declaration line
             TEMPEST_CORE_ASSERT(eol != std::string::npos, "Syntax error");
@@ -108,12 +108,12 @@ namespace Tempest
         return shaderSources;
     }
 
-    void OpenGLShader::compile(const std::unordered_map<GLenum, std::string>& shaderSources) 
+    void OpenGLShader::compile(const std::unordered_map<GLenum, std::string>& shaderSources)
     {
         _rendererID = glCreateProgram();
         std::array<GLenum, 2> glShaderIDs;
         int shaderIDIndex = 0;
-        for (auto& keyValue : shaderSources) 
+        for (auto& keyValue : shaderSources)
         {
             GLenum shaderType = keyValue.first;
             const std::string& shaderSource = keyValue.second;
@@ -170,7 +170,7 @@ namespace Tempest
                 glGetProgramInfoLog(_rendererID, maxLength, &maxLength, &infoLog[0]);
                 TEMPEST_CORE_ASSERT(false, "Shader linker error: {0}", infoLog.data());
             }
-            else 
+            else
             {
                 TEMPEST_CORE_ASSERT(false, "Shader linker error: No error message reported.");
             }
@@ -204,6 +204,31 @@ namespace Tempest
         glUseProgram(0);
     }
 
+    void OpenGLShader::setInt(const std::string& name, int value)
+    {
+        setIntUniform(name, value);
+    }
+
+    void OpenGLShader::setMatrix4(const std::string& name, const glm::mat4x4& value)
+    {
+        setMatrix4Uniform(name, value);
+    }
+
+    void OpenGLShader::setVec4(const std::string& name, const glm::vec4& value)
+    {
+        setVec4Uniform(name, value);
+    }
+
+    void OpenGLShader::setVec3(const std::string& name, const glm::vec3& value)
+    {
+        setVec3Uniform(name, value);
+    }
+
+    void OpenGLShader::setVec2(const std::string& name, const glm::vec2& value) 
+    {
+        setVec2Uniform(name, value);
+    }
+
     void OpenGLShader::setMatrix4Uniform(const std::string& name, const glm::mat4x4& matrix)
     {
         int uniformLocation = glGetUniformLocation(_rendererID, name.c_str());
@@ -219,7 +244,7 @@ namespace Tempest
     void OpenGLShader::setIntUniform(const std::string& name, int value)
     {
         int uniformLocation = glGetUniformLocation(_rendererID, name.c_str());
-        TEMPEST_CORE_ASSERT(uniformLocation != -1, "Could not find uniform.");
+        //TEMPEST_CORE_ASSERT(uniformLocation != -1, "Could not find uniform.");
         glUniform1i(uniformLocation, value);
 
     }
