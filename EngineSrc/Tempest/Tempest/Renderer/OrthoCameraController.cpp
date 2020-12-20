@@ -1,8 +1,9 @@
 #include "PreComp.h"
 #include "OrthoCameraController.h"
 
-#include "Input.h"
-#include "KeyCodes.h"
+#include "Tempest/Core/Input.h"
+#include "Tempest/Core/KeyCodes.h"
+#include "Tempest/Core/TimeStep.h"
 
 namespace Tempest 
 {
@@ -57,7 +58,6 @@ namespace Tempest
         EventDispatcher dispatcher(e);
         dispatcher.dispatch<MouseScrolledEvent>(std::bind(&OrthographicalCameraController::onMouseScrolled, this, std::placeholders::_1));
         dispatcher.dispatch<WindowResizeEvent>(std::bind(&OrthographicalCameraController::onWindowResized, this, std::placeholders::_1));
-        //dispatcher.dispatch<MouseButtonEventPressed>(std::bind(&OrthographicalCameraController::onMouseTest, this, std::placeholders::_1));
     }
 
     bool OrthographicalCameraController::onMouseScrolled(MouseScrolledEvent& e) 
@@ -72,12 +72,6 @@ namespace Tempest
     {
         _aspectRation = (float)e.getWidth() / (float)e.getHeight();
         _camera.setProjection(-_aspectRation * _zoomLevel, _aspectRation * _zoomLevel, -_zoomLevel, _zoomLevel);
-        return false;
-    }
-
-    bool OrthographicalCameraController::onMouseTest(MouseButtonEventPressed& e)
-    {
-        TEMPEST_INFO("{0}", e.getMouseEvent());
         return false;
     }
 }

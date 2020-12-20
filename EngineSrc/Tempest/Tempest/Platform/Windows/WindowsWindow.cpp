@@ -2,12 +2,12 @@
 
 #include "PreComp.h"
 
-#include "../../Events/ApplicationEvents.h"
-#include "../../Events/KeyEvents.h"
-#include "../../Events/MouseEvents.h"
-#include "../../Events/Event.h"
+#include "Tempest/Events/ApplicationEvents.h"
+#include "Tempest/Events/KeyEvents.h"
+#include "Tempest/Events/MouseEvents.h"
+#include "Tempest/Events/Event.h"
 
-#include "../Platform/OpenGL/OpenGLContext.h"
+#include "Tempest/Platform/OpenGL/OpenGLContext.h"
 #include <backends/imgui_impl_glfw.h>
 
 namespace

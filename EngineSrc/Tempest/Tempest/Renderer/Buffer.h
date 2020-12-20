@@ -1,7 +1,7 @@
 #ifndef BUFFER_HDR
 #define BUFFER_HDR
 
-#include "../Core.h"
+#include "Tempest/Core/Core.h"
 
 namespace Tempest
 {
@@ -35,7 +35,7 @@ namespace Tempest
         case ShaderDataType::BOOL: return 1; break;
         }
 
-        TEMPEST_ERROR("Unknown ShaderDataType!");
+        TEMPEST_CORE_ASSERT(false, "Unknown ShaderDataType!");
         return 0;
     }
 
@@ -72,7 +72,7 @@ namespace Tempest
             case ShaderDataType::BOOL: return 1; break;
             }
 
-            TEMPEST_ERROR("Unknown ShaderDataType!");
+            TEMPEST_CORE_ASSERT(false, "Unknown ShaderDataType!");
             return 0;
         }
     };

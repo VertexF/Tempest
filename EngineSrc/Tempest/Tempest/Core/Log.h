@@ -20,6 +20,7 @@ namespace Tempest
 
 //These defined used to run the logger at different level. While giving the 
 //befinite of being able to be stripped on release builds.
+#define TEMPEST_CRITICAL(...) ::Tempest::Log::getLogger()->critical(__VA_ARGS__)
 #define TEMPEST_ERROR(...) ::Tempest::Log::getLogger()->error(__VA_ARGS__)
 #define TEMPEST_WARN(...)  ::Tempest::Log::getLogger()->warn(__VA_ARGS__)
 #define TEMPEST_INFO(...)  ::Tempest::Log::getLogger()->info(__VA_ARGS__)

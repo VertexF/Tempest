@@ -1,6 +1,8 @@
 #include <iostream>
 #include <Tempest.h>
 
+#include "Tempest/Core/EntryPoint.h"
+
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -11,12 +13,14 @@
 #include "Tempest/Platform/OpenGL/OpenGLShader.h"
 #include "Tempest/Renderer/Shader.h"
 
+#include "Game2D.h"
+
 //The client also create it own layers depending on what it needs.
 class ExampleLayer : public Tempest::Layer 
 {
 public:
     ExampleLayer() : Layer("Example Layer"),
-        _cameraController(1280.f / 720.f), /*_playerPosition(0.f),*/ _squareColour({0.8f, 0.3f, 0.2f})
+        _cameraController(1280.f / 720.f), _playerPosition(0.f), _squareColour({0.8f, 0.3f, 0.2f})
     {
         _vertexArray = Tempest::VertexArray::create();
         _squareVA = Tempest::VertexArray::create();
@@ -80,29 +84,10 @@ public:
     virtual void onUpdate(Tempest::TimeStep timeStep) override
     {
         _cameraController.onUpdate(timeStep);
-        //Square movement
-        //if (Tempest::Input::isKeyPressed(TEMP_KEY_W))
-        //{
-        //    _playerPosition.y += _playerMoveSpeed * timeStep;
-        //}
-        //else if (Tempest::Input::isKeyPressed(TEMP_KEY_S))
-        //{
-        //    _playerPosition.y -= _playerMoveSpeed * timeStep;
-        //}
-
-        //if (Tempest::Input::isKeyPressed(TEMP_KEY_A))
-        //{
-        //    _playerPosition.x -= _playerMoveSpeed * timeStep;
-        //}
-        //else if (Tempest::Input::isKeyPressed(TEMP_KEY_D))
-        //{
-        //    _playerPosition.x += _playerMoveSpeed * timeStep;
-        //}
+        _playerPosition = _cameraController.getCameraPosition();
 
         Tempest::RendererCommands::setClearColour({ 0.2f, 0.2f, 0.2f, 1.f });
         Tempest::RendererCommands::clear();
-
-        //_camera.setPosition(_playerPosition);
 
         Tempest::Renderer::beginScene(_cameraController.getCamera());
 
@@ -124,8 +109,7 @@ public:
         auto textureShader = _shaderLibrary.get("Texture");
 
         _characterTexture->bind();
-        //glm::mat4 tryTransform = glm::translate(glm::mat4(1.0f), _playerPosition) * scale;
-        glm::mat4 tryTransform = glm::translate(glm::mat4(1.0f), glm::vec3(1.f)) * scale;
+        glm::mat4 tryTransform = glm::translate(glm::mat4(1.0f), _playerPosition) * scale;
         Tempest::Renderer::submit(_squareVA, textureShader, tryTransform);
 
         Tempest::Renderer::endScene();
@@ -158,8 +142,7 @@ private:
 
     Tempest::ShaderLibrary _shaderLibrary;
 
-    //glm::vec3 _playerPosition;
-    //float _playerMoveSpeed = 2.f;
+    glm::vec3 _playerPosition;
 
     glm::vec3 _squareColour;
 };
@@ -170,7 +153,8 @@ class Game : public Tempest::Application
 public:
     Game() 
     {
-        pushLayer(new ExampleLayer());
+        //pushLayer(new ExampleLayer());
+        pushLayer(new Game2D());
     }
 
     ~Game() {}

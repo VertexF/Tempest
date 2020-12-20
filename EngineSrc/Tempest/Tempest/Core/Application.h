@@ -3,12 +3,12 @@
 
 #include "PreComp.h"
 #include "Window.h"
-#include "Events/Event.h"
-#include "Events/ApplicationEvents.h"
+#include "Tempest/Events/Event.h"
+#include "Tempest/Events/ApplicationEvents.h"
 #include "LayerStack.h"
-#include "Debug/ImGUILayer.h"
+#include "Tempest/ImGui/ImGUILayer.h"
 
-#include "Core/TimeStep.h"
+#include "TimeStep.h"
 
 namespace Tempest
 {
@@ -31,9 +31,10 @@ namespace Tempest
         inline Window& getWindow() const { return *_window;  }
     private:
         bool onWindowClosed(WindowClosedEvent &closed);
-
+        bool onWindowResize(WindowResizeEvent& resized);
     private:
         bool _running;
+        bool _minimized = false;
         ImGuiLayer* _imGuiLayer;
         std::unique_ptr<Window> _window;
         LayerStack _layerStack;

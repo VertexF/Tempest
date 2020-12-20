@@ -7,7 +7,8 @@
 #include "OrthographicCamera.h"
 #include "Shader.h"
 
-#include "../Core.h"
+#include "Tempest/Core/Core.h"
+#include <stdint.h>
 
 namespace Tempest 
 {
@@ -15,6 +16,7 @@ namespace Tempest
     {
     public:
         static void init();
+        static void onResizeEvent(uint32_t width, uint32_t height);
 
         static void beginScene(OrthographicCamera &camera);
         static void endScene();

@@ -4,7 +4,7 @@
 #include "PreComp.h"
 
 #include "Buffer.h"
-#include "../Core.h"
+#include "Tempest/Core/Core.h"
 
 namespace Tempest 
 {

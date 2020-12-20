@@ -1,8 +1,10 @@
 #include "PreComp.h"
-#include "Buffer.h"
 
+#include "Buffer.h"
 #include "Renderer.h"
-#include "../Platform/OpenGL/OpenGLBuffer.h"
+
+#include "Tempest/Core/Core.h"
+#include "Tempest/Platform/OpenGL/OpenGLBuffer.h"
 
 namespace Tempest 
 {
@@ -11,7 +13,7 @@ namespace Tempest
         switch (Renderer::getAPI()) 
         {
         case RendererAPI::API::NONE:
-            TEMPEST_ERROR("Renderer Type None is not supported!");
+            TEMPEST_CORE_ASSERT(false, "Renderer Type None is not supported!");
             return nullptr;
             break;
         case RendererAPI::API::OPENGL:
@@ -19,7 +21,7 @@ namespace Tempest
             break;
         }
 
-        TEMPEST_ERROR("Unknown RendererAPI!");
+        TEMPEST_CORE_ASSERT(false, "Unknown RendererAPI!");
         return nullptr;
     }
 
@@ -28,7 +30,7 @@ namespace Tempest
         switch (Renderer::getAPI())
         {
         case RendererAPI::API::NONE:
-            TEMPEST_ERROR("Renderer Type None is not supported!");
+            TEMPEST_CORE_ASSERT(false, "Renderer Type None is not supported!");
             return nullptr;
             break;
         case RendererAPI::API::OPENGL:
@@ -36,7 +38,7 @@ namespace Tempest
             break;
         }
 
-        TEMPEST_ERROR("Unknown RendererAPI!");
+        TEMPEST_CORE_ASSERT(false, "Unknown RendererAPI!");
         return nullptr;
     }
 }

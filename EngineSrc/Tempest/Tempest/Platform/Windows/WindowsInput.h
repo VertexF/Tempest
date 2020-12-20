@@ -1,7 +1,7 @@
 #ifndef WINDOWS_INPUT_HDR
 #define WINDOWS_INPUT_HDR
 
-#include "../../Input.h"
+#include "Tempest/Core/Input.h"
 #include <glm/glm.hpp>
 
 namespace Tempest 

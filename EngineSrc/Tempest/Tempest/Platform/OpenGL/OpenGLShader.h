@@ -1,7 +1,7 @@
 #ifndef OPENGL_SHADER_HDR
 #define OPENGL_SHADER_HDR
 
-#include "../Renderer/Shader.h"
+#include "Tempest/Renderer/Shader.h"
 
 #include "PreComp.h"
 

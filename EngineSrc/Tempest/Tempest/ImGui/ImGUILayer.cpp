@@ -5,7 +5,7 @@
 #include "backends/imgui_impl_opengl3.h"
 #include "backends/imgui_impl_glfw.h"
 
-#include "../Application.h"
+#include "Tempest/Core/Application.h"
 
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"

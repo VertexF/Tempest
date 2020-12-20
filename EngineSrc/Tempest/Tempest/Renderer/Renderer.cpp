@@ -1,7 +1,7 @@
 #include "PreComp.h"
 #include "Renderer.h"
 
-#include "../Platform/OpenGL/OpenGLShader.h"
+#include "Tempest/Platform/OpenGL/OpenGLShader.h"
 
 namespace Tempest 
 {
@@ -10,6 +10,11 @@ namespace Tempest
     void Renderer::init()
     {
         RendererCommands::init();
+    }
+
+    void Renderer::onResizeEvent(uint32_t width, uint32_t height) 
+    {
+        RendererCommands::setViewport(0, 0, width, height);
     }
 
     void Renderer::beginScene(OrthographicCamera& camera)

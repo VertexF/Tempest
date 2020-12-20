@@ -6,7 +6,7 @@
 #include <glm/glm.hpp>
 #include "RendererAPI.h"
 
-#include "../Core.h"
+#include "Tempest/Core/Core.h"
 
 namespace Tempest 
 {
@@ -21,6 +21,11 @@ namespace Tempest
         inline static void setClearColour(const glm::vec4 &colour) 
         {
             _rendererAPI->setClearColour(colour);
+        }
+
+        static void setViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
+        {
+            _rendererAPI->setViewport(x, y, width, height);
         }
 
         inline static void clear() 

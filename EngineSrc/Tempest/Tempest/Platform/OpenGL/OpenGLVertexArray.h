@@ -2,8 +2,8 @@
 #define OPENGL_VERTEX_ARRAY_HDR
 
 #include "PreComp.h"
-#include "../Renderer/VertexArray.h"
-#include "../Core.h"
+#include "Tempest/Renderer/VertexArray.h"
+#include "Tempest/Core/Core.h"
 
 namespace Tempest 
 {

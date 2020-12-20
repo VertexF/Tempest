@@ -2,9 +2,9 @@
 #define LAYER_HDR
 
 #include "PreComp.h"
-#include "Events/Event.h"
+#include "Tempest/Events/Event.h"
 
-#include "Core/TimeStep.h"
+#include "TimeStep.h"
 
 namespace Tempest 
 {

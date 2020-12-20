@@ -1,30 +1,26 @@
 #ifndef TEMPEST_HDR
 #define TEMPEST_HDR
 
-#include "../Application.h"
-#include "../Layer.h"
-#include "../Core.h"
-#include "../Debug/ImGUILayer.h"
-#include "../Input.h"
-#include "../KeyCodes.h"
-#include "../MouseButtonCodes.h"
+#include "Tempest/Core/Application.h"
+#include "Tempest/Core/Layer.h"
+#include "Tempest/Core/Core.h"
+#include "Tempest/ImGui/ImGUILayer.h"
+#include "Tempest/Core/Input.h"
+#include "Tempest/Core/KeyCodes.h"
+#include "Tempest/Core/MouseButtonCodes.h"
 
-#include "../Core/TimeStep.h"
-#include "Tempest/OrthoCameraController.h"
+#include "Tempest/Core/TimeStep.h"
+#include "Tempest/Renderer/OrthoCameraController.h"
 
 //RenderingAPI
-#include "../Renderer/Buffer.h"
-#include "../Renderer/GraphicsContext.h"
-#include "../Renderer/OrthographicCamera.h"
-#include "../Renderer/Renderer.h"
-#include "../Renderer/RendererAPI.h"
-#include "../Renderer/RendererCommands.h"
-#include "../Renderer/Shader.h"
-#include "../Renderer/VertexArray.h"
-#include "../Renderer/Texture.h"
-
-/*****************************Entry Point**********************************/
-
-#include "../EntryPoint.h"
+#include "Tempest/Renderer/Buffer.h"
+#include "Tempest/Renderer/GraphicsContext.h"
+#include "Tempest/Renderer/OrthographicCamera.h"
+#include "Tempest/Renderer/Renderer.h"
+#include "Tempest/Renderer/RendererAPI.h"
+#include "Tempest/Renderer/RendererCommands.h"
+#include "Tempest/Renderer/Shader.h"
+#include "Tempest/Renderer/VertexArray.h"
+#include "Tempest/Renderer/Texture.h"
 
 #endif // !TEMPEST_HDR

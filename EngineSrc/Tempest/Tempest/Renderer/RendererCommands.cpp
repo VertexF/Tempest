@@ -1,7 +1,7 @@
 #include "PreComp.h"
 #include "RendererCommands.h"
 
-#include "../Platform/OpenGL/OpenGLRendererAPI.h"
+#include "Tempest/Platform/OpenGL/OpenGLRendererAPI.h"
 
 namespace Tempest 
 {

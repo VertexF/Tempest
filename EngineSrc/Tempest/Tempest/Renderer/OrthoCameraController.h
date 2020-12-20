@@ -1,11 +1,11 @@
 #ifndef ORTHO_CAMERA_CONTROLLER_HDR
 #define ORTHO_CAMERA_CONTROLLER_HDR
 
-#include "Renderer/OrthographicCamera.h"
-#include "Core/TimeStep.h"
+#include "OrthographicCamera.h"
+#include "Tempest/Core/TimeStep.h"
 
-#include "Events/ApplicationEvents.h"
-#include "Events/MouseEvents.h"
+#include "Tempest/Events/ApplicationEvents.h"
+#include "Tempest/Events/MouseEvents.h"
 
 #include <glm/glm.hpp>
 
@@ -21,10 +21,16 @@ namespace Tempest
 
         OrthographicCamera& getCamera() { return _camera; }
         const OrthographicCamera& getCamera() const { return _camera; }
+
+        void setZoomLevel(float level) { _zoomLevel = level; }
+        float getZoomLevel() const { return _zoomLevel; }
+
+        //TODO: Decouple this class from the application. The player postion
+        //should NOT be tied to the camera.
+        glm::vec3 getCameraPosition() const { return _cameraPosition; }
     private:
         bool onMouseScrolled(MouseScrolledEvent& e);
         bool onWindowResized(WindowResizeEvent& e);
-        bool onMouseTest(MouseButtonEventPressed& e);
     private:
         float _aspectRation;
         float _zoomLevel = 1.f;

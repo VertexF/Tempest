@@ -1,8 +1,8 @@
 #include "PreComp.h"
 #include "Shader.h"
 
-#include "../Renderer/Renderer.h"
-#include "../Platform/OpenGL/OpenGLShader.h"
+#include "Tempest/Renderer/Renderer.h"
+#include "Tempest/Platform/OpenGL/OpenGLShader.h"
 
 namespace Tempest 
 {
@@ -11,7 +11,7 @@ namespace Tempest
         switch (Renderer::getAPI())
         {
         case RendererAPI::API::NONE:
-            TEMPEST_ERROR("Renderer Type None is not supported!");
+            TEMPEST_CORE_ASSERT(false, "Renderer Type None is not supported!");
             return nullptr;
             break;
         case RendererAPI::API::OPENGL:
@@ -19,7 +19,7 @@ namespace Tempest
             break;
         }
 
-        TEMPEST_ERROR("Unknown RendererAPI!");
+        TEMPEST_CORE_ASSERT(false, "Unknown RendererAPI!");
         return nullptr;
     }
 
@@ -28,7 +28,7 @@ namespace Tempest
         switch (Renderer::getAPI())
         {
         case RendererAPI::API::NONE:
-            TEMPEST_ERROR("Renderer Type None is not supported!");
+            TEMPEST_CORE_ASSERT(false, "Renderer Type None is not supported!");
             return nullptr;
             break;
         case RendererAPI::API::OPENGL:
@@ -36,7 +36,7 @@ namespace Tempest
             break;
         }
 
-        TEMPEST_ERROR("Unknown RendererAPI!");
+        TEMPEST_CORE_ASSERT(false, "Unknown RendererAPI!");
         return nullptr;
     }
 
@@ -45,7 +45,7 @@ namespace Tempest
         auto& name = shader->getName();
         if (exists(name) == true)
         {
-            TEMPEST_ERROR("Shader name already exists.");
+            TEMPEST_CORE_ASSERT(false, "Shader name already exists.");
             assert(0);
         }
         _shaders[name] = shader;
@@ -55,7 +55,7 @@ namespace Tempest
     {
         if (exists(name) == true)
         {
-            TEMPEST_ERROR("Shader name already exists.");
+            TEMPEST_CORE_ASSERT(false, "Shader name already exists.");
             assert(0);
         }
         _shaders[name] = shader;

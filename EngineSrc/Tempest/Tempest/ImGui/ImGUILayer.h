@@ -3,11 +3,11 @@
 
 #include "PreComp.h"
 
-#include "../Layer.h"
-#include "../Events/Event.h"
-#include "../Events/MouseEvents.h"
-#include "../Events/KeyEvents.h"
-#include "../Events/ApplicationEvents.h"
+#include "Tempest/Core/Layer.h"
+#include "Tempest/Events/Event.h"
+#include "Tempest/Events/MouseEvents.h"
+#include "Tempest/Events/KeyEvents.h"
+#include "Tempest/Events/ApplicationEvents.h"
 
 namespace Tempest 
 {

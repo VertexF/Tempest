@@ -2,7 +2,7 @@
 #define TEXTURE_HDR
 
 #include "PreComp.h"
-#include "../Core.h"
+#include "Tempest/Core/Core.h"
 
 namespace Tempest 
 {

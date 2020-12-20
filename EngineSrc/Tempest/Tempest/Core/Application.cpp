@@ -1,17 +1,17 @@
 #include "Application.h"
 
 #include "PreComp.h"
-#include "Events/ApplicationEvents.h"
-#include "Events/KeyEvents.h"
-#include "Events/MouseEvents.h"
-#include "Events/Event.h"
+#include "Tempest/Events/ApplicationEvents.h"
+#include "Tempest/Events/KeyEvents.h"
+#include "Tempest/Events/MouseEvents.h"
+#include "Tempest/Events/Event.h"
 #include "Layer.h"
 #include "Input.h"
 
-#include "Renderer/Shader.h"
-#include "Platform/OpenGL/OpenGLBuffer.h"
-#include "Renderer/Renderer.h"
-#include "Renderer/RendererCommands.h"
+#include "Tempest/Renderer/Shader.h"
+#include "Tempest/Platform/OpenGL/OpenGLBuffer.h"
+#include "Tempest/Renderer/Renderer.h"
+#include "Tempest/Renderer/RendererCommands.h"
 
 #include <GLFW/glfw3.h>
 
@@ -46,6 +46,7 @@ namespace Tempest
     {
         EventDispatcher eventDispatcher(e);
         eventDispatcher.dispatch<WindowClosedEvent>(std::bind(&Application::onWindowClosed, this, std::placeholders::_1));
+        eventDispatcher.dispatch<WindowResizeEvent>(std::bind(&Application::onWindowResize, this, std::placeholders::_1));
 
         //This is meant to go in reserve to handle events like keypresses.
         for (auto it = _layerStack.rbegin(); it != _layerStack.rend(); it++) 
@@ -72,9 +73,12 @@ namespace Tempest
             TimeStep timestep(time - _lastFrameTime);
             _lastFrameTime = time;
 
-            for(Layer *layer : _layerStack)
+            if (_minimized == false)
             {
-                layer->onUpdate(timestep);
+                for (Layer* layer : _layerStack)
+                {
+                    layer->onUpdate(timestep);
+                }
             }
 
             _imGuiLayer->begin();
@@ -96,15 +100,27 @@ namespace Tempest
         return true;
     }
 
+    bool Application::onWindowResize(WindowResizeEvent& resized)
+    {
+        if (resized.getWidth() == 0 || resized.getHeight() == 0) 
+        {
+            _minimized = true;
+            return false;
+        }
+
+        Renderer::onResizeEvent(resized.getWidth(), resized.getHeight());
+
+        _minimized = false;
+        return false;
+    }
+
     void Application::pushLayer(Layer *layer)
     {
         _layerStack.pushLayer(layer);
-        layer->onAttach();
     }
 
     void Application::pushOverlay(Layer *layer)
     {
         _layerStack.pushOverlay(layer);
-        layer->onAttach();
     }
 }

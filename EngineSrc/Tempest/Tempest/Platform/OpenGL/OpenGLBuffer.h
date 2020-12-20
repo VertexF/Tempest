@@ -1,7 +1,7 @@
 #ifndef OPENGL_BUFFER_HDR
 #define OPENGL_BUFFER_HDR
 
-#include "../Renderer/Buffer.h"
+#include "Tempest/Renderer/Buffer.h"
 
 namespace Tempest 
 {

@@ -16,9 +16,9 @@ void main()
 
 layout(location = 0) out vec4 colour;
 
-uniform vec3 uColour;
+uniform vec4 uColour;
 
 void main()
 {
-    colour = vec4(uColour, 1.0);
+    colour = uColour;
 }

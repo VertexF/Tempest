@@ -2,7 +2,7 @@
 #define OPENGL_TEXTURE_HDR
 
 #include "PreComp.h"
-#include "../Renderer/Texture.h"
+#include "Tempest/Renderer/Texture.h"
 
 namespace Tempest 
 {

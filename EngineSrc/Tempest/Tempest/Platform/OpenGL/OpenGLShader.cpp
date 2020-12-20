@@ -1,6 +1,8 @@
 #include "PreComp.h"
 #include "OpenGLShader.h"
 
+#include "Tempest/Core/Core.h"
+
 #include <glm/gtc/type_ptr.hpp>
 #include <fstream>
 #include <filesystem>
@@ -18,8 +20,7 @@ namespace
             return GL_FRAGMENT_SHADER;
         }
 
-        TEMPEST_ERROR("Unknown shader type");
-        assert(0);
+        TEMPEST_CORE_ASSERT(false, "Unknown shader type");
 
         return 0;
     }
@@ -90,26 +91,14 @@ namespace Tempest
         while (pos != std::string::npos) 
         {
             size_t eol = shaderSource.find_first_of("\r\n", pos); //End of shader type declaration line
-            if (eol == std::string::npos) 
-            {
-                TEMPEST_ERROR("Syntax error");
-                assert(eol == std::string::npos);
-            }
+            TEMPEST_CORE_ASSERT(eol != std::string::npos, "Syntax error");
 
             size_t begin = pos + typeTokenLength + 1; //Start of shader type name (after "#type " keyword)
             std::string type = shaderSource.substr(begin, eol - begin);
-            if (shaderTypeFromString(type) == 0)
-            {
-                TEMPEST_ERROR("Invalid shader type specified");
-                assert(shaderTypeFromString(type));
-            }
+            TEMPEST_CORE_ASSERT(shaderTypeFromString(type) != 0, "Invalid shader type specified");
 
             size_t nextLinePos = shaderSource.find_first_not_of("\r\n", eol); //Start of shader code after shader type declaration line
-            if (nextLinePos == std::string::npos)
-            {
-                TEMPEST_ERROR("Syntax error");
-                assert(nextLinePos == std::string::npos);
-            }
+            TEMPEST_CORE_ASSERT(nextLinePos != std::string::npos, "Syntax error");
 
             pos = shaderSource.find(typeToken, nextLinePos); //Start of next shader type declaration line
 
@@ -155,7 +144,7 @@ namespace Tempest
                 // We don't need the shader anymore.
                 glDeleteShader(shader);
 
-                TEMPEST_ERROR("Shader compliation error: {0}", infoLog.data());
+                TEMPEST_CORE_ASSERT(false, "Shader compliation error: {0}", infoLog.data());
                 break;
             }
 
@@ -179,11 +168,11 @@ namespace Tempest
             if (maxLength != 0)
             {
                 glGetProgramInfoLog(_rendererID, maxLength, &maxLength, &infoLog[0]);
-                TEMPEST_ERROR("Shader linker error: {0}", infoLog.data());
+                TEMPEST_CORE_ASSERT(false, "Shader linker error: {0}", infoLog.data());
             }
             else 
             {
-                TEMPEST_ERROR("Shader linker error: No error message reported.");
+                TEMPEST_CORE_ASSERT(false, "Shader linker error: No error message reported.");
             }
 
             // We don't need the program anymore.
@@ -230,14 +219,9 @@ namespace Tempest
     void OpenGLShader::setIntUniform(const std::string& name, int value)
     {
         int uniformLocation = glGetUniformLocation(_rendererID, name.c_str());
-        if (uniformLocation != -1)
-        {
-            glUniform1i(uniformLocation, value);
-        }
-        else
-        {
-            TEMPEST_ERROR("Could not find uniform.");
-        }
+        TEMPEST_CORE_ASSERT(uniformLocation != -1, "Could not find uniform.");
+        glUniform1i(uniformLocation, value);
+
     }
 
     void OpenGLShader::setVec1Uniform(const std::string& name, const glm::vec1& vector)
@@ -255,14 +239,8 @@ namespace Tempest
     void OpenGLShader::setVec3Uniform(const std::string& name, const glm::vec3& vector)
     {
         int uniformLocation = glGetUniformLocation(_rendererID, name.c_str());
-        if (uniformLocation != -1)
-        {
-            glUniform3f(uniformLocation, vector.x, vector.y, vector.z);
-        }
-        else 
-        {
-            TEMPEST_ERROR("Could not find uniform.");
-        }
+        TEMPEST_CORE_ASSERT(uniformLocation != -1, "Could not find uniform.");
+        glUniform3f(uniformLocation, vector.x, vector.y, vector.z);
     }
 
     void OpenGLShader::setVec4Uniform(const std::string& name, const glm::vec4& vector)
