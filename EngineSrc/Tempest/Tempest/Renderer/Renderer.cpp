@@ -2,14 +2,16 @@
 #include "Renderer.h"
 
 #include "Tempest/Platform/OpenGL/OpenGLShader.h"
+#include "Tempest/Renderer/Renderer2D.h"
 
 namespace Tempest 
 {
-    Renderer::SceneData* Renderer::_sceneData = new Renderer::SceneData;
+    Renderer::SceneData* Renderer::_sceneData = new Renderer::SceneData();
     
     void Renderer::init()
     {
         RendererCommands::init();
+        Renderer2D::init();
     }
 
     void Renderer::onResizeEvent(uint32_t width, uint32_t height) 

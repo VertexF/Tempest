@@ -10,16 +10,16 @@ namespace Tempest
     public:
         OrthographicCamera(float left, float right, float top, float bottom);
 
-        inline const glm::vec3& getPosition() const { return _position; }
-        inline float getRotation() const { return _rotation; }
-        inline void setPosition(const glm::vec3& position) { _position = position;  recalculateViewMatrix(); }
-        inline void setRotation(float rotation) { _rotation = rotation; recalculateViewMatrix(); }
+        const glm::vec3& getPosition() const { return _position; }
+        float getRotation() const { return _rotation; }
+        void setPosition(const glm::vec3& position) { _position = position;  recalculateViewMatrix(); }
+        void setRotation(float rotation) { _rotation = rotation; recalculateViewMatrix(); }
 
         void setProjection(float left, float right, float top, float bottom);
 
-        inline const glm::mat4x4& getProjectionMatrix() { return _projectionMatrix; }
-        inline const glm::mat4x4& getViewMatrix() { return _viewMatrix; }
-        inline const glm::mat4x4& getViewProjectionMatrix() { return _viewProjectionMatrix; }
+        const glm::mat4x4& getProjectionMatrix() const { return _projectionMatrix; }
+        const glm::mat4x4& getViewMatrix() const { return _viewMatrix; }
+        const glm::mat4x4& getViewProjectionMatrix() const { return _viewProjectionMatrix; }
     private:
         void recalculateViewMatrix();
     private:

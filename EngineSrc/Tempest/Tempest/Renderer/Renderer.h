@@ -30,7 +30,7 @@ namespace Tempest
             glm::mat4x4 _viewProjectMatrix;
         };
 
-        static SceneData *_sceneData;
+        static SceneData* _sceneData;
     };
 }
 
