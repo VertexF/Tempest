@@ -33,7 +33,7 @@ namespace Tempest
         bool onWindowResized(WindowResizeEvent& e);
     private:
         float _aspectRation;
-        float _zoomLevel = 1.f;
+        float _zoomLevel = 10.f;
         //Needs to be below other values
         OrthographicCamera _camera;
 
