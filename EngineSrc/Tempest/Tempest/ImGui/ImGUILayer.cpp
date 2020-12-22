@@ -17,10 +17,6 @@ namespace Tempest
     {
     }
 
-    ImGuiLayer::~ImGuiLayer()
-    {
-    }
-
     void ImGuiLayer::onAttach()
     {
         // Setup Dear ImGui context

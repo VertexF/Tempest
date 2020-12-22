@@ -23,7 +23,7 @@ namespace Tempest
 
         static void submit(const ref<VertexArray> &vertexArray, const ref<Shader>& shader, const glm::mat4x4& transform = glm::mat4x4(1.f));
 
-        inline static RendererAPI::API getAPI() { return RendererAPI::getAPI(); }
+        constexpr static RendererAPI::API getAPI() { return RendererAPI::getAPI(); }
     private:
         struct SceneData
         {

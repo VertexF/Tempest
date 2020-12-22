@@ -43,21 +43,13 @@ namespace Tempest
     void ShaderLibrary::add(const ref<Shader>& shader) 
     {
         auto& name = shader->getName();
-        if (exists(name) == true)
-        {
-            TEMPEST_CORE_ASSERT(false, "Shader name already exists.");
-            assert(0);
-        }
+        TEMPEST_CORE_ASSERT(exists(name) == false, "Shader name already exists.");
         _shaders[name] = shader;
     }
 
     void ShaderLibrary::add(const std::string& name, const ref<Shader>& shader)
     {
-        if (exists(name) == true)
-        {
-            TEMPEST_CORE_ASSERT(false, "Shader name already exists.");
-            assert(0);
-        }
+        TEMPEST_CORE_ASSERT(exists(name) == false, "Shader name already exists.");
         _shaders[name] = shader;
     }
 
@@ -77,12 +69,7 @@ namespace Tempest
 
     ref<Shader> ShaderLibrary::get(const std::string& name) const 
     {
-        if (exists(name) == false)
-        {
-            TEMPEST_ERROR("Shader name doesn't exists.");
-            assert(0);
-        }
-
+        TEMPEST_CORE_ASSERT(exists(name) == true, "Shader name doesn't exists.");
         return _shaders.at(name);
     }
 }

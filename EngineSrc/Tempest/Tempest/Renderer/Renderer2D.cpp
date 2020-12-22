@@ -106,7 +106,6 @@ namespace Tempest
         glm::mat4x4 transform = glm::translate(glm::mat4x4(1.f), position) * glm::scale(glm::mat4x4(1.f), { size.x, size.y, 0.f });
         renderer2DData->textureShader->setMatrix4("uModelMatrix", transform);
 
-
         renderer2DData->squareVA->bind();
         RendererCommands::drawIndexed(renderer2DData->squareVA);
         texture->unbind();

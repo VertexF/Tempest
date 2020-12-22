@@ -10,11 +10,11 @@ namespace Tempest
     class Input
     {
     public:
-        inline static bool isKeyPressed(int keyCode) { return _input->isKeyPressedImpl(keyCode); }
-        inline static bool isMouseButtonPressed(int button) { return _input->isMouseButtonPressedImpl(button); }
-        inline static glm::vec2 getMousePosition() { return _input->getMousePositionImpl();  }
-        inline static float getMouseX() { return _input->getMouseXImpl(); }
-        inline static float getMouseY() { return _input->getMouseYImpl(); }
+        static bool isKeyPressed(int keyCode) { return _input->isKeyPressedImpl(keyCode); }
+        static bool isMouseButtonPressed(int button) { return _input->isMouseButtonPressedImpl(button); }
+        static glm::vec2 getMousePosition() { return _input->getMousePositionImpl();  }
+        static float getMouseX() { return _input->getMouseXImpl(); }
+        static float getMouseY() { return _input->getMouseYImpl(); }
     private:
         virtual bool isKeyPressedImpl(int keyCode) = 0;
         virtual bool isMouseButtonPressedImpl(int button) = 0;
