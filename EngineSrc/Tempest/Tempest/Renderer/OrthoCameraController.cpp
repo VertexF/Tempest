@@ -17,6 +17,8 @@ namespace Tempest
 
     void OrthographicalCameraController::onUpdate(TimeStep ts) 
     {
+        TEMPEST_PROFILE_FUNCTION();
+
         if (Input::isKeyPressed(TEMP_KEY_W))
         {
             _cameraPosition.y += _cameraMovementSpeed * ts;
@@ -55,6 +57,8 @@ namespace Tempest
 
     void OrthographicalCameraController::onEvent(Event& e) 
     {
+        TEMPEST_PROFILE_FUNCTION();
+
         EventDispatcher dispatcher(e);
         dispatcher.dispatch<MouseScrolledEvent>(std::bind(&OrthographicalCameraController::onMouseScrolled, this, std::placeholders::_1));
         dispatcher.dispatch<WindowResizeEvent>(std::bind(&OrthographicalCameraController::onWindowResized, this, std::placeholders::_1));
@@ -62,6 +66,8 @@ namespace Tempest
 
     bool OrthographicalCameraController::onMouseScrolled(MouseScrolledEvent& e) 
     {
+        TEMPEST_PROFILE_FUNCTION();
+
         _zoomLevel -= e.y * 0.25f;
         _zoomLevel = std::max(_zoomLevel, 0.25f);
         _camera.setProjection(-_aspectRation * _zoomLevel, _aspectRation * _zoomLevel, -_zoomLevel, _zoomLevel);
@@ -70,6 +76,8 @@ namespace Tempest
 
     bool OrthographicalCameraController::onWindowResized(WindowResizeEvent& e) 
     {
+        TEMPEST_PROFILE_FUNCTION();
+
         _aspectRation = (float)e.getWidth() / (float)e.getHeight();
         _camera.setProjection(-_aspectRation * _zoomLevel, _aspectRation * _zoomLevel, -_zoomLevel, _zoomLevel);
         return false;

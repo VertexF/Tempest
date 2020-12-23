@@ -24,6 +24,7 @@
 #include <spdlog/sinks/stdout_color_sinks.h>
 
 #include "Tempest/Core/Log.h"
+#include "Tempest/Debug/Instrumentor.h"
 
 #ifdef WIN32
     #define WIN32_LEAN_AND_MEAN

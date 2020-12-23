@@ -10,8 +10,14 @@ namespace Tempest
     
     void Renderer::init()
     {
+        TEMPEST_PROFILE_FUNCTION();
         RendererCommands::init();
         Renderer2D::init();
+    }
+
+    void Renderer::shutdown() 
+    {
+        Renderer2D::shutdown();
     }
 
     void Renderer::onResizeEvent(uint32_t width, uint32_t height) 

@@ -8,6 +8,7 @@
 #include "Tempest/Events/Event.h"
 
 #include "Tempest/Platform/OpenGL/OpenGLContext.h"
+#include "Tempest/Core/Core.h"
 #include <backends/imgui_impl_glfw.h>
 
 namespace
@@ -25,18 +26,20 @@ namespace
 namespace Tempest
 {
     //Here we are constructing a window with the default properties.
-    Window* Window::create(const WindowProps& props) 
+    scope<Window> Window::create(const WindowProps& props)
     { 
-        return new WindowsWindow(props);
+        return std::make_unique<WindowsWindow>(props);
     }
 
     WindowsWindow::WindowsWindow(const WindowProps& props) : _window(nullptr)
     {
+        TEMPEST_PROFILE_FUNCTION();
         init(props);
     }
 
     WindowsWindow::~WindowsWindow() 
     {
+        TEMPEST_PROFILE_FUNCTION();
         shutdown();
     }
 
@@ -49,6 +52,7 @@ namespace Tempest
     //4) You need to intialise GLEW 
     void WindowsWindow::init(const WindowProps& props) 
     {
+        TEMPEST_PROFILE_FUNCTION();
         _windowData.title = props.title;
         _windowData.width = props.width;
         _windowData.height = props.height;
@@ -190,18 +194,21 @@ namespace Tempest
 
     void WindowsWindow::shutdown() 
     {
+        TEMPEST_PROFILE_FUNCTION();
         glfwDestroyWindow(_window);
     }
 
     //Currently just swaps the back buffer.
     void WindowsWindow::onUpdate() 
     {
+        TEMPEST_PROFILE_FUNCTION();
         glfwPollEvents();
         _context->swapBuffers();
     }
 
     void WindowsWindow::setVSync(bool vsync) 
     {
+        TEMPEST_PROFILE_FUNCTION();
         if (vsync) 
         {
             glfwSwapInterval(1);

@@ -19,10 +19,15 @@ extern Tempest::Application* Tempest::createApplication();
 int main(int /*argc*/, char** /*argv*/) 
 {
     Tempest::Log::init();
-
+    TEMPEST_PROFILE_BEGIN_SESSION("Startup", "TempestProfile_startup.json");
     auto app = Tempest::createApplication();
+    TEMPEST_PROFILE_END_SESSION();
+    TEMPEST_PROFILE_BEGIN_SESSION("runtime", "TempestProfile_runtime.json");
     app->run();
+    TEMPEST_PROFILE_END_SESSION();
+    TEMPEST_PROFILE_BEGIN_SESSION("shutdown", "TempestProfile_shutdown.json");
     delete app;
+    TEMPEST_PROFILE_END_SESSION();
     return 0;
 }
 

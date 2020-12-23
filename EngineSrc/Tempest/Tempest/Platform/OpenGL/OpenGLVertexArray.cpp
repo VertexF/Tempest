@@ -31,26 +31,32 @@ namespace Tempest
 
     OpenGLVertexArray::OpenGLVertexArray() 
     {
+        TEMPEST_PROFILE_FUNCTION();
         glGenVertexArrays(1, &_vertexArray);
     }
 
     OpenGLVertexArray::~OpenGLVertexArray()
     {
+        TEMPEST_PROFILE_FUNCTION();
         glDeleteVertexArrays(1, &_vertexArray);
     }
 
     void OpenGLVertexArray::bind() const 
     {
+        TEMPEST_PROFILE_FUNCTION();
         glBindVertexArray(_vertexArray);
     }
 
     void OpenGLVertexArray::unbind() const 
     {
+        TEMPEST_PROFILE_FUNCTION();
         glBindVertexArray(0);
     }
 
     void OpenGLVertexArray::addVertexBuffer(const ref<VertexBuffer>& vertexBuffer) 
     {
+        TEMPEST_PROFILE_FUNCTION();
+
         if (vertexBuffer->getLayout().getElements().empty())
         {
             TEMPEST_ERROR("Error: The layout is empty. Did you add the vertex buffer before setting the layout of the vertex buffer?");
@@ -80,6 +86,7 @@ namespace Tempest
 
     void OpenGLVertexArray::setIndexBuffer(const ref<IndexBuffer>& indexBuffer) 
     {
+        TEMPEST_PROFILE_FUNCTION();
         glBindVertexArray(_vertexArray);
         indexBuffer->bind();
 

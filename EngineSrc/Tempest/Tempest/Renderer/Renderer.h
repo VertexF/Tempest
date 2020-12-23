@@ -16,6 +16,7 @@ namespace Tempest
     {
     public:
         static void init();
+        static void shutdown();
         static void onResizeEvent(uint32_t width, uint32_t height);
 
         static void beginScene(OrthographicCamera &camera);

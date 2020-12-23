@@ -31,6 +31,7 @@ namespace Tempest
     OpenGLShader::OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc) :
         _name(name)
     {
+        TEMPEST_PROFILE_FUNCTION();
         std::unordered_map<GLenum, std::string> shaderSources;
         shaderSources[GL_VERTEX_SHADER] = vertexSrc;
         shaderSources[GL_FRAGMENT_SHADER] = fragmentSrc;
@@ -39,6 +40,7 @@ namespace Tempest
 
     OpenGLShader::OpenGLShader(const std::string& filepath)
     {
+        TEMPEST_PROFILE_FUNCTION();
         std::filesystem::path path = filepath;
         _name = path.stem().string(); // Returns the file's name stripped of the extension.
 
@@ -49,11 +51,13 @@ namespace Tempest
 
     OpenGLShader::~OpenGLShader()
     {
+        TEMPEST_PROFILE_FUNCTION();
         glDeleteProgram(_rendererID);
     }
 
     std::string OpenGLShader::readFile(const std::string& path)
     {
+        TEMPEST_PROFILE_FUNCTION();
         std::string result;
         std::ifstream in(path, std::ios::in | std::ios::binary);
         if (in.is_open())
@@ -82,6 +86,8 @@ namespace Tempest
 
     std::unordered_map<GLenum, std::string> OpenGLShader::preProcess(const std::string& shaderSource)
     {
+        TEMPEST_PROFILE_FUNCTION();
+
         std::unordered_map<GLenum, std::string> shaderSources;
 
         const char* typeToken = "#type";
@@ -110,6 +116,8 @@ namespace Tempest
 
     void OpenGLShader::compile(const std::unordered_map<GLenum, std::string>& shaderSources)
     {
+        TEMPEST_PROFILE_FUNCTION();
+
         _rendererID = glCreateProgram();
         std::array<GLenum, 2> glShaderIDs;
         int shaderIDIndex = 0;
@@ -196,36 +204,45 @@ namespace Tempest
 
     void OpenGLShader::bind() const
     {
+        TEMPEST_PROFILE_FUNCTION();
+
         glUseProgram(_rendererID);
     }
 
     void OpenGLShader::unbind() const
     {
+        TEMPEST_PROFILE_FUNCTION();
+
         glUseProgram(0);
     }
 
     void OpenGLShader::setInt(const std::string& name, int value)
     {
+        TEMPEST_PROFILE_FUNCTION();
         setIntUniform(name, value);
     }
 
     void OpenGLShader::setMatrix4(const std::string& name, const glm::mat4x4& value)
     {
+        TEMPEST_PROFILE_FUNCTION();
         setMatrix4Uniform(name, value);
     }
 
     void OpenGLShader::setVec4(const std::string& name, const glm::vec4& value)
     {
+        TEMPEST_PROFILE_FUNCTION();
         setVec4Uniform(name, value);
     }
 
     void OpenGLShader::setVec3(const std::string& name, const glm::vec3& value)
     {
+        TEMPEST_PROFILE_FUNCTION();
         setVec3Uniform(name, value);
     }
 
     void OpenGLShader::setVec2(const std::string& name, const glm::vec2& value) 
     {
+        TEMPEST_PROFILE_FUNCTION();
         setVec2Uniform(name, value);
     }
 

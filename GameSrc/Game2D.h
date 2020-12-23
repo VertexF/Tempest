@@ -20,15 +20,8 @@ private:
     glm::vec4 _squareColour;
 
     Tempest::ref<Tempest::Texture2D> _backgroundTexture;
-    Tempest::ref<Tempest::Texture2D> _dirt;
-    Tempest::ref<Tempest::Texture2D> _water;
-    Tempest::ref<Tempest::Texture2D> _grass;
 
     Tempest::OrthographicalCameraController _cameraController;
-
-    int _levelWidth;
-    int _levelHeight;
-    std::wstring _levelMap;
 };
 
 #endif //!GAME_2D_HDR

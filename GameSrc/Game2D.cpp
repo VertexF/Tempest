@@ -14,15 +14,20 @@ Game2D::Game2D() : Layer("Game"), _cameraController(1280.f / 720.f), _squareColo
 
 void Game2D::onAttach() 
 {
+    TEMPEST_PROFILE_FUNCTION();
+
     _backgroundTexture = Tempest::Texture2D::create("Assets/Textures/Checkerboard.png");
 }
 
 void Game2D::onDetach() 
 {
+    TEMPEST_PROFILE_FUNCTION();
 }
 
 void Game2D::onUpdate(Tempest::TimeStep timeStep) 
 {
+    TEMPEST_PROFILE_FUNCTION();
+
     _cameraController.onUpdate(timeStep);
 
     Tempest::RendererCommands::setClearColour({ 0.2f, 0.2f, 0.2f, 1.f });
@@ -44,6 +49,7 @@ void Game2D::onEvent(Tempest::Event& e)
 
 void Game2D::onImGuiRender() 
 {
+    TEMPEST_PROFILE_FUNCTION();
     ImGui::Begin("Settings");
 
     ImGui::ColorEdit4("Square Colour Picker", glm::value_ptr(_squareColour));

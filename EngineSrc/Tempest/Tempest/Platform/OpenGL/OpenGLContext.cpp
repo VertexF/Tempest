@@ -13,6 +13,8 @@ namespace Tempest
 
     void OpenGLContext::init() 
     {
+        TEMPEST_PROFILE_FUNCTION();
+
         glfwMakeContextCurrent(_windowHandle);
         //Here we are starting up glew.
         glewExperimental = GL_TRUE;
@@ -28,6 +30,8 @@ namespace Tempest
 
     void OpenGLContext::swapBuffers()
     {
+        TEMPEST_PROFILE_FUNCTION();
+
         glfwSwapBuffers(_windowHandle);
     }
 }

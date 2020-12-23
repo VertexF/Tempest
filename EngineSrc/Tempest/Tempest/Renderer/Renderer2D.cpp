@@ -21,6 +21,8 @@ namespace Tempest
 
     void Renderer2D::init() 
     {
+        TEMPEST_PROFILE_FUNCTION();
+
         renderer2DData = new Renderer2DData();
 
         renderer2DData->squareVA = VertexArray::create();
@@ -62,17 +64,20 @@ namespace Tempest
 
     void Renderer2D::shutdown() 
     {
+        TEMPEST_PROFILE_FUNCTION();
         delete renderer2DData;
     }
 
     void Renderer2D::beginScene(const OrthographicCamera& camera) 
     {
+        TEMPEST_PROFILE_FUNCTION();
         renderer2DData->textureShader->bind();
         renderer2DData->textureShader->setMatrix4("uViewProjectmatrix", camera.getViewProjectionMatrix());
     }
 
     void Renderer2D::endScene() 
     {
+        TEMPEST_PROFILE_FUNCTION();
     }
 
     //Primitive
@@ -83,6 +88,7 @@ namespace Tempest
 
     void Renderer2D::drawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& colour) 
     {
+        TEMPEST_PROFILE_FUNCTION();
         renderer2DData->textureShader->setVec4("uColour", colour);
         renderer2DData->whiteTexture->bind();
 
@@ -100,6 +106,7 @@ namespace Tempest
 
     void Renderer2D::drawQuad(const glm::vec3& position, const glm::vec2& size, const ref<Texture2D> texture)
     {
+        TEMPEST_PROFILE_FUNCTION();
         renderer2DData->textureShader->setVec4("uColour", glm::vec4(1.f));
         texture->bind();
 

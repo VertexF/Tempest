@@ -24,9 +24,11 @@ namespace Tempest
     //This allows events to be sent GLFW from our onEvent function.
     Application::Application()
     {
+        TEMPEST_PROFILE_FUNCTION();
+
         _instance = this;
 
-        _window = std::unique_ptr<Window>(Window::create());
+        _window = Window::create();
         _window->setCallbackFunction(std::bind(&Application::onEvent, this, std::placeholders::_1));
 
         Renderer::init();
@@ -37,6 +39,9 @@ namespace Tempest
 
     Application::~Application()
     {
+        TEMPEST_PROFILE_FUNCTION();
+
+        Renderer::shutdown();
     }
 
     //The only event we need to dispatch is our windows close event.
@@ -44,6 +49,8 @@ namespace Tempest
     //by running the WindowClosedEvent function as a callback.
     void Application::onEvent(Event &e) 
     {
+        TEMPEST_PROFILE_FUNCTION();
+
         EventDispatcher eventDispatcher(e);
         eventDispatcher.dispatch<WindowClosedEvent>(std::bind(&Application::onWindowClosed, this, std::placeholders::_1));
         eventDispatcher.dispatch<WindowResizeEvent>(std::bind(&Application::onWindowResize, this, std::placeholders::_1));
@@ -66,25 +73,35 @@ namespace Tempest
     //render layers on top of each other correctly.
     void Application::run()
     {
+        TEMPEST_PROFILE_FUNCTION();
+
         _running = true;
         while (_running)
         {
+            TEMPEST_PROFILE_SCOPE("Main run loop");
+
             float time = static_cast<float>(glfwGetTime());
             TimeStep timestep(time - _lastFrameTime);
             _lastFrameTime = time;
 
             if (_minimized == false)
             {
-                for (Layer* layer : _layerStack)
                 {
-                    layer->onUpdate(timestep);
+                    TEMPEST_PROFILE_SCOPE("Layer stack update");
+                    for (Layer* layer : _layerStack)
+                    {
+                        layer->onUpdate(timestep);
+                    }
                 }
             }
 
             _imGuiLayer->begin();
-            for (Layer* layer : _layerStack)
             {
-                layer->onImGuiRender();
+                TEMPEST_PROFILE_FUNCTION("Layer stack ImGui Update");
+                for (Layer* layer : _layerStack)
+                {
+                    layer->onImGuiRender();
+                }
             }
             _imGuiLayer->end();
 
@@ -102,6 +119,8 @@ namespace Tempest
 
     bool Application::onWindowResize(WindowResizeEvent& resized)
     {
+        TEMPEST_PROFILE_FUNCTION();
+
         if (resized.getWidth() == 0 || resized.getHeight() == 0) 
         {
             _minimized = true;
@@ -116,11 +135,15 @@ namespace Tempest
 
     void Application::pushLayer(Layer *layer)
     {
+        TEMPEST_PROFILE_FUNCTION();
+
         _layerStack.pushLayer(layer);
     }
 
     void Application::pushOverlay(Layer *layer)
     {
+        TEMPEST_PROFILE_FUNCTION();
+
         _layerStack.pushOverlay(layer);
     }
 }

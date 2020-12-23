@@ -4,6 +4,7 @@
 #include "PreComp.h"
 
 #include "Tempest/Events/Event.h"
+#include "Tempest/Core/Core.h"
 
 namespace Tempest 
 {
@@ -28,7 +29,7 @@ namespace Tempest
     public:
         using EventCallbackFunc = std::function<void(Event&)>;
 
-        virtual ~Window() {}
+        virtual ~Window() = default;
 
         virtual void onUpdate() = 0;
 
@@ -44,7 +45,7 @@ namespace Tempest
 
         //As every window need to be create with properties this static
         //function should be implemented on the platform specific class.
-        static Window* create(const WindowProps& props = WindowProps());
+        static scope<Window> create(const WindowProps& props = WindowProps());
     };
 }
 

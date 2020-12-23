@@ -19,6 +19,7 @@ namespace Tempest
 
     void ImGuiLayer::onAttach()
     {
+        TEMPEST_PROFILE_FUNCTION();
         // Setup Dear ImGui context
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
@@ -54,6 +55,7 @@ namespace Tempest
 
     void ImGuiLayer::onDetach()
     {
+        TEMPEST_PROFILE_FUNCTION();
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
         ImGui::DestroyContext();
@@ -77,6 +79,7 @@ namespace Tempest
 
     void ImGuiLayer::begin()
     {
+        TEMPEST_PROFILE_FUNCTION();
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
@@ -86,6 +89,7 @@ namespace Tempest
 
     void ImGuiLayer::end()
     {
+        TEMPEST_PROFILE_FUNCTION();
         ImGuiIO& io = ImGui::GetIO();
         Application& app = Application::get();
         io.DisplaySize = ImVec2((float)app.getWindow().getWidth(), (float)app.getWindow().getHeight());
