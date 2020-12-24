@@ -97,7 +97,7 @@ namespace Tempest
 
             _imGuiLayer->begin();
             {
-                TEMPEST_PROFILE_FUNCTION("Layer stack ImGui Update");
+                TEMPEST_PROFILE_SCOPE("Layer stack ImGui Update");
                 for (Layer* layer : _layerStack)
                 {
                     layer->onImGuiRender();

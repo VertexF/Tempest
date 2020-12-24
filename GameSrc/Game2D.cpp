@@ -35,9 +35,9 @@ void Game2D::onUpdate(Tempest::TimeStep timeStep)
 
     Tempest::Renderer2D::beginScene(_cameraController.getCamera());
 
-    Tempest::Renderer2D::drawQuad({ 0.f, 0.f }, {1.f, 1.f}, _squareColour);
+    Tempest::Renderer2D::drawRotatedQuad({ 0.f, 0.f }, {1.f, 1.f}, glm::radians(30.f), _squareColour);
     Tempest::Renderer2D::drawQuad({ 3.f, -1.f }, { 0.5f, 2.f }, { 0.2f, 0.3f, 0.8f, 1.f });
-    Tempest::Renderer2D::drawQuad({ 0.f, 0.f -0.1f }, { 10.f, 10.f }, _backgroundTexture);
+    Tempest::Renderer2D::drawRotatedQuad({ 0.f, 0.f - 0.1f }, { 10.f, 10.f }, glm::radians(45.f), _backgroundTexture, 20.f, {0.4f, 0.2f, 0.3f, 1.f});
 
     Tempest::Renderer2D::endScene();
 }

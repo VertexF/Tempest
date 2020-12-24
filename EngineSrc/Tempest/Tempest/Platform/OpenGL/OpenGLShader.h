@@ -25,6 +25,7 @@ namespace Tempest
         virtual void setVec4(const std::string& name, const glm::vec4& value) override;
         virtual void setVec3(const std::string& name, const glm::vec3& value) override;
         virtual void setVec2(const std::string& name, const glm::vec2& value) override;
+        virtual void setFloat(const std::string& name, float value) override;
 
         virtual const std::string& getName() const override { return _name; }
 
@@ -33,7 +34,7 @@ namespace Tempest
 
         void setIntUniform(const std::string& name, int value);
 
-        void setVec1Uniform(const std::string& name, const glm::vec1& vector);
+        void setFloatUniform(const std::string& name, float value);
         void setVec2Uniform(const std::string& name, const glm::vec2& vector);
         void setVec3Uniform(const std::string& name, const glm::vec3& vector);
         void setVec4Uniform(const std::string& name, const glm::vec4& vector);

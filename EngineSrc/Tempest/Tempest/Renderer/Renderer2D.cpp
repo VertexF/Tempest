@@ -90,6 +90,7 @@ namespace Tempest
     {
         TEMPEST_PROFILE_FUNCTION();
         renderer2DData->textureShader->setVec4("uColour", colour);
+        renderer2DData->textureShader->setFloat("uTileFactor", 1.f);
         renderer2DData->whiteTexture->bind();
 
         glm::mat4x4 transform = glm::translate(glm::mat4x4(1.f), position) * glm::scale(glm::mat4x4(1.f), {size.x, size.y, 0.f});
@@ -99,18 +100,62 @@ namespace Tempest
         RendererCommands::drawIndexed(renderer2DData->squareVA);
     }
 
-    void Renderer2D::drawQuad(const glm::vec2& position, const glm::vec2& size, const ref<Texture2D> texture)
+    void Renderer2D::drawQuad(const glm::vec2& position, const glm::vec2& size, const ref<Texture2D> texture, float tileFactor, const glm::vec4& tint)
     {
-        drawQuad(glm::vec3(position.x, position.y, 0.f), size, texture);
+        drawQuad(glm::vec3(position.x, position.y, 0.f), size, texture, tileFactor, tint);
     }
 
-    void Renderer2D::drawQuad(const glm::vec3& position, const glm::vec2& size, const ref<Texture2D> texture)
+    void Renderer2D::drawQuad(const glm::vec3& position, const glm::vec2& size, const ref<Texture2D> texture, float tileFactor, const glm::vec4& tint)
     {
         TEMPEST_PROFILE_FUNCTION();
-        renderer2DData->textureShader->setVec4("uColour", glm::vec4(1.f));
+        renderer2DData->textureShader->setVec4("uColour", tint);
+        renderer2DData->textureShader->setFloat("uTileFactor", tileFactor);
         texture->bind();
 
         glm::mat4x4 transform = glm::translate(glm::mat4x4(1.f), position) * glm::scale(glm::mat4x4(1.f), { size.x, size.y, 0.f });
+        renderer2DData->textureShader->setMatrix4("uModelMatrix", transform);
+
+        renderer2DData->squareVA->bind();
+        RendererCommands::drawIndexed(renderer2DData->squareVA);
+        texture->unbind();
+    }
+
+    void Renderer2D::drawRotatedQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const glm::vec4& colour)
+    {
+        drawRotatedQuad(glm::vec3(position.x, position.y, 0.f), size, rotation, colour);
+    }
+
+    void Renderer2D::drawRotatedQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& colour)
+    {
+        TEMPEST_PROFILE_FUNCTION();
+        renderer2DData->textureShader->setVec4("uColour", colour);
+        renderer2DData->textureShader->setFloat("uTileFactor", 1.f);
+        renderer2DData->whiteTexture->bind();
+
+        glm::mat4x4 transform = glm::translate(glm::mat4x4(1.f), position) * 
+                                glm::rotate(glm::mat4x4(1.f), rotation, { 0.f, 0.f, 1.f }) * 
+                                glm::scale(glm::mat4x4(1.f), { size.x, size.y, 0.f });
+        renderer2DData->textureShader->setMatrix4("uModelMatrix", transform);
+
+        renderer2DData->squareVA->bind();
+        RendererCommands::drawIndexed(renderer2DData->squareVA);
+    }
+
+    void Renderer2D::drawRotatedQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const ref<Texture2D> texture, float tileFactor, const glm::vec4& tint)
+    {
+        drawRotatedQuad(glm::vec3(position.x, position.y, 0.f), size, rotation, texture, tileFactor, tint);
+    }
+
+    void Renderer2D::drawRotatedQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const ref<Texture2D> texture, float tileFactor, const glm::vec4& tint)
+    {
+        TEMPEST_PROFILE_FUNCTION();
+        renderer2DData->textureShader->setVec4("uColour", tint);
+        renderer2DData->textureShader->setFloat("uTileFactor", tileFactor);
+        texture->bind();
+
+        glm::mat4x4 transform = glm::translate(glm::mat4x4(1.f), position) * 
+                                glm::rotate(glm::mat4x4(1.f), rotation, { 0.f, 0.f, 1.f }) * 
+                                glm::scale(glm::mat4x4(1.f), { size.x, size.y, 0.f });
         renderer2DData->textureShader->setMatrix4("uModelMatrix", transform);
 
         renderer2DData->squareVA->bind();

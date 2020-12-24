@@ -246,6 +246,12 @@ namespace Tempest
         setVec2Uniform(name, value);
     }
 
+    void OpenGLShader::setFloat(const std::string& name, float value) 
+    {
+        TEMPEST_PROFILE_FUNCTION();
+        setFloatUniform(name, value);
+    }
+
     void OpenGLShader::setMatrix4Uniform(const std::string& name, const glm::mat4x4& matrix)
     {
         int uniformLocation = glGetUniformLocation(_rendererID, name.c_str());
@@ -266,10 +272,10 @@ namespace Tempest
 
     }
 
-    void OpenGLShader::setVec1Uniform(const std::string& name, const glm::vec1& vector)
+    void OpenGLShader::setFloatUniform(const std::string& name, float value)
     {
         int uniformLocation = glGetUniformLocation(_rendererID, name.c_str());
-        glUniform1f(uniformLocation, vector.x);
+        glUniform1f(uniformLocation, value);
     }
 
     void OpenGLShader::setVec2Uniform(const std::string& name, const glm::vec2& vector)
