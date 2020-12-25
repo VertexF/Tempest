@@ -127,7 +127,7 @@ void Level::onRender()
     for (auto& pillar : _pillars)
     {
         Tempest::Renderer2D::drawRotatedQuad({ pillar.topPosition.x, pillar.topPosition.y, -pillar.topPosition.z }, pillar.topScale, glm::radians(180.0f), _triangleTexture, 1.f, colour);
-        Tempest::Renderer2D::drawRotatedQuad({ pillar.bottomPosition.x, pillar.bottomPosition.y, -pillar.bottomPosition.z }, pillar.bottomScale, 0.f, _triangleTexture, 1.f, colour);
+        Tempest::Renderer2D::drawQuad({ pillar.bottomPosition.x, pillar.bottomPosition.y, -pillar.bottomPosition.z }, pillar.bottomScale, _triangleTexture, 1.f, colour);
     }
 
     _player.onRender();
@@ -215,7 +215,9 @@ bool Level::collisionTest()
         for (auto& vert : playerTransformedVerts)
         {
             if (pointInTri({ vert.x, vert.y }, tri[0], tri[1], tri[2]))
+            {
                 return true;
+            }
         }
 
         // Bottom pillars
@@ -229,7 +231,9 @@ bool Level::collisionTest()
         for (auto& vert : playerTransformedVerts)
         {
             if (pointInTri({ vert.x, vert.y }, tri[0], tri[1], tri[2]))
+            {
                 return true;
+            }
         }
 
     }

@@ -78,8 +78,8 @@ void Game2D::onUpdate(Tempest::TimeStep timeStep)
 void Game2D::onEvent(Tempest::Event& e)
 {
     Tempest::EventDispatcher dispatcher(e);
-    dispatcher.dispatch<Tempest::MouseButtonEventPressed>(std::bind(&Game2D::onMouseButtonPressed, this, std::placeholders::_1));
-
+    //dispatcher.dispatch<Tempest::MouseButtonEventPressed>(std::bind(&Game2D::onMouseButtonPressed, this, std::placeholders::_1));
+    dispatcher.dispatch<Tempest::PressedKeyEvent>(std::bind(&Game2D::onButtonPressed, this, std::placeholders::_1));
     _cameraController->onEvent(e);
 }
 
@@ -104,7 +104,7 @@ void Game2D::onImGuiRender()
         auto width = Tempest::Application::get().getWindow().getWidth();
         //auto height = Tempest::Application::get().getWindow().getHeight();
 
-        pos.x += width * 0.5f - 300.0f;
+        pos.x += width * 0.5f - 570.0f;
         pos.y += 50.0f;
 
         //if (_blink)
@@ -120,15 +120,15 @@ void Game2D::onImGuiRender()
         auto width = Tempest::Application::get().getWindow().getWidth();
         //auto height = Tempest::Application::get().getWindow().getHeight();
 
-        pos.x += width * 0.5f - 470.0f;
+        pos.x += width * 0.5f - 590.0f;
         pos.y += 50.0f;
 
        // if (_blink)
         //{
-            ImGui::GetForegroundDrawList()->AddText(_font, 120.0f, pos, 0xffffffff, "Click to Play Again!");
+            ImGui::GetForegroundDrawList()->AddText(_font, 120.0f, pos, 0xffffffff, "Press Space to Play Again!");
         //}
 
-        pos.x += 280.0f;
+        pos.x += 440.0f;
         pos.y += 150.0f;
 
         uint32_t playerScore = _level.getPlayer().getScore();
@@ -142,15 +142,15 @@ void Game2D::onImGuiRender()
         auto pos = ImGui::GetWindowPos();
         auto width = Tempest::Application::get().getWindow().getWidth();
 
-        pos.x += width * 0.5f - 300.0f;
+        pos.x += width * 0.5f - 470.0f;
         pos.y += 50.0f;
 
         // if (_blink)
          //{
-        ImGui::GetForegroundDrawList()->AddText(_font, 120.0f, pos, 0xffffffff, "Click to Play!");
+        ImGui::GetForegroundDrawList()->AddText(_font, 120.0f, pos, 0xffffffff, "Press Space to Play!");
         //}
 
-        pos.x += 50;
+        pos.x += 160;
         pos.y += 150;
 
         ImGui::GetForegroundDrawList()->AddText(_font, 60.0f, pos, 0xffffffff, "Press Space to move!");
@@ -168,13 +168,16 @@ void Game2D::onImGuiRender()
     }
 }
 
-bool Game2D::onMouseButtonPressed(Tempest::MouseButtonEventPressed& e)
+bool Game2D::onButtonPressed(Tempest::PressedKeyEvent& e)
 {
-    if (_gameState == GameState::GAME_OVER)
+    if (Tempest::Input::isKeyPressed(TEMP_KEY_SPACE)) 
     {
-        _level.reset();
-    }
+        if (_gameState == GameState::GAME_OVER || _gameState == GameState::START)
+        {
+            _level.reset();
+        }
 
-    _gameState = GameState::PLAY;
-    return false;
+        _gameState = GameState::PLAY;
+        return false;
+    }
 }

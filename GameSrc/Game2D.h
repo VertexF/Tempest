@@ -6,6 +6,7 @@
 
 #include "Tempest/Events/Event.h"
 #include "Tempest/Events/MouseEvents.h"
+#include "Tempest/Events/KeyEvents.h"
 
 #include "Level.h"
 
@@ -23,7 +24,7 @@ public:
 
     virtual void onImGuiRender() override;
 private:
-    bool onMouseButtonPressed(Tempest::MouseButtonEventPressed& e);
+    bool onButtonPressed(Tempest::PressedKeyEvent& e);
 private:
     Tempest::scope<Tempest::OrthographicalCameraController> _cameraController;
 
