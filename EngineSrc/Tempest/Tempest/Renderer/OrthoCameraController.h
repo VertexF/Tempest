@@ -28,12 +28,13 @@ namespace Tempest
         //TODO: Decouple this class from the application. The player postion
         //should NOT be tied to the camera.
         glm::vec3 getCameraPosition() const { return _cameraPosition; }
+        void setCameraPosition(const glm::vec3& position) { _cameraPosition = position; }
     private:
         bool onMouseScrolled(MouseScrolledEvent& e);
         bool onWindowResized(WindowResizeEvent& e);
     private:
         float _aspectRation;
-        float _zoomLevel = 1.f;
+        float _zoomLevel = 10.0f;
         //Needs to be below other values
         OrthographicCamera _camera;
 

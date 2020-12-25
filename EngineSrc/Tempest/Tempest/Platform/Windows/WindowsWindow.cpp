@@ -11,6 +11,8 @@
 #include "Tempest/Core/Core.h"
 #include <backends/imgui_impl_glfw.h>
 
+#include <stb_image.h>
+
 namespace
 {
     //Makes sure the intialisation of GLFW happens only once.
@@ -77,6 +79,20 @@ namespace Tempest
 
         _context = new OpenGLContext(_window);
         _context->init();
+
+        int width = 0;
+        int height = 0;
+        int channels;
+
+        stbi_uc* imageData;
+        {
+            TEMPEST_PROFILE_SCOPE("WindowsWindow::init loading icon - stbi_load");
+            imageData = stbi_load("Assets/Textures/Ship.png", &width, &height, &channels, 0);
+        }
+
+        GLFWimage icon = { width, height, imageData};
+
+        glfwSetWindowIcon(_window, 1, &icon);
 
         glfwSetWindowUserPointer(_window, &_windowData);
         setVSync(true);

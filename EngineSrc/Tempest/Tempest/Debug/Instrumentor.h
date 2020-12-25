@@ -126,7 +126,7 @@ namespace Tempest
     };
 }
 
-#define TEMPEST_PROFILE 1
+//#define TEMPEST_PROFILE 1
 #if TEMPEST_PROFILE
     #define TEMPEST_PROFILE_BEGIN_SESSION(name, filepath) ::Tempest::Instrumentor::get().beginSession(name, filepath)
     #define TEMPEST_PROFILE_END_SESSION() ::Tempest::Instrumentor::get().endSession()

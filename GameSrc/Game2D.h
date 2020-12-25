@@ -2,6 +2,12 @@
 #define GAME_2D_HDR
 
 #include <Tempest.h>
+#include <ImGui.h>
+
+#include "Tempest/Events/Event.h"
+#include "Tempest/Events/MouseEvents.h"
+
+#include "Level.h"
 
 class Game2D : public Tempest::Layer
 {
@@ -11,17 +17,31 @@ public:
 
     virtual void onAttach() override;
     virtual void onDetach() override;
+
     virtual void onUpdate(Tempest::TimeStep timeStep) override;
     virtual void onEvent(Tempest::Event& e) override;
+
     virtual void onImGuiRender() override;
 private:
-    Tempest::ref<Tempest::Shader> _squareShader;
-    Tempest::ref<Tempest::VertexArray> _squareVA;
-    glm::vec4 _squareColour;
+    bool onMouseButtonPressed(Tempest::MouseButtonEventPressed& e);
+private:
+    Tempest::scope<Tempest::OrthographicalCameraController> _cameraController;
 
-    Tempest::ref<Tempest::Texture2D> _backgroundTexture;
+    Level _level;
+    ImFont* _font;
 
-    Tempest::OrthographicalCameraController _cameraController;
+    float _time = 0.f;
+    bool _blink = false;
+
+    enum class GameState
+    {
+        PLAY = 0,
+        MAIN_MENU,
+        GAME_OVER,
+        START
+    };
+
+    GameState _gameState = GameState::START;
 };
 
 #endif //!GAME_2D_HDR

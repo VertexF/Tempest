@@ -31,7 +31,7 @@ set_property(
 )
 
 add_compile_definitions("TEMPEST_$<$<CONFIG:Debug>:DEBUG>")
-add_definitions("-DTEMPEST_PROFILE")
+#add_definitions("-DTEMPEST_PROFILE")
 
 set(PRECOMPILED_HEADER Tempest/PublicInclude)
 target_precompile_headers(Tempest PUBLIC "${PRECOMPILED_HEADER}/PreComp.h")
