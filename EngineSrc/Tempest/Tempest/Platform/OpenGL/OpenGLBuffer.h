@@ -12,7 +12,7 @@ namespace Tempest
         OpenGLVertexBuffer(float* vertices, uint32_t size);
         virtual ~OpenGLVertexBuffer();
 
-        virtual void setData() override;
+        virtual void setData(const void* data, uint32_t size) override;
 
         virtual void bind() const override;
         virtual void unbind() const override;

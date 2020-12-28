@@ -28,8 +28,10 @@ namespace Tempest
         glDeleteBuffers(1, &_vertexBuffer);
     }
 
-    void OpenGLVertexBuffer::setData()
+    void OpenGLVertexBuffer::setData(const void* data, uint32_t size)
     {
+        glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
+        glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
     }
 
     void OpenGLVertexBuffer::bind() const

@@ -15,6 +15,7 @@ namespace Tempest
 
         static void beginScene(const OrthographicCamera& camera);
         static void endScene();
+        static void flush();
 
         //Primitive
         static void drawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& colour);

@@ -33,9 +33,9 @@ namespace Tempest
             _rendererAPI->clear();
         }
 
-        inline static void drawIndexed(const ref<VertexArray> &vertexArray) 
+        inline static void drawIndexed(const ref<VertexArray> &vertexArray, uint32_t indexCount = 0) 
         {
-            _rendererAPI->drawIndexed(vertexArray);
+            _rendererAPI->drawIndexed(vertexArray, indexCount);
         }
     private:
         static RendererAPI *_rendererAPI;

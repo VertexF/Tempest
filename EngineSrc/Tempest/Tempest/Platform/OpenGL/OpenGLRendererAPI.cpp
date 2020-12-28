@@ -30,8 +30,9 @@ namespace Tempest
         glClearColor(colour.r, colour.g, colour.b, colour.a);
     }
 
-    void OpenGLRendererAPI::drawIndexed(const ref<VertexArray>& vertexArray)
+    void OpenGLRendererAPI::drawIndexed(const ref<VertexArray>& vertexArray, uint32_t indexCount)
     {
-        glDrawElements(GL_TRIANGLES, vertexArray->getIndexBuffer()->getCount(), GL_UNSIGNED_INT, nullptr);
+        uint32_t count = indexCount ? indexCount : vertexArray->getIndexBuffer()->getCount();
+        glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
     }
 }
