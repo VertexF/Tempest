@@ -8,6 +8,23 @@
 
 namespace Tempest 
 {
+    ref<VertexBuffer> VertexBuffer::create(uint32_t size)
+    {
+        switch (Renderer::getAPI())
+        {
+        case RendererAPI::API::NONE:
+            TEMPEST_CORE_ASSERT(false, "Renderer Type None is not supported!");
+            return nullptr;
+            break;
+        case RendererAPI::API::OPENGL:
+            return std::make_shared<OpenGLVertexBuffer>(size);
+            break;
+        }
+
+        TEMPEST_CORE_ASSERT(false, "Unknown RendererAPI!");
+        return nullptr;
+    }
+
     ref<VertexBuffer> VertexBuffer::create(float* vertices, uint32_t size)
     {
         switch (Renderer::getAPI()) 

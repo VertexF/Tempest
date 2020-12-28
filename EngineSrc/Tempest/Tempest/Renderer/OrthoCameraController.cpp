@@ -59,9 +59,9 @@ namespace Tempest
     {
         TEMPEST_PROFILE_FUNCTION();
 
-        //EventDispatcher dispatcher(e);
-        //dispatcher.dispatch<MouseScrolledEvent>(std::bind(&OrthographicalCameraController::onMouseScrolled, this, std::placeholders::_1));
-        //dispatcher.dispatch<WindowResizeEvent>(std::bind(&OrthographicalCameraController::onWindowResized, this, std::placeholders::_1));
+        EventDispatcher dispatcher(e);
+        dispatcher.dispatch<MouseScrolledEvent>(std::bind(&OrthographicalCameraController::onMouseScrolled, this, std::placeholders::_1));
+        dispatcher.dispatch<WindowResizeEvent>(std::bind(&OrthographicalCameraController::onWindowResized, this, std::placeholders::_1));
     }
 
     bool OrthographicalCameraController::onMouseScrolled(MouseScrolledEvent& e) 

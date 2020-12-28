@@ -126,7 +126,8 @@ namespace Tempest
         virtual void setLayout(const BufferLayout &bufferLayout) = 0; 
         virtual const BufferLayout getLayout() const = 0;
 
-        static ref<VertexBuffer> create(float *vertices, uint32_t size);
+        static ref<VertexBuffer> create(uint32_t size);
+        static ref<VertexBuffer> create(float* vertices, uint32_t size);
     };
 
     class IndexBuffer 

@@ -5,6 +5,15 @@
 
 namespace Tempest
 {
+    OpenGLVertexBuffer::OpenGLVertexBuffer(uint32_t size)
+    {
+        TEMPEST_PROFILE_FUNCTION();
+
+        glCreateBuffers(1, &_vertexBuffer);
+        glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
+        glBufferData(GL_ARRAY_BUFFER, size, nullptr, GL_DYNAMIC_DRAW);
+    }
+
     OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t size)
     {
         TEMPEST_PROFILE_FUNCTION();
