@@ -29,6 +29,19 @@ namespace Tempest
 
         static void drawRotatedQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const ref<Texture2D> texture, float tileFactor = 1.f, const glm::vec4& tint = glm::vec4(1.f));
         static void drawRotatedQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const ref<Texture2D> texture, float tileFactor = 1.f, const glm::vec4& tint = glm::vec4(1.f));
+
+        struct Statistics
+        {
+            uint32_t drawCalls = 0;
+            uint32_t quadCount = 0;
+
+            uint32_t getTotalVertices() const { return quadCount * 4; }
+            uint32_t getTotalIndices() const { return quadCount * 6; }
+        };
+        static Statistics getStats();
+        static void resetStats();
+    private:
+        static void flushAndReset();
     };
 }
 

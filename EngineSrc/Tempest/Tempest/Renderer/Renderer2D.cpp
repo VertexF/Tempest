@@ -22,9 +22,9 @@ namespace Tempest
 
     struct Renderer2DData 
     {
-        const uint32_t maxQuads = 10000;
-        const uint32_t maxVertices = maxQuads * 4;
-        const uint32_t maxIndices = maxQuads * 6;
+        static const uint32_t maxQuads = 20000;
+        static const uint32_t maxVertices = maxQuads * 4;
+        static const uint32_t maxIndices = maxQuads * 6;
         static const uint32_t maxTextureSlots = 32;
 
         ref<VertexArray> squareVA;
@@ -36,11 +36,13 @@ namespace Tempest
         QuadVertex* quadVertexBufferBase = nullptr;
         QuadVertex* quadVertexBufferPtr = nullptr;
 
-        std::array<ref<Texture2D>, maxTextureSlots> textureSlots = { 0 };
+        std::array<ref<Texture2D>, maxTextureSlots> textureSlots;
         uint32_t textureSlotIndex = 1;
         //Texture slot 0 is the white 1 by 1 texture we have at the beginning.
 
         glm::vec4 quadVertexPositions[4];
+
+        Renderer2D::Statistics stats;
     };
 
     static Renderer2DData renderer2DData;
@@ -50,7 +52,7 @@ namespace Tempest
         TEMPEST_PROFILE_FUNCTION();
 
         renderer2DData.squareVA = VertexArray::create();
-        renderer2DData.quadBuffer = VertexBuffer::create(renderer2DData.maxVertices * sizeof(QuadVertex));
+        renderer2DData.quadBuffer = VertexBuffer::create(Renderer2DData::maxVertices * sizeof(QuadVertex));
 
         BufferLayout layoutSquare = {
             { ShaderDataType::FLOAT3, "position" },
@@ -62,12 +64,12 @@ namespace Tempest
         renderer2DData.quadBuffer->setLayout(layoutSquare);
         renderer2DData.squareVA->addVertexBuffer(renderer2DData.quadBuffer);
 
-        renderer2DData.quadVertexBufferBase = new QuadVertex[renderer2DData.maxVertices];
+        renderer2DData.quadVertexBufferBase = new QuadVertex[Renderer2DData::maxVertices];
 
-        uint32_t* quadIndices = new uint32_t[renderer2DData.maxIndices];
+        uint32_t* quadIndices = new uint32_t[Renderer2DData::maxIndices];
 
         uint32_t offset = 0;
-        for (uint32_t i = 0; i < renderer2DData.maxIndices; i += 6) 
+        for (uint32_t i = 0; i < Renderer2DData::maxIndices; i += 6) 
         {
             quadIndices[i + 0] = offset + 0;
             quadIndices[i + 1] = offset + 1;
@@ -81,7 +83,7 @@ namespace Tempest
         }
 
         ref<IndexBuffer> quadIB;
-        quadIB = IndexBuffer::create(quadIndices, renderer2DData.maxIndices);
+        quadIB = IndexBuffer::create(quadIndices, Renderer2DData::maxIndices);
         renderer2DData.squareVA->setIndexBuffer(quadIB);
 
         delete[] quadIndices;
@@ -90,8 +92,8 @@ namespace Tempest
         uint32_t whiteTextureData = 0xFFFFFFFF;
         renderer2DData.whiteTexture->setData(&whiteTextureData, sizeof(whiteTextureData));
 
-        int samplers[renderer2DData.maxTextureSlots];
-        for (int i = 0; i < renderer2DData.maxTextureSlots; ++i)
+        int samplers[Renderer2DData::maxTextureSlots];
+        for (int i = 0; i < Renderer2DData::maxTextureSlots; ++i)
         {
             samplers[i] = i;
         }
@@ -135,6 +137,8 @@ namespace Tempest
         }
 
         RendererCommands::drawIndexed(renderer2DData.squareVA, renderer2DData.quadIndexCount);
+
+        renderer2DData.stats.drawCalls++;
     }
 
     void Renderer2D::endScene() 
@@ -147,6 +151,16 @@ namespace Tempest
         flush();
     }
 
+    void Renderer2D::flushAndReset()
+    {
+        endScene();
+
+        renderer2DData.quadIndexCount = 0;
+        renderer2DData.quadVertexBufferPtr = renderer2DData.quadVertexBufferBase;
+
+        renderer2DData.textureSlotIndex = 1;
+    }
+
     //Primitive
     void Renderer2D::drawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& colour) 
     {
@@ -156,6 +170,11 @@ namespace Tempest
     void Renderer2D::drawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& colour) 
     {
         TEMPEST_PROFILE_FUNCTION();
+
+        if (renderer2DData.quadIndexCount >= Renderer2DData::maxIndices)
+        {
+            flushAndReset();
+        }
 
         glm::mat4x4 transform = glm::translate(glm::mat4x4(1.f), position) *
                                 glm::scale(glm::mat4x4(1.f), { size.x, size.y, 1.f });
@@ -190,14 +209,7 @@ namespace Tempest
 
         renderer2DData.quadIndexCount += 6;
 
-        //renderer2DData.textureShader->setFloat("uTileFactor", 1.f);
-        //renderer2DData.whiteTexture->bind();
-
-        //glm::mat4x4 transform = glm::translate(glm::mat4x4(1.f), position) * glm::scale(glm::mat4x4(1.f), {size.x, size.y, 0.f});
-        //renderer2DData.textureShader->setMatrix4("uModelMatrix", transform);
-
-        //renderer2DData.squareVA->bind();
-        //RendererCommands::drawIndexed(renderer2DData.squareVA);
+        renderer2DData.stats.quadCount++;
     }
 
     void Renderer2D::drawQuad(const glm::vec2& position, const glm::vec2& size, const ref<Texture2D> texture, float tileFactor, const glm::vec4& tint)
@@ -208,6 +220,12 @@ namespace Tempest
     void Renderer2D::drawQuad(const glm::vec3& position, const glm::vec2& size, const ref<Texture2D> texture, float tileFactor, const glm::vec4& tint)
     {
         TEMPEST_PROFILE_FUNCTION();
+
+        if (renderer2DData.quadIndexCount >= Renderer2DData::maxIndices)
+        {
+            flushAndReset();
+        }
+
         int textureIndex = 0;
 
         for (uint32_t i = 1; i < renderer2DData.textureSlotIndex; ++i)
@@ -258,16 +276,7 @@ namespace Tempest
 
         renderer2DData.quadIndexCount += 6;
 
-        //renderer2DData.textureShader->setVec4("uColour", tint);
-        //renderer2DData.textureShader->setFloat("uTileFactor", tileFactor);
-        //texture->bind();
-
-        //glm::mat4x4 transform = glm::translate(glm::mat4x4(1.f), position) * glm::scale(glm::mat4x4(1.f), { size.x, size.y, 0.f });
-        //renderer2DData.textureShader->setMatrix4("uModelMatrix", transform);
-
-        //renderer2DData.squareVA->bind();
-        //RendererCommands::drawIndexed(renderer2DData.squareVA);
-        //texture->unbind();
+        renderer2DData.stats.quadCount++;
     }
 
     void Renderer2D::drawRotatedQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const glm::vec4& colour)
@@ -278,6 +287,11 @@ namespace Tempest
     void Renderer2D::drawRotatedQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& colour)
     {
         TEMPEST_PROFILE_FUNCTION();
+
+        if (renderer2DData.quadIndexCount >= Renderer2DData::maxIndices)
+        {
+            flushAndReset();
+        }
 
         glm::mat4x4 transform = glm::translate(glm::mat4x4(1.f), position) *
                                 glm::rotate(glm::mat4x4(1.f), glm::radians(rotation), { 0.f, 0.f, 1.f }) *
@@ -313,17 +327,7 @@ namespace Tempest
 
         renderer2DData.quadIndexCount += 6;
 
-        //renderer2DData.textureShader->setVec4("uColour", colour);
-        //renderer2DData.textureShader->setFloat("uTileFactor", 1.f);
-        //renderer2DData.whiteTexture->bind();
-
-        //glm::mat4x4 transform = glm::translate(glm::mat4x4(1.f), position) * 
-        //                        glm::rotate(glm::mat4x4(1.f), rotation, { 0.f, 0.f, 1.f }) * 
-        //                        glm::scale(glm::mat4x4(1.f), { size.x, size.y, 0.f });
-        //renderer2DData.textureShader->setMatrix4("uModelMatrix", transform);
-
-        //renderer2DData.squareVA->bind();
-        //RendererCommands::drawIndexed(renderer2DData.squareVA);
+        renderer2DData.stats.quadCount++;
     }
 
     void Renderer2D::drawRotatedQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const ref<Texture2D> texture, float tileFactor, const glm::vec4& tint)
@@ -334,6 +338,11 @@ namespace Tempest
     void Renderer2D::drawRotatedQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const ref<Texture2D> texture, float tileFactor, const glm::vec4& tint)
     {
         TEMPEST_PROFILE_FUNCTION();
+
+        if (renderer2DData.quadIndexCount >= Renderer2DData::maxIndices)
+        {
+            flushAndReset();
+        }
 
         int textureIndex = 0;
 
@@ -386,17 +395,16 @@ namespace Tempest
 
         renderer2DData.quadIndexCount += 6;
 
-        //renderer2DData.textureShader->setVec4("uColour", tint);
-        //renderer2DData.textureShader->setFloat("uTileFactor", tileFactor);
-        //texture->bind();
+        renderer2DData.stats.quadCount++;
+    }
 
-        //glm::mat4x4 transform = glm::translate(glm::mat4x4(1.f), position) * 
-        //                        glm::rotate(glm::mat4x4(1.f), rotation, { 0.f, 0.f, 1.f }) * 
-        //                        glm::scale(glm::mat4x4(1.f), { size.x, size.y, 0.f });
-        //renderer2DData.textureShader->setMatrix4("uModelMatrix", transform);
+    Renderer2D::Statistics Renderer2D::getStats() 
+    {
+        return renderer2DData.stats;
+    }
 
-        //renderer2DData.squareVA->bind();
-        //RendererCommands::drawIndexed(renderer2DData.squareVA);
-        //texture->unbind();
+    void Renderer2D::resetStats()
+    {
+        memset(&renderer2DData.stats, 0, sizeof(Renderer2D::Statistics));
     }
 }

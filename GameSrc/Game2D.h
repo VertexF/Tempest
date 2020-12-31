@@ -23,6 +23,8 @@ private:
     Tempest::ref<Tempest::Texture2D> _backgroundTexture;
 
     Tempest::scope<Tempest::OrthographicalCameraController> _cameraController;
+    std::vector<float> _xPos;
+    std::vector<float> _yPos;
 };
 
 
