@@ -19,7 +19,7 @@ namespace Tempest
     {
         TEMPEST_PROFILE_FUNCTION();
 
-        /*if (Input::isKeyPressed(TEMP_KEY_W))
+        if (Input::isKeyPressed(TEMP_KEY_W))
         {
             _cameraPosition.y += _cameraMovementSpeed * ts;
         }
@@ -49,7 +49,7 @@ namespace Tempest
             }
 
             _camera.setRotation(_rotation);
-        }*/
+        }
 
         _camera.setPosition(_cameraPosition);
         _cameraMovementSpeed = _zoomLevel;

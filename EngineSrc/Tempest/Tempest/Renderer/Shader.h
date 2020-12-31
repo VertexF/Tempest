@@ -18,6 +18,7 @@ namespace Tempest
         virtual void unbind() const = 0;
 
         virtual void setInt(const std::string& name, int value) = 0;
+        virtual void setIntArray(const std::string& name, uint32_t count, int* values) = 0;
         virtual void setMatrix4(const std::string& name, const glm::mat4x4& value) = 0;
         virtual void setVec4(const std::string& name, const glm::vec4& value) = 0;
         virtual void setVec3(const std::string& name, const glm::vec3& value) = 0;

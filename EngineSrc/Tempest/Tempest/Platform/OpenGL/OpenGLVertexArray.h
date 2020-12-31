@@ -25,6 +25,7 @@ namespace Tempest
         std::vector<ref<VertexBuffer>> _vertexBuffers;
         ref<IndexBuffer> _indexBuffer;
         uint32_t _vertexArray;
+        uint32_t _vertexBufferIndex = 0;
     };
 }
 

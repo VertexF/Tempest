@@ -42,7 +42,7 @@ namespace Tempest
         return nullptr;
     }
 
-    ref<IndexBuffer> IndexBuffer::create(uint32_t *indices, uint32_t size)
+    ref<IndexBuffer> IndexBuffer::create(uint32_t *indices, uint32_t count)
     {
         switch (Renderer::getAPI())
         {
@@ -51,7 +51,7 @@ namespace Tempest
             return nullptr;
             break;
         case RendererAPI::API::OPENGL:
-            return std::make_shared<OpenGLIndexBuffer>(indices, size);
+            return std::make_shared<OpenGLIndexBuffer>(indices, count);
             break;
         }
 

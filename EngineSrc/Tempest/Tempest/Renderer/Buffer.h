@@ -110,7 +110,7 @@ namespace Tempest
         }
     private:
         std::vector<BufferElement> _bufferElements;
-        uint32_t _stride;
+        uint32_t _stride = 0;
     };
 
     class VertexBuffer 

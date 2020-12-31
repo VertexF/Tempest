@@ -67,17 +67,28 @@ namespace Tempest
             glBindVertexArray(_vertexArray);
             vertexBuffer->bind();
 
-            uint32_t index = 0;
-            for (const auto& element : vertexBuffer->getLayout())
+            const auto& layout = vertexBuffer->getLayout();
+            for (const auto& element : layout)
             {
-                glEnableVertexAttribArray(index);
-                glVertexAttribPointer(index,
-                    element.getCompomentCount(),
-                    shaderDataTypeToOpenGL(element.type),
-                    element.normalised ? GL_TRUE : GL_FALSE,
-                    vertexBuffer->getLayout().getStride(),
-                    reinterpret_cast<const void*>((intptr_t)element.offset));
-                index++;
+                glEnableVertexAttribArray(_vertexBufferIndex);
+                if (shaderDataTypeToOpenGL(element.type) == GL_INT)
+                {
+                    glVertexAttribIPointer(_vertexBufferIndex,
+                        element.getCompomentCount(),
+                        shaderDataTypeToOpenGL(element.type),
+                        layout.getStride(),
+                        reinterpret_cast<const void*>((intptr_t)element.offset));
+                }
+                else 
+                {
+                    glVertexAttribPointer(_vertexBufferIndex,
+                        element.getCompomentCount(),
+                        shaderDataTypeToOpenGL(element.type),
+                        element.normalised ? GL_TRUE : GL_FALSE,
+                        layout.getStride(),
+                        reinterpret_cast<const void*>((intptr_t)element.offset));
+                }
+                _vertexBufferIndex++;
             }
 
             _vertexBuffers.push_back(vertexBuffer);

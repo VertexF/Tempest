@@ -222,6 +222,12 @@ namespace Tempest
         setIntUniform(name, value);
     }
 
+    void OpenGLShader::setIntArray(const std::string& name, uint32_t count, int* values)
+    {
+        TEMPEST_PROFILE_FUNCTION();
+        setIntArrayUniform(name, count, values);
+    }
+
     void OpenGLShader::setMatrix4(const std::string& name, const glm::mat4x4& value)
     {
         TEMPEST_PROFILE_FUNCTION();
@@ -269,7 +275,12 @@ namespace Tempest
         int uniformLocation = glGetUniformLocation(_rendererID, name.c_str());
         //TEMPEST_CORE_ASSERT(uniformLocation != -1, "Could not find uniform.");
         glUniform1i(uniformLocation, value);
+    }
 
+    void OpenGLShader::setIntArrayUniform(const std::string& name, uint32_t count, int* values)
+    {
+        int uniformLocation = glGetUniformLocation(_rendererID, name.c_str());
+        glUniform1iv(uniformLocation, count, values);
     }
 
     void OpenGLShader::setFloatUniform(const std::string& name, float value)

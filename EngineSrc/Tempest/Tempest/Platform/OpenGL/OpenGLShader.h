@@ -21,6 +21,7 @@ namespace Tempest
         virtual void unbind() const override;
 
         virtual void setInt(const std::string& name, int value) override;
+        virtual void setIntArray(const std::string& name, uint32_t count, int* values) override;
         virtual void setMatrix4(const std::string& name, const glm::mat4x4& value) override;
         virtual void setVec4(const std::string& name, const glm::vec4& value) override;
         virtual void setVec3(const std::string& name, const glm::vec3& value) override;
@@ -33,6 +34,7 @@ namespace Tempest
         void setMatrix3Uniform(const std::string& name, const glm::mat3x3& matrix);
 
         void setIntUniform(const std::string& name, int value);
+        void setIntArrayUniform(const std::string& name, uint32_t count, int* values);
 
         void setFloatUniform(const std::string& name, float value);
         void setVec2Uniform(const std::string& name, const glm::vec2& vector);

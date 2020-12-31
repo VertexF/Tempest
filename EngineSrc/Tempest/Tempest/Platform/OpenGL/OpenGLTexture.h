@@ -22,6 +22,8 @@ namespace Tempest
 
         virtual void bind(uint32_t slot = 0) const override;
         virtual void unbind(uint32_t slot = 0) const override;
+
+        virtual bool operator==(const Texture& rhsTexture) const override { return _textureID == dynamic_cast<const OpenGLTexture2D&>(rhsTexture)._textureID; }
     private:
         std::string _path;
 
