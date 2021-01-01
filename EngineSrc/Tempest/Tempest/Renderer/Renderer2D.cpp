@@ -221,6 +221,20 @@ namespace Tempest
     {
         TEMPEST_PROFILE_FUNCTION();
 
+        //Temp
+        constexpr float x = 2.f;
+        constexpr float y = 3.f;
+        constexpr float sheetWidth = 2560.f;
+        constexpr float sheetHeight = 1664.f;
+        constexpr float spriteWidth = 128.f; 
+        constexpr float spriteHeight = 128.f;
+
+        constexpr glm::vec2 textureCoords[] = { 
+            { (x * spriteWidth) / sheetWidth, (y * spriteHeight) / sheetHeight },
+            { ((x + 1) * spriteWidth) / sheetWidth, (y * spriteHeight) / sheetHeight },
+            { ((x + 1) * spriteWidth) / sheetWidth, ((y + 1) * spriteHeight) / sheetHeight },
+            { (x * spriteWidth) / sheetWidth, ((y + 1) * spriteHeight) / sheetHeight } };
+
         if (renderer2DData.quadIndexCount >= Renderer2DData::maxIndices)
         {
             flushAndReset();
@@ -246,33 +260,15 @@ namespace Tempest
         glm::mat4x4 transform = glm::translate(glm::mat4x4(1.f), position) *
                                 glm::scale(glm::mat4x4(1.f), { size.x, size.y, 1.f });
 
-        renderer2DData.quadVertexBufferPtr->position = transform * renderer2DData.quadVertexPositions[0];
-        renderer2DData.quadVertexBufferPtr->colour = tint;
-        renderer2DData.quadVertexBufferPtr->texCoord = { 0.f, 0.f };
-        renderer2DData.quadVertexBufferPtr->tilingFactor = tileFactor;
-        renderer2DData.quadVertexBufferPtr->textureIndex = textureIndex;
-        renderer2DData.quadVertexBufferPtr++;
-
-        renderer2DData.quadVertexBufferPtr->position = transform * renderer2DData.quadVertexPositions[1];
-        renderer2DData.quadVertexBufferPtr->colour = tint;
-        renderer2DData.quadVertexBufferPtr->texCoord = { 1.f, 0.f };
-        renderer2DData.quadVertexBufferPtr->tilingFactor = tileFactor;
-        renderer2DData.quadVertexBufferPtr->textureIndex = textureIndex;
-        renderer2DData.quadVertexBufferPtr++;
-
-        renderer2DData.quadVertexBufferPtr->position = transform * renderer2DData.quadVertexPositions[2];
-        renderer2DData.quadVertexBufferPtr->colour = tint;
-        renderer2DData.quadVertexBufferPtr->texCoord = { 1.f, 1.f };
-        renderer2DData.quadVertexBufferPtr->tilingFactor = tileFactor;
-        renderer2DData.quadVertexBufferPtr->textureIndex = textureIndex;
-        renderer2DData.quadVertexBufferPtr++;
-
-        renderer2DData.quadVertexBufferPtr->position = transform * renderer2DData.quadVertexPositions[3];
-        renderer2DData.quadVertexBufferPtr->colour = tint;
-        renderer2DData.quadVertexBufferPtr->texCoord = { 0.f, 1.f };
-        renderer2DData.quadVertexBufferPtr->tilingFactor = tileFactor;
-        renderer2DData.quadVertexBufferPtr->textureIndex = textureIndex;
-        renderer2DData.quadVertexBufferPtr++;
+        for (uint32_t i = 0; i < 4; ++i) 
+        {
+            renderer2DData.quadVertexBufferPtr->position = transform * renderer2DData.quadVertexPositions[i];
+            renderer2DData.quadVertexBufferPtr->colour = tint;
+            renderer2DData.quadVertexBufferPtr->texCoord = textureCoords[i];
+            renderer2DData.quadVertexBufferPtr->tilingFactor = tileFactor;
+            renderer2DData.quadVertexBufferPtr->textureIndex = textureIndex;
+            renderer2DData.quadVertexBufferPtr++;
+        }
 
         renderer2DData.quadIndexCount += 6;
 

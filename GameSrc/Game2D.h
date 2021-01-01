@@ -21,6 +21,7 @@ private:
     glm::vec4 _squareColour;
 
     Tempest::ref<Tempest::Texture2D> _backgroundTexture;
+    Tempest::ref<Tempest::Texture2D> _spriteSheetLevel;
 
     Tempest::scope<Tempest::OrthographicalCameraController> _cameraController;
     std::vector<float> _xPos;
