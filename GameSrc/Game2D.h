@@ -22,10 +22,9 @@ private:
 
     Tempest::ref<Tempest::Texture2D> _backgroundTexture;
     Tempest::ref<Tempest::Texture2D> _spriteSheetLevel;
+    Tempest::ref<Tempest::SubTexture2D> _bushTexture;
 
     Tempest::scope<Tempest::OrthographicalCameraController> _cameraController;
-    std::vector<float> _xPos;
-    std::vector<float> _yPos;
 };
 
 
