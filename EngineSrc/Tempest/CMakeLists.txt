@@ -22,7 +22,9 @@ add_subdirectory(vender/stb)
 
 add_library(Tempest STATIC ${TEMPEST_SOURCE}) 
 
-set_property(TARGET Tempest PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+if(MSVC)
+    set_property(TARGET Tempest PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+endif()
 
 set_property(
     TARGET Tempest
@@ -30,8 +32,7 @@ set_property(
     PROPERTY COMPILE_DEFINITIONS GLEW_NO_GLU GLEW_STATIC
 )
 
-add_compile_definitions("TEMPEST_$<$<CONFIG:Debug>:DEBUG>")
-#add_definitions("-DTEMPEST_PROFILE")
+add_compile_definitions("$<$<CONFIG:Debug>:TEMPEST_DEBUG>")
 
 set(PRECOMPILED_HEADER Tempest/PublicInclude)
 target_precompile_headers(Tempest PUBLIC "${PRECOMPILED_HEADER}/PreComp.h")

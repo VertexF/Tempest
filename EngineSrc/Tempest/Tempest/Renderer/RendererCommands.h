@@ -13,12 +13,12 @@ namespace Tempest
     class RendererCommands 
     {
     public:
-        inline static void init() 
+        static void init() 
         {
             _rendererAPI->init();
         }
 
-        inline static void setClearColour(const glm::vec4 &colour) 
+        static void setClearColour(const glm::vec4 &colour) 
         {
             _rendererAPI->setClearColour(colour);
         }
@@ -28,12 +28,12 @@ namespace Tempest
             _rendererAPI->setViewport(x, y, width, height);
         }
 
-        inline static void clear() 
+        static void clear() 
         {
             _rendererAPI->clear();
         }
 
-        inline static void drawIndexed(const ref<VertexArray> &vertexArray, uint32_t indexCount = 0) 
+        static void drawIndexed(const ref<VertexArray> &vertexArray, uint32_t indexCount = 0) 
         {
             _rendererAPI->drawIndexed(vertexArray, indexCount);
         }

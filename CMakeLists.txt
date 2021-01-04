@@ -21,7 +21,9 @@ add_subdirectory(EngineSrc/Tempest)
 
 add_executable(Game ${GAME_SOURCE})
 
-set_property(TARGET Game PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+if(MSVC)
+    set_property(TARGET Game PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+endif()
 
 target_compile_options(Game PRIVATE
   $<$<CXX_COMPILER_ID:MSVC>:/W4>

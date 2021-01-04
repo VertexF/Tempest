@@ -6,7 +6,9 @@ add_library(GLEW STATIC include/GL/glew.h src/glew.c
 set_target_properties(GLEW PROPERTIES LINKER_LANGUAGE C)
 
 find_package(OpenGL REQUIRED)
-set_property(TARGET GLEW PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+if(MSVC)
+    set_property(TARGET GLEW PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+endif()
 
 set_property(
     TARGET GLEW

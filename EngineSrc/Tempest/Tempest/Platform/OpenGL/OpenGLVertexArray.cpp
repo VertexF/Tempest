@@ -57,42 +57,38 @@ namespace Tempest
     {
         TEMPEST_PROFILE_FUNCTION();
 
-        if (vertexBuffer->getLayout().getElements().empty())
-        {
-            TEMPEST_ERROR("Error: The layout is empty. Did you add the vertex buffer before setting the layout of the vertex buffer?");
-        }
-        else
-        {
+        TEMPEST_CORE_ASSERT(vertexBuffer->getLayout().getElements().empty() == false, 
+                            "Error: The layout is empty. Did you add the vertex buffer before setting the layout of the vertex buffer?");
 
-            glBindVertexArray(_vertexArray);
-            vertexBuffer->bind();
+        glBindVertexArray(_vertexArray);
+        vertexBuffer->bind();
 
-            const auto& layout = vertexBuffer->getLayout();
-            for (const auto& element : layout)
+        const auto& layout = vertexBuffer->getLayout();
+        for (const auto& element : layout)
+        {
+            glEnableVertexAttribArray(_vertexBufferIndex);
+            if (shaderDataTypeToOpenGL(element.type) == GL_INT)
             {
-                glEnableVertexAttribArray(_vertexBufferIndex);
-                if (shaderDataTypeToOpenGL(element.type) == GL_INT)
-                {
-                    glVertexAttribIPointer(_vertexBufferIndex,
-                        element.getCompomentCount(),
-                        shaderDataTypeToOpenGL(element.type),
-                        layout.getStride(),
-                        reinterpret_cast<const void*>((intptr_t)element.offset));
-                }
-                else 
-                {
-                    glVertexAttribPointer(_vertexBufferIndex,
-                        element.getCompomentCount(),
-                        shaderDataTypeToOpenGL(element.type),
-                        element.normalised ? GL_TRUE : GL_FALSE,
-                        layout.getStride(),
-                        reinterpret_cast<const void*>((intptr_t)element.offset));
-                }
-                _vertexBufferIndex++;
+                glVertexAttribIPointer(_vertexBufferIndex,
+                    element.getCompomentCount(),
+                    shaderDataTypeToOpenGL(element.type),
+                    layout.getStride(),
+                    reinterpret_cast<const void*>((intptr_t)element.offset));
             }
-
-            _vertexBuffers.push_back(vertexBuffer);
+            else 
+            {
+                glVertexAttribPointer(_vertexBufferIndex,
+                    element.getCompomentCount(),
+                    shaderDataTypeToOpenGL(element.type),
+                    element.normalised ? GL_TRUE : GL_FALSE,
+                    layout.getStride(),
+                    reinterpret_cast<const void*>((intptr_t)element.offset));
+            }
+            _vertexBufferIndex++;
         }
+
+        _vertexBuffers.push_back(vertexBuffer);
+
     }
 
     void OpenGLVertexArray::setIndexBuffer(const ref<IndexBuffer>& indexBuffer) 

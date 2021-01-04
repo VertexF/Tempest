@@ -12,11 +12,11 @@ namespace Tempest
         _texCoord[3] = { minBound.x, maxBound.y };
     }
 
-    ref<SubTexture2D> SubTexture2D::createFromCoords(const ref<Texture2D>& texture, const glm::vec2& coords, const glm::vec2& spriteSize)
+    ref<SubTexture2D> SubTexture2D::createFromCoords(const ref<Texture2D>& texture, const glm::vec2& coords, const glm::vec2& cellSize, const glm::vec2& spriteSize)
     {
-        glm::vec2 min = { (coords.x * spriteSize.x) / texture->getWidth(), (coords.y * spriteSize.y) / texture->getHeight() };
-        glm::vec2 max = { ((coords.x + 1) * spriteSize.x) / texture->getWidth(), (coords.y * spriteSize.y) / texture->getHeight() };
+        glm::vec2 min = { (coords.x * cellSize.x) / texture->getWidth(), (coords.y * cellSize.y) / texture->getHeight() };
+        glm::vec2 max = { ((coords.x + spriteSize.x) * cellSize.x) / texture->getWidth(), ((coords.y + spriteSize.y) * cellSize.y) / texture->getHeight() };
 
-        return ref<SubTexture2D>(texture, min, max);
+        return std::make_shared<SubTexture2D>(texture, min, max);
     }
 }

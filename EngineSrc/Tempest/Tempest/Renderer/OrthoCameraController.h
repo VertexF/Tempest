@@ -22,7 +22,7 @@ namespace Tempest
         OrthographicCamera& getCamera() { return _camera; }
         const OrthographicCamera& getCamera() const { return _camera; }
 
-        void setZoomLevel(float level) { _zoomLevel = level; }
+        void setZoomLevel(float level) { _zoomLevel = level; calculateView(); }
         float getZoomLevel() const { return _zoomLevel; }
 
         //TODO: Decouple this class from the application. The player postion
@@ -30,6 +30,8 @@ namespace Tempest
         glm::vec3 getCameraPosition() const { return _cameraPosition; }
         void setCameraPosition(const glm::vec3& position) { _cameraPosition = position; }
     private:
+        void calculateView();
+
         bool onMouseScrolled(MouseScrolledEvent& e);
         bool onWindowResized(WindowResizeEvent& e);
     private:

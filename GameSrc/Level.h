@@ -2,15 +2,8 @@
 #define LEVEL_HDR
 
 #include "Player.h"
-
-struct Pillar 
-{
-    glm::vec3 topPosition = { 0.f, 10.f, 0.f };
-    glm::vec3 bottomPosition = { 10.f, 10.f, 0.f };
-
-    glm::vec2 topScale = { 15.f, 20.f };
-    glm::vec2 bottomScale = { 15.f, 20.f  };
-};
+#include "Tempest/Renderer/Texture.h"
+#include "Tempest/Renderer/SubTexture2D.h"
 
 class Level 
 {
@@ -24,24 +17,21 @@ public:
     bool isGameOver() const { return _gameOver; }
     void reset();
 
-    Player& getPlayer() { return _player; }
-private:
-    void createPillar(int index, float offset);
-    bool collisionTest();
-
-    void gameOver();
+    const Player& getPlayer() const { return _player; }
 private:
     Player _player;
 
+    Tempest::ref<Tempest::Texture2D> _backgroundTexture;
+    Tempest::ref<Tempest::Texture2D> _spriteSheetLevel;
+    Tempest::ref<Tempest::SubTexture2D> _bushTexture;
+    Tempest::ref<Tempest::SubTexture2D> _treeTexture;
+
+    uint32_t _mapWidth;
+    uint32_t _mapHeight;
+
+    std::unordered_map<char, Tempest::ref<Tempest::SubTexture2D>> _textureMap;
+
     bool _gameOver = false;
-
-    float _pillarTarget = 30.f;
-    int _pillarIndex = 0;
-    glm::vec3 _pillarHSV = { 0.f, 0.8f, 0.8f };
-
-    std::vector<Pillar> _pillars;
-
-    Tempest::ref<Tempest::Texture2D> _triangleTexture;
 };
 
 #endif // !LEVEL_HDR

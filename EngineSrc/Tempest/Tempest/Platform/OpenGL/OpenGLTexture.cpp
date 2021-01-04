@@ -34,16 +34,14 @@ namespace Tempest
             TEMPEST_PROFILE_SCOPE("OpenGLTexture2D::OpenGLTexture2D(const std::string&) - stbi_load");
             imageData = stbi_load(path.c_str(), &width, &height, &channels, 0);
         }
-        if (imageData == nullptr) 
-        {
-            TEMPEST_ERROR("Image could not be found or loaded!");
-            assert(imageData != nullptr);
-        }
+
+        TEMPEST_CORE_ASSERT(imageData != nullptr, "Image could not be found or loaded!");
 
         _width = width;
         _height = height;
 
-        GLenum internalFormat, dataFormat = 0;
+        GLenum internalFormat = 0;
+        GLenum dataFormat = 0;
         if (channels == 4) 
         {
             internalFormat = GL_RGBA8;

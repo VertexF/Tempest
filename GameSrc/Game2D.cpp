@@ -5,19 +5,20 @@
 
 #include <imgui.h>
 
+#include "Level.h"
+
 Game2D::Game2D() : Layer("Game"), _squareColour({ 0.8f, 0.3f, 0.2f, 1.f })
 {
     _cameraController = std::make_unique<Tempest::OrthographicalCameraController>(1280.f / 720.f);
+    _level = std::make_unique<Level>();
 }
 
 void Game2D::onAttach()
 {
     TEMPEST_PROFILE_FUNCTION();
 
-    _backgroundTexture = Tempest::Texture2D::create("Assets/Textures/Checkerboard.png");
-    _spriteSheetLevel = Tempest::Texture2D::create("Assets/Textures/RPGpack_sheet_2X.png");
-
-    _bushTexture = Tempest::SubTexture2D::createFromCoords(_spriteSheetLevel, { 3, 2 }, {128, 128});
+    _level->init();
+    _cameraController->setZoomLevel(5.f);
 }
 
 void Game2D::onDetach()
@@ -36,21 +37,8 @@ void Game2D::onUpdate(Tempest::TimeStep timeStep)
     Tempest::RendererCommands::setClearColour({ 0.2f, 0.2f, 0.2f, 1.f });
     Tempest::RendererCommands::clear();
 
-    //Tempest::Renderer2D::beginScene(_cameraController->getCamera());
-
-    //Tempest::Renderer2D::drawRotatedQuad({ -2.f, 0.f }, { 1.f, 1.f }, 45.f, _squareColour);
-    //Tempest::Renderer2D::drawQuad({ 0.f, 0.f }, { 1.f, 1.f }, _squareColour);
-    //Tempest::Renderer2D::drawQuad({ 3.f, -1.f }, { 0.5f, 2.f }, { 0.2f, 0.3f, 0.8f, 1.f });
-    //Tempest::Renderer2D::drawRotatedQuad({ 0.f, 0.f, 0.1f }, { 10.f, 10.f }, 45.f, _backgroundTexture, 20.f, { 0.4f, 0.2f, 0.3f, 1.f });
-    //Tempest::Renderer2D::drawRotatedQuad({ 1.f, 0.f, 0.0f }, { 1.f, 1.f }, 45.f, _backgroundTexture, 20.f, { 0.4f, 0.8f, 0.8f, 1.f });
-
-    //Tempest::Renderer2D::drawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, { 0.8f, 0.2f, 0.3f, 1.0f });
-    //Tempest::Renderer2D::drawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, { 0.2f, 0.3f, 0.8f, 1.0f });
-
-    //Tempest::Renderer2D::endScene();
-
     Tempest::Renderer2D::beginScene(_cameraController->getCamera());
-    Tempest::Renderer2D::drawQuad({ 0.f, 0.f, -0.1f }, { 1.f, 1.f }, _bushTexture);
+    _level->onRender();
     Tempest::Renderer2D::endScene();
 }
 

@@ -6,6 +6,8 @@
 
 #include "Tempest/Events/Event.h"
 
+class Level;
+
 class Game2D : public Tempest::Layer
 {
 public:
@@ -20,11 +22,8 @@ public:
 private:
     glm::vec4 _squareColour;
 
-    Tempest::ref<Tempest::Texture2D> _backgroundTexture;
-    Tempest::ref<Tempest::Texture2D> _spriteSheetLevel;
-    Tempest::ref<Tempest::SubTexture2D> _bushTexture;
-
     Tempest::scope<Tempest::OrthographicalCameraController> _cameraController;
+    Tempest::scope<Level> _level;
 };
 
 

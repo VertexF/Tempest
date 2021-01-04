@@ -16,7 +16,7 @@ namespace Tempest
         const ref<Texture2D> getTexture() const { return _texture; }
         const glm::vec2* getTexCoord() const { return _texCoord; }
 
-        static ref<SubTexture2D> createFromCoords(const ref<Texture2D>& texture, const glm::vec2& coords, const glm::vec2& spriteSize);
+        static ref<SubTexture2D> createFromCoords(const ref<Texture2D>& texture, const glm::vec2& coords, const glm::vec2& cellSize, const glm::vec2& spriteSize = { 1, 1 });
     private:
         ref<Texture2D> _texture;
 

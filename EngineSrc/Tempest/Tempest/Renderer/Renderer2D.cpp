@@ -287,7 +287,7 @@ namespace Tempest
         if (textureIndex == 0)
         {
             textureIndex = renderer2DData.textureSlotIndex;
-            renderer2DData.textureSlots[renderer2DData.textureSlotIndex] = subTexture;
+            renderer2DData.textureSlots[renderer2DData.textureSlotIndex] = texture;
             renderer2DData.textureSlotIndex++;
         }
 
@@ -408,7 +408,7 @@ namespace Tempest
 
     void Renderer2D::drawRotatedQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const ref<SubTexture2D> subTexture, float tileFactor, const glm::vec4& tint)
     {
-        drawRotatedQuad(position, size, rotation, subTexture, tileFactor, tint);
+        drawRotatedQuad(glm::vec3(position.x, position.y, 0.f), size, rotation, subTexture, tileFactor, tint);
     }
 
     void Renderer2D::drawRotatedQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const ref<SubTexture2D> subTexture, float tileFactor, const glm::vec4& tint) 
@@ -436,7 +436,7 @@ namespace Tempest
         if (textureIndex == 0)
         {
             textureIndex = renderer2DData.textureSlotIndex;
-            renderer2DData.textureSlots[renderer2DData.textureSlotIndex] = subTexture;
+            renderer2DData.textureSlots[renderer2DData.textureSlotIndex] = texture;
             renderer2DData.textureSlotIndex++;
         }
 

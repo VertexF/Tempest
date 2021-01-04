@@ -3,9 +3,7 @@
 
 #include <Tempest.h>
 
-#include "Colour.h"
 #include "Player.h"
-#include "ParticalSystem.h"
 
 class Player 
 {
@@ -19,25 +17,13 @@ public:
     void onImGuiRender();
     void reset();
 
-    float getRotation() { return (_velocity.y * 4.f - 90.f); }
+    float getRotation() { return _rotation; }
     const glm::vec2& getPosition() const { return _position; }
-
-    uint32_t getScore() const { return static_cast<uint32_t>((_position.x + 10.f) / 10.f);  }
 private:
-    glm::vec2 _position = { -10.f, 4.f };
-    glm::vec2 _velocity = { 5.f, 0.f };
+    glm::vec2 _position = { 0.f, 0.f };
+    glm::vec2 _velocity = { 0.f, 0.f };
 
-    float _enginePower = 0.8f;
-    float _gravity = 0.6f;
-
-    float _time = 0.f;
-    float _smokeInterval = 0.4f;
-    float _smokeEmitTime = _smokeInterval;
-
-    ParticalProps _smokeParticalProps, _fireParticalProps;
-    ParticalSystem _particalSystem;
-
-    Tempest::ref<Tempest::Texture2D> _shipTexture;
+    float _rotation = 0.f;
 };
 
 #endif // !PLAYER_HDR
