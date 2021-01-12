@@ -13,3 +13,9 @@
 [submodule "src/Tempest/vender/glm"]
 	path = EngineSrc/Tempest/vender/glm
 	url = https://github.com/g-truc/glm.git
+[submodule "EngineSrc/Tempest/vender/openal-soft"]
+	path = EngineSrc/Tempest/vender/openal-soft
+	url = https://github.com/kcat/openal-soft.git
+[submodule "EngineSrc/Tempest/vender/libsndfile"]
+	path = EngineSrc/Tempest/vender/libsndfile
+	url = https://github.com/libsndfile/libsndfile.git

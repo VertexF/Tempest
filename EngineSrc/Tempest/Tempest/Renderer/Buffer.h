@@ -133,7 +133,7 @@ namespace Tempest
     class IndexBuffer 
     {
     public:
-        virtual ~IndexBuffer() {}
+        virtual ~IndexBuffer() = default;
 
         virtual void setData() = 0;
 
