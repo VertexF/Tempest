@@ -1,6 +1,7 @@
 #ifndef SOUND_SOURCE_HDR
 #define SOUND_SOURCE_HDR
 
+#define AL_LIBTYPE_STATIC
 #include <AL/al.h>
 #include <glm/glm.hpp>
 

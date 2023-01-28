@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\CMakeFiles\Tempest.dir\cmake_pch.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Audio\OpenALSoundBuffer.cpp">
+      <Filter>Tempest\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Audio\OpenALSoundDevice.cpp">
+      <Filter>Tempest\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Audio\SoundBuffer.cpp">
+      <Filter>Tempest\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Audio\SoundDevice.cpp">
+      <Filter>Tempest\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Audio\SoundSource.cpp">
+      <Filter>Tempest\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\Application.cpp">
+      <Filter>Tempest\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\Layer.cpp">
+      <Filter>Tempest\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\LayerStack.cpp">
+      <Filter>Tempest\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\Log.cpp">
+      <Filter>Tempest\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\Random.cpp">
+      <Filter>Tempest\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\ImGui\ImGUILayer.cpp">
+      <Filter>Tempest\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\ImGui\ImGuiBuild.cpp">
+      <Filter>Tempest\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\OpenGL\OpenGLBuffer.cpp">
+      <Filter>Tempest\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>Tempest\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\OpenGL\OpenGLRendererAPI.cpp">
+      <Filter>Tempest\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\OpenGL\OpenGLShader.cpp">
+      <Filter>Tempest\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\OpenGL\OpenGLTexture.cpp">
+      <Filter>Tempest\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\OpenGL\OpenGLVertexArray.cpp">
+      <Filter>Tempest\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\Windows\WindowsInput.cpp">
+      <Filter>Tempest\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Tempest\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\Buffer.cpp">
+      <Filter>Tempest\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\OrthoCameraController.cpp">
+      <Filter>Tempest\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\OrthographicCamera.cpp">
+      <Filter>Tempest\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\ParticalSystem.cpp">
+      <Filter>Tempest\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\Renderer.cpp">
+      <Filter>Tempest\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\Renderer2D.cpp">
+      <Filter>Tempest\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\RendererCommands.cpp">
+      <Filter>Tempest\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\Shader.cpp">
+      <Filter>Tempest\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\SubTexture2D.cpp">
+      <Filter>Tempest\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\Texture.cpp">
+      <Filter>Tempest\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\VertexArray.cpp">
+      <Filter>Tempest\Renderer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Audio\OpenALSoundBuffer.h">
+      <Filter>Tempest\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Audio\OpenALSoundDevice.h">
+      <Filter>Tempest\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Audio\SoundBuffer.h">
+      <Filter>Tempest\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Audio\SoundDevice.h">
+      <Filter>Tempest\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Audio\SoundSource.h">
+      <Filter>Tempest\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\Application.h">
+      <Filter>Tempest\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\Core.h">
+      <Filter>Tempest\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\EntryPoint.h">
+      <Filter>Tempest\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\Input.h">
+      <Filter>Tempest\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\KeyCodes.h">
+      <Filter>Tempest\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\Layer.h">
+      <Filter>Tempest\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\LayerStack.h">
+      <Filter>Tempest\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\Log.h">
+      <Filter>Tempest\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\MouseButtonCodes.h">
+      <Filter>Tempest\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\Random.h">
+      <Filter>Tempest\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\TimeStep.h">
+      <Filter>Tempest\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\Window.h">
+      <Filter>Tempest\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Debug\Instrumentor.h">
+      <Filter>Tempest\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Events\ApplicationEvents.h">
+      <Filter>Tempest\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Events\Event.h">
+      <Filter>Tempest\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Events\KeyEvents.h">
+      <Filter>Tempest\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Events\MouseEvents.h">
+      <Filter>Tempest\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\ImGui\ImGUILayer.h">
+      <Filter>Tempest\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\OpenGL\OpenGLBuffer.h">
+      <Filter>Tempest\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\OpenGL\OpenGLContext.h">
+      <Filter>Tempest\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\OpenGL\OpenGLRendererAPI.h">
+      <Filter>Tempest\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\OpenGL\OpenGLShader.h">
+      <Filter>Tempest\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\OpenGL\OpenGLTexture.h">
+      <Filter>Tempest\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\OpenGL\OpenGLVertexArray.h">
+      <Filter>Tempest\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\Windows\WindowsInput.h">
+      <Filter>Tempest\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\Windows\WindowsWindow.h">
+      <Filter>Tempest\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\PublicInclude\PreComp.h">
+      <Filter>Tempest\PublicInclude</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\PublicInclude\Tempest.h">
+      <Filter>Tempest\PublicInclude</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\Buffer.h">
+      <Filter>Tempest\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\GraphicsContext.h">
+      <Filter>Tempest\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\OrthoCameraController.h">
+      <Filter>Tempest\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\OrthographicCamera.h">
+      <Filter>Tempest\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\ParticalSystem.h">
+      <Filter>Tempest\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\Renderer.h">
+      <Filter>Tempest\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\Renderer2D.h">
+      <Filter>Tempest\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\RendererAPI.h">
+      <Filter>Tempest\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\RendererCommands.h">
+      <Filter>Tempest\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\Shader.h">
+      <Filter>Tempest\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\SubTexture2D.h">
+      <Filter>Tempest\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\Texture.h">
+      <Filter>Tempest\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\VertexArray.h">
+      <Filter>Tempest\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\CMakeFiles\Tempest.dir\Debug\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\CMakeFiles\Tempest.dir\Release\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\CMakeFiles\Tempest.dir\MinSizeRel\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\CMakeFiles\Tempest.dir\RelWithDebInfo\cmake_pch.hxx">
+      <Filter>Precompile Header File</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Precompile Header File">
+      <UniqueIdentifier>{FC2C5D8D-DE70-38F7-B070-51F3E06F8331}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{6980D45B-3620-3183-AC87-4A56E8E28FF7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tempest">
+      <UniqueIdentifier>{B4B83068-4417-3936-AC43-300BEE3F7738}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tempest\Audio">
+      <UniqueIdentifier>{DC5AEB50-8503-35F3-B4E1-8673F9EDCFC8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tempest\Core">
+      <UniqueIdentifier>{FFA7399E-C264-339F-91BE-BB55AA8C81D6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tempest\Debug">
+      <UniqueIdentifier>{5CE1AC8E-2A35-36EE-B894-E052BC131790}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tempest\Events">
+      <UniqueIdentifier>{5D349129-4B25-38D0-9E03-C52229663514}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tempest\ImGui">
+      <UniqueIdentifier>{4A77178A-AF86-3162-934F-12B7A4CA9651}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tempest\Platform">
+      <UniqueIdentifier>{1933E463-B162-3213-9A4F-26166700C51C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tempest\Platform\OpenGL">
+      <UniqueIdentifier>{6D01CB18-0432-3995-9134-128D9B8E7CD5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tempest\Platform\Windows">
+      <UniqueIdentifier>{A63D4143-6695-3D51-8A74-73FA08C85EEE}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tempest\PublicInclude">
+      <UniqueIdentifier>{235AC867-8F2C-31B0-9CA8-0417053B49A2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tempest\Renderer">
+      <UniqueIdentifier>{86754F4A-697E-3CE1-A00B-467F609C6F76}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

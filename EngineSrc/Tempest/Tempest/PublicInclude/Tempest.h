@@ -29,6 +29,11 @@
 #include "Tempest/Renderer/SubTexture2D.h"
 #include "Tempest/Renderer/Renderer2D.h"
 
+//Audio
+#include "Tempest/Audio/OpenALSoundDevice.h"
+#include "Tempest/Audio/SoundSource.h"
+#include "Tempest/Audio/SoundBuffer.h"
+
 //Effects
 #include "Tempest/Renderer/ParticalSystem.h"
 

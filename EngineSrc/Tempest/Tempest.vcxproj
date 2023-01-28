@@ -1,0 +1,562 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{80495C8C-2874-3D72-ACA3-B50340E0E08B}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>Tempest</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Games Development\git\Tempest\EngineSrc\Tempest\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Tempest.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Tempest</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Games Development\git\Tempest\EngineSrc\Tempest\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Tempest.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Tempest</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\Games Development\git\Tempest\EngineSrc\Tempest\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Tempest.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Tempest</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\Games Development\git\Tempest\EngineSrc\Tempest\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Tempest.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Tempest</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Games Development\git\Tempest\src\Tempest;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\spdlog\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\PublicInclude;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\imgui;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glm;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glfw\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glew-2.1.0\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\stb;D:\Games Development\git\Tempest\EngineSrc\Tempest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>D:/Games Development/git/Tempest/EngineSrc/Tempest/Tempest.dir/Debug/cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;GLEW_NO_GLU;GLEW_STATIC;AL_LIBTYPE_STATIC;TEMPEST_DEBUG;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;GLEW_NO_GLU;GLEW_STATIC;AL_LIBTYPE_STATIC;TEMPEST_DEBUG;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Games Development\git\Tempest\src\Tempest;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\spdlog\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\PublicInclude;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\imgui;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glm;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glfw\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glew-2.1.0\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\stb;D:\Games Development\git\Tempest\EngineSrc\Tempest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Games Development\git\Tempest\src\Tempest;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\spdlog\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\PublicInclude;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\imgui;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glm;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glfw\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glew-2.1.0\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\stb;D:\Games Development\git\Tempest\EngineSrc\Tempest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Games Development\git\Tempest\src\Tempest;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\spdlog\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\PublicInclude;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\imgui;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glm;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glfw\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glew-2.1.0\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\stb;D:\Games Development\git\Tempest\EngineSrc\Tempest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>D:/Games Development/git/Tempest/EngineSrc/Tempest/Tempest.dir/Release/cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;GLEW_NO_GLU;GLEW_STATIC;AL_LIBTYPE_STATIC;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;GLEW_NO_GLU;GLEW_STATIC;AL_LIBTYPE_STATIC;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Games Development\git\Tempest\src\Tempest;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\spdlog\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\PublicInclude;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\imgui;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glm;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glfw\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glew-2.1.0\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\stb;D:\Games Development\git\Tempest\EngineSrc\Tempest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Games Development\git\Tempest\src\Tempest;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\spdlog\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\PublicInclude;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\imgui;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glm;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glfw\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glew-2.1.0\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\stb;D:\Games Development\git\Tempest\EngineSrc\Tempest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Games Development\git\Tempest\src\Tempest;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\spdlog\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\PublicInclude;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\imgui;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glm;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glfw\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glew-2.1.0\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\stb;D:\Games Development\git\Tempest\EngineSrc\Tempest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>D:/Games Development/git/Tempest/EngineSrc/Tempest/Tempest.dir/MinSizeRel/cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;GLEW_NO_GLU;GLEW_STATIC;AL_LIBTYPE_STATIC;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;GLEW_NO_GLU;GLEW_STATIC;AL_LIBTYPE_STATIC;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Games Development\git\Tempest\src\Tempest;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\spdlog\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\PublicInclude;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\imgui;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glm;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glfw\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glew-2.1.0\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\stb;D:\Games Development\git\Tempest\EngineSrc\Tempest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Games Development\git\Tempest\src\Tempest;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\spdlog\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\PublicInclude;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\imgui;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glm;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glfw\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glew-2.1.0\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\stb;D:\Games Development\git\Tempest\EngineSrc\Tempest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Games Development\git\Tempest\src\Tempest;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\spdlog\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\PublicInclude;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\imgui;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glm;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glfw\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glew-2.1.0\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\stb;D:\Games Development\git\Tempest\EngineSrc\Tempest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>D:/Games Development/git/Tempest/EngineSrc/Tempest/Tempest.dir/RelWithDebInfo/cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;GLEW_NO_GLU;GLEW_STATIC;AL_LIBTYPE_STATIC;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;GLEW_NO_GLU;GLEW_STATIC;AL_LIBTYPE_STATIC;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Games Development\git\Tempest\src\Tempest;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\spdlog\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\PublicInclude;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\imgui;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glm;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glfw\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glew-2.1.0\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\stb;D:\Games Development\git\Tempest\EngineSrc\Tempest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Games Development\git\Tempest\src\Tempest;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\spdlog\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\PublicInclude;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\imgui;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glm;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glfw\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glew-2.1.0\include;D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\stb;D:\Games Development\git\Tempest\EngineSrc\Tempest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"D:\Windows\Program Files\CMake\bin\cmake.exe" "-SD:/Games Development/git/Tempest" "-BD:/Games Development/git/Tempest" --check-stamp-file "D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Games Development\git\Tempest\EngineSrc\Tempest\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"D:\Windows\Program Files\CMake\bin\cmake.exe" "-SD:/Games Development/git/Tempest" "-BD:/Games Development/git/Tempest" --check-stamp-file "D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Games Development\git\Tempest\EngineSrc\Tempest\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"D:\Windows\Program Files\CMake\bin\cmake.exe" "-SD:/Games Development/git/Tempest" "-BD:/Games Development/git/Tempest" --check-stamp-file "D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\Games Development\git\Tempest\EngineSrc\Tempest\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"D:\Windows\Program Files\CMake\bin\cmake.exe" "-SD:/Games Development/git/Tempest" "-BD:/Games Development/git/Tempest" --check-stamp-file "D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\Games Development\git\Tempest\EngineSrc\Tempest\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\CMakeFiles\Tempest.dir\cmake_pch.cxx">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/Tempest.dir/Debug/cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/Tempest.dir/Release/cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/Tempest.dir/MinSizeRel/cmake_pch.pch</PrecompiledHeaderOutputFile>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/Tempest.dir/RelWithDebInfo/cmake_pch.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Audio\OpenALSoundBuffer.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Audio\OpenALSoundBuffer.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Audio\OpenALSoundDevice.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Audio\OpenALSoundDevice.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Audio\SoundBuffer.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Audio\SoundBuffer.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Audio\SoundDevice.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Audio\SoundDevice.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Audio\SoundSource.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Audio\SoundSource.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\Application.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\Application.h" />
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\Core.h" />
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\EntryPoint.h" />
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\Input.h" />
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\KeyCodes.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\Layer.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\Layer.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\LayerStack.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\LayerStack.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\Log.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\Log.h" />
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\MouseButtonCodes.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\Random.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\Random.h" />
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\TimeStep.h" />
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Core\Window.h" />
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Debug\Instrumentor.h" />
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Events\ApplicationEvents.h" />
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Events\Event.h" />
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Events\KeyEvents.h" />
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Events\MouseEvents.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\ImGui\ImGUILayer.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\ImGui\ImGUILayer.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\ImGui\ImGuiBuild.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\OpenGL\OpenGLBuffer.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\OpenGL\OpenGLBuffer.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\OpenGL\OpenGLContext.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\OpenGL\OpenGLContext.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\OpenGL\OpenGLRendererAPI.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\OpenGL\OpenGLRendererAPI.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\OpenGL\OpenGLShader.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\OpenGL\OpenGLShader.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\OpenGL\OpenGLTexture.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\OpenGL\OpenGLTexture.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\OpenGL\OpenGLVertexArray.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\OpenGL\OpenGLVertexArray.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\Windows\WindowsInput.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\Windows\WindowsInput.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\Windows\WindowsWindow.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Platform\Windows\WindowsWindow.h" />
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\PublicInclude\PreComp.h" />
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\PublicInclude\Tempest.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\Buffer.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\Buffer.h" />
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\GraphicsContext.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\OrthoCameraController.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\OrthoCameraController.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\OrthographicCamera.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\OrthographicCamera.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\ParticalSystem.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\ParticalSystem.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\Renderer.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\Renderer.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\Renderer2D.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\Renderer2D.h" />
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\RendererAPI.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\RendererCommands.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\RendererCommands.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\Shader.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\Shader.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\SubTexture2D.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\SubTexture2D.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\Texture.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\Texture.h" />
+    <ClCompile Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\VertexArray.cpp">
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Debug/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/Release/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/MinSizeRel/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <ForcedIncludeFiles Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:/Games Development/git/Tempest/EngineSrc/Tempest/CMakeFiles/Tempest.dir/RelWithDebInfo/cmake_pch.hxx;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\Tempest\Renderer\VertexArray.h" />
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\CMakeFiles\Tempest.dir\Debug\cmake_pch.hxx" />
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\CMakeFiles\Tempest.dir\Release\cmake_pch.hxx" />
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\CMakeFiles\Tempest.dir\MinSizeRel\cmake_pch.hxx" />
+    <ClInclude Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\CMakeFiles\Tempest.dir\RelWithDebInfo\cmake_pch.hxx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\Games Development\git\Tempest\ZERO_CHECK.vcxproj">
+      <Project>{EB5A7014-FFF5-3DE6-9E11-B655EC049BD8}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glew-2.1.0\GLEW.vcxproj">
+      <Project>{D340AE1B-1E33-3160-8318-A93599AEE4D6}</Project>
+      <Name>GLEW</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\glfw\GLFW.vcxproj">
+      <Project>{2E20EE81-FFAF-3AF3-8BC9-79801127E17B}</Project>
+      <Name>GLFW</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\imgui\IMGUI.vcxproj">
+      <Project>{3445AB4A-9FC6-399E-AD8E-92D5715B5F29}</Project>
+      <Name>IMGUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\spdlog\SPDLOG.vcxproj">
+      <Project>{79BF8283-319B-34C0-A25D-0C9FD0642684}</Project>
+      <Name>SPDLOG</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\Games Development\git\Tempest\EngineSrc\Tempest\vender\stb\STB.vcxproj">
+      <Project>{109FCE70-4A58-3493-B261-B82AD194C80B}</Project>
+      <Name>STB</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

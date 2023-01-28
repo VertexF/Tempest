@@ -19,3 +19,6 @@
 [submodule "EngineSrc/Tempest/vender/libsndfile"]
 	path = EngineSrc/Tempest/vender/libsndfile
 	url = https://github.com/libsndfile/libsndfile.git
+[submodule "EngineSrc/Tempest/vender/DevIL"]
+	path = EngineSrc/Tempest/vender/DevIL
+	url = https://github.com/DentonW/DevIL.git

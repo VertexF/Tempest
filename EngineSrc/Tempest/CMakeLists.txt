@@ -18,6 +18,8 @@ if(MSVC)
     source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${TEMPEST_SOURCE})
 endif()
 
+message(STATUS ${OPENAL_INCLUDE_DIR})
+
 add_subdirectory(vender/glew-2.1.0)
 add_subdirectory(vender/imgui)
 add_subdirectory(vender/glfw)
@@ -44,4 +46,4 @@ set(PRECOMPILED_HEADER Tempest/PublicInclude)
 target_precompile_headers(Tempest PUBLIC "${PRECOMPILED_HEADER}/PreComp.h")
 
 target_include_directories(Tempest PUBLIC ${PROJECT_BINARY_DIR}/src/Tempest ${SPDLOG_INCLUDE_DIR} ${PRECOMPILED_HEADER} ${IMGUI_INCLUDE_DIR} ${GML_INCLUDE_DIR} ${GLFW_INCLUDE_DIR} ${GLEW_INCLUDE_DIR} ${STB_INCLUDE_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${OPENAL_INCLUDE_DIR} ${SNDFILE_INCLUDE_DIR})
-target_link_libraries(Tempest PRIVATE IMGUI GLEW GLFW SPDLOG STB OPENAL SNDFILE)
+target_link_libraries(Tempest PRIVATE IMGUI GLEW GLFW SPDLOG STB OpenAL SNDFILE)
