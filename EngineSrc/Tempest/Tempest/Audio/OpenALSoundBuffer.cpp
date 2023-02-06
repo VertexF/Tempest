@@ -1,6 +1,7 @@
 #include "PreComp.h"
 #include "OpenALSoundBuffer.h"
 
+#define CPU_IS_LITTLE_ENDIAN
 #include <sndfile.h>
 #include <inttypes.h>
 #include <AL\alext.h>
@@ -40,7 +41,7 @@ namespace Tempest
 
             TEMPEST_CRITICAL("File name {0}", filename);
             TEMPEST_CRITICAL("Error string {0}", errorString);
-            TEMPEST_CORE_ASSERT(false, "Could not open audio in");
+            TEMPEST_CORE_ASSERT("Could not open audio in", true);
         }
 
         if (sfinfo.frames < 1 || sfinfo.frames >(sf_count_t)(INT_MAX / sizeof(short)) / sfinfo.channels)

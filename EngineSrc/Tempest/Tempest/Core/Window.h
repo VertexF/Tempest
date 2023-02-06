@@ -12,12 +12,12 @@ namespace Tempest
     struct WindowProps
     {
         std::string title;
-        unsigned int width;
-        unsigned int height;
+        uint32_t width;
+        uint32_t height;
 
         WindowProps(const std::string title = "Tempest Engine",
-                    unsigned int w = 1280,
-                    unsigned int h = 720) :
+            uint32_t w = 1280,
+            uint32_t h = 720) :
             title(title), width(w), height(h)
         {
         }
@@ -33,8 +33,8 @@ namespace Tempest
 
         virtual void onUpdate() = 0;
 
-        virtual unsigned int getWidth() const = 0;
-        virtual unsigned int getHeight() const = 0;
+        virtual uint32_t getWidth() const = 0;
+        virtual uint32_t getHeight() const = 0;
 
         //Window attributes.
         virtual void setCallbackFunction(const EventCallbackFunc &callback) = 0;

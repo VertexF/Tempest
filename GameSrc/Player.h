@@ -3,27 +3,68 @@
 
 #include <Tempest.h>
 
-#include "Player.h"
+#include <memory>
 
-class Player 
+#include "BaseEntity.h"
+#include "Bullet.h"
+
+
+namespace 
 {
-public:
-    Player();
+    float LINEAR_DAMPING = 0.95f;
+}
 
-    void loadAssets();
-    void onUpdate(Tempest::TimeStep ts);
-    void onRender();
+namespace game
+{
+    class Bullet;
 
-    void onImGuiRender();
-    void reset();
+    class Player : public BaseEntity
+    {
+        enum class CURRENT_STATE
+        {
+            DAMAGED,
+            FLYING
+        };
+    public:
+        Player(int id);
 
-    float getRotation() { return _rotation; }
-    const glm::vec2& getPosition() const { return _position; }
-private:
-    glm::vec2 _position = { 0.f, 0.f };
-    glm::vec2 _velocity = { 0.f, 0.f };
+        virtual void init();
+        void loadAssets();
+        void onUpdate(Tempest::TimeStep ts);
+        void onRender();
 
-    float _rotation = 0.f;
-};
+        void onImGuiRender();
+        void reset();
+
+        bool isDead() const;
+        float getRotation() { return (collisionRect.velocity.y); }
+
+        virtual const glm::vec3 getBulletPosition() const override;
+        virtual int getID() const override;
+    private:
+        std::unique_ptr<Bullet> _bullet;
+
+        int _lives = 7;
+
+        CURRENT_STATE _currentState;
+        Tempest::TimeStep _totalTime;
+        Tempest::TimeStep _movementTime;
+        float _invisibilityTime = 0.1f;
+
+        Tempest::Rect testRect;
+        //Test stuff
+
+        Tempest::ref<Tempest::Texture2D> _spriteSheetLevel;
+        Tempest::ref<Tempest::Texture2D> _astroid;
+        Tempest::ref<Tempest::SubTexture2D> _shipTexture;
+
+        Tempest::ParticalProps _smokeParticalProps, _fireParticalProps;
+        Tempest::ParticalSystem _particalSystem;
+
+        float _time = 0.f;
+        float _smokeInterval = 0.4f;
+        float _smokeEmitTime = _smokeInterval;
+    };
+}
 
 #endif // !PLAYER_HDR

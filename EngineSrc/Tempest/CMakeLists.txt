@@ -28,11 +28,11 @@ add_subdirectory(vender/stb)
 add_subdirectory(vender/openal-soft)
 add_subdirectory(vender/libsndfile)
 
-add_library(Tempest STATIC ${TEMPEST_SOURCE}) 
+add_library(Tempest STATIC ${TEMPEST_SOURCE})
 
-if(MSVC)
-    set_property(TARGET Tempest PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
-endif()
+#if(MSVC)
+#    set_property(TARGET Tempest PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+#endif()
 
 set_property(
     TARGET Tempest

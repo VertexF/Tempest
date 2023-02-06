@@ -14,7 +14,7 @@ namespace Tempest
         //Height and width are the new size of the resized event.
         //The constructure of the event class is taking in the Event category
         //this specific event belongs to.
-        WindowResizeEvent(unsigned int width, unsigned int height) : Event(EVENT_CATEGORY_APPLICATION),
+        WindowResizeEvent(uint32_t width, uint32_t height) : Event(EVENT_CATEGORY_APPLICATION),
             _width(width), _height(height)
         {
         }
@@ -28,8 +28,8 @@ namespace Tempest
             return ss.str();
         }
 
-        unsigned int getWidth() const { return _width; }
-        unsigned int getHeight() const { return _height; }
+        uint32_t getWidth() const { return _width; }
+        uint32_t getHeight() const { return _height; }
 
         //The static return is used to get the event type. Every instance will
         //share the same event type of this class. This is needed for the event
@@ -38,8 +38,8 @@ namespace Tempest
         virtual EventType getEventType() const override { return getStaticType(); };
         virtual const char* getName() const override { return "Window resize"; }
     private:
-        unsigned int _width;
-        unsigned int _height;
+        uint32_t _width;
+        uint32_t _height;
     };
 
     //This class handles the window close events

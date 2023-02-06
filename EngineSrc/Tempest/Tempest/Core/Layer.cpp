@@ -3,7 +3,7 @@
 
 namespace Tempest
 {
-    Layer::Layer(const std::string& layerName) : _debugName(layerName)
+    Layer::Layer(const std::string& layerName, float zoomLevel) : _debugName(layerName), zoomLevel(zoomLevel)
     {
     }
 
@@ -33,5 +33,10 @@ namespace Tempest
 
     void Layer::onImGuiRender() 
     {
+    }
+
+    float Layer::getZoomLevel() const 
+    {
+        return zoomLevel;
     }
 }

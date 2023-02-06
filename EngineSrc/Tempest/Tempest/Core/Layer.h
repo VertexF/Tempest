@@ -14,7 +14,7 @@ namespace Tempest
     class Layer 
     {
     public:
-        Layer(const std::string &layerName = "Layer");
+        Layer(const std::string &layerName = "Layer", float zoomLevel = 1.f);
         virtual ~Layer();
 
         virtual void onAttach();
@@ -22,9 +22,13 @@ namespace Tempest
         virtual void onUpdate(TimeStep timeStep);
         virtual void onEvent(Event& e);
         virtual void onImGuiRender();
+        virtual bool isFinished() const = 0;
+        virtual float getZoomLevel() const;
 
         //Only really used for debugging and shouldn't be used in release.
         inline std::string getLayer() const { return _debugName; }
+    protected:
+        float zoomLevel;
     private:
         std::string _debugName;
     };

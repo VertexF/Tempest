@@ -56,4 +56,30 @@ namespace Tempest
             _layers.erase(it);
         }
     }
+
+    void LayerStack::pushGameLayer(Layer* layer)
+    {
+        _layers.emplace(_layers.begin() + _layerIteratorIndex, layer);
+        _layerIteratorIndex++;
+    }
+
+    void LayerStack::pushGameOverlay(Layer* overlay)
+    {
+        _layers.emplace_back(overlay);
+    }
+
+    void LayerStack::attachTopLayer() 
+    {
+        _layers.back()->onAttach();
+    }
+
+    Layer* LayerStack::back()
+    {
+        if (isEmpty()) 
+        {
+            TEMPEST_CRITICAL("You are trying to get a layer of the game state stack when there is none.");
+            return nullptr;
+        }
+        return _layers.back();
+    }
 }

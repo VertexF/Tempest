@@ -76,7 +76,7 @@ namespace Tempest
             colour.a = colour.a * life;
 
             float size = glm::lerp(partical.endSize, partical.beginSize, life);
-            Renderer2D::drawRotatedQuad(partical.position, { size, size }, partical.rotation, colour);
+            Renderer2D::drawRotatedQuad({ partical.position.x, partical.position.y, -0.8f }, { size, size }, partical.rotation, colour);
         }
     }
 }

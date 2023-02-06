@@ -3,41 +3,55 @@
 
 #include <Tempest.h>
 #include <ImGui.h>
+#include <memory>
 
 #include "Tempest/Events/Event.h"
 #include "Tempest/Events/KeyEvents.h"
-#include "Tempest/Audio/OpenALSoundDevice.h"
-#include "Tempest/Audio/SoundSource.h"
-#include "Tempest/Audio/SoundBuffer.h"
 
-class Level;
 
-class Game2D : public Tempest::Layer
+namespace game
 {
-public:
-    Game2D();
-    virtual ~Game2D() = default;
+    class Player;
 
-    virtual void onAttach() override;
-    virtual void onDetach() override;
-    virtual void onUpdate(Tempest::TimeStep timeStep) override;
-    virtual void onEvent(Tempest::Event& e) override;
-    virtual void onImGuiRender() override;
-private:
-    bool onKeyPressed(Tempest::PressedKeyEvent& e);
-private:
-    glm::vec4 _squareColour;
+    class Game2D : public Tempest::Layer
+    {
+    public:
+        Game2D();
+        virtual ~Game2D() = default;
 
-    uint32_t _spellSoundBuffer = 0;
-    uint32_t _magicFailSoundBuffer = 0;
+        virtual void onAttach() override;
+        virtual void onDetach() override;
+        virtual void onUpdate(Tempest::TimeStep timeStep) override;
+        virtual void onEvent(Tempest::Event& e) override;
+        virtual void onImGuiRender() override;
 
-    Tempest::ref<Tempest::SoundDevice> _soundDevice;
-    Tempest::ref<Tempest::SoundBuffer> _soundBuffer;
-    Tempest::ref<Tempest::SoundSource> _mySource;
+        virtual bool isFinished() const override { return false; }
+    private:
+        bool onKeyPressed(Tempest::PressedKeyEvent& e);
+        bool onKeyReleased(Tempest::ReleasedKeyEvent& e);
+    private:
+        Tempest::scope<Tempest::OrthographicalCameraController> _cameraController;
+        Tempest::scope<Tempest::TextRenderer> _testText;
 
-    Tempest::scope<Tempest::OrthographicalCameraController> _cameraController;
-    Tempest::scope<Level> _level;
-};
+        glm::vec4 _squareColour;
+        Tempest::ref<Tempest::Texture2D> _backgroundTexture;
 
+        uint32_t _spellSoundBuffer = 0;
+        uint32_t _magicFailSoundBuffer = 0;
+
+        Tempest::ref<Tempest::SoundDevice> _soundDevice;
+        Tempest::ref<Tempest::SoundBuffer> _soundBuffer;
+        Tempest::ref<Tempest::SoundSource> _mySource;
+
+        bool _hasWon = false;
+        bool _isDead = false;
+
+        int _score = 0;
+        float _totalTime = 0.f;
+
+        std::vector<float> _xPos;
+        std::vector<float> _yPos;
+    };
+}
 
 #endif //!GAME_2D_HDR

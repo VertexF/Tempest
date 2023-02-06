@@ -12,6 +12,7 @@ namespace Tempest
         }
 
         operator float() const { return _time; }
+        float operator+=(const TimeStep& lhs) { return (this->_time += lhs._time); }
 
         float getSeconds() const { return _time; }
         float getMilliseconds() const { return _time * 1000.f; }

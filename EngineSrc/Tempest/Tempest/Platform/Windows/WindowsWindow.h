@@ -22,15 +22,15 @@ namespace Tempest
 
         virtual void onUpdate() override;
 
-        inline unsigned int getWidth() const override { return _windowData.width; }
-        inline unsigned int getHeight() const override { return _windowData.height; }
+        uint32_t getWidth() const override;
+        uint32_t getHeight() const override;
 
         //Window attributes.
-        inline void setCallbackFunction(const EventCallbackFunc& callback) override { _windowData.eventCallback = callback; }
+        void setCallbackFunction(const EventCallbackFunc& callback) override;
         virtual void setVSync(bool vsync) override;
         virtual bool isVSync() const override;
 
-        inline virtual void* getNativeWindow() const override { return _window; }
+        virtual void* getNativeWindow() const override;
     private:
         virtual void init(const WindowProps& props);
         virtual void shutdown();
@@ -44,8 +44,8 @@ namespace Tempest
         struct WindowData 
         {
             std::string title;
-            unsigned int width;
-            unsigned int height;
+            uint32_t width;
+            uint32_t height;
             bool vSync;
 
             //This allows use to use function callback to events.

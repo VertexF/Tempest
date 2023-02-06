@@ -21,6 +21,7 @@ namespace Tempest
         virtual void onDetach() override;
         virtual void onImGuiRender() override;
         virtual void onEvent(Event& e) override;
+        virtual bool isFinished() const override;
 
         void begin();
         void end();

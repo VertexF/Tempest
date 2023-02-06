@@ -27,14 +27,27 @@
 #include "Tempest/Renderer/VertexArray.h"
 #include "Tempest/Renderer/Texture.h"
 #include "Tempest/Renderer/SubTexture2D.h"
+#include "Tempest/Renderer/Framebuffer.h"
 #include "Tempest/Renderer/Renderer2D.h"
+
+#include "Tempest/Renderer/TextRenderer.h"
+
+//Effects
+#include "Tempest/Renderer/ParticalSystem.h"
 
 //Audio
 #include "Tempest/Audio/OpenALSoundDevice.h"
 #include "Tempest/Audio/SoundSource.h"
 #include "Tempest/Audio/SoundBuffer.h"
 
-//Effects
-#include "Tempest/Renderer/ParticalSystem.h"
+//Collision
+#include "Tempest/Collision/Rect.h"
+#include "Tempest/Collision/AABBCollision.h"
+
+//Entities
+// #include "Tempest/Entity/MovingEntity.h"
+// #include "Tempest/Entity/SteeringBehavior.h"
+// #include "Tempest/Entity/GameWorld.h"
+// #include "Tempest/Entity/Telegram.h"
 
 #endif // !TEMPEST_HDR

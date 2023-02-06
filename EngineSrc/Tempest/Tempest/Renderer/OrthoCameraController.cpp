@@ -8,8 +8,8 @@
 namespace Tempest 
 {
     OrthographicalCameraController::OrthographicalCameraController(float apsectRatio, bool rotation) :
-        _aspectRation(apsectRatio),
-        _camera(-_aspectRation * _zoomLevel, _aspectRation * _zoomLevel, -_zoomLevel, _zoomLevel),
+        _aspectRatio(apsectRatio),
+        _camera(-_aspectRatio * _zoomLevel, _aspectRatio * _zoomLevel, -_zoomLevel, _zoomLevel),
         _isRotatable(rotation),
         _cameraPosition(0.f)
     {
@@ -37,20 +37,17 @@ namespace Tempest
             _cameraPosition.x += _cameraMovementSpeed * ts;
         }
 
-        if (_rotation) 
-        {
-            if (Input::isKeyPressed(TEMP_KEY_Z))
-            {
-                _rotation += _rotationSpeed * ts;
-            }
-            else if (Input::isKeyPressed(TEMP_KEY_X))
-            {
-                _rotation -= _rotationSpeed * ts;
-            }
+        ////Rotation
+        //if (Input::isKeyPressed(TEMP_KEY_Z))
+        //{
+        //    _rotation += _rotationSpeed * ts;
+        //}
+        //else if (Input::isKeyPressed(TEMP_KEY_X))
+        //{
+        //    _rotation -= _rotationSpeed * ts;
+        //}
 
-            _camera.setRotation(_rotation);
-        }
-
+        _camera.setRotation(_rotation);
         _camera.setPosition(_cameraPosition);
         _cameraMovementSpeed = _zoomLevel;
     }
@@ -64,27 +61,34 @@ namespace Tempest
         dispatcher.dispatch<WindowResizeEvent>(std::bind(&OrthographicalCameraController::onWindowResized, this, std::placeholders::_1));
     }
 
+    void OrthographicalCameraController::onResize(float width, float height)
+    {
+        if (height != 0.f)
+        {
+            _aspectRatio = width / height;
+            calculateView();
+        }
+    }
+
     void OrthographicalCameraController::calculateView() 
     {
-        _camera.setProjection(-_aspectRation * _zoomLevel, _aspectRation * _zoomLevel, -_zoomLevel, _zoomLevel);
+        _camera.setProjection(-_aspectRatio * _zoomLevel, _aspectRatio * _zoomLevel, -_zoomLevel, _zoomLevel);
     }
 
     bool OrthographicalCameraController::onMouseScrolled(MouseScrolledEvent& e) 
     {
         TEMPEST_PROFILE_FUNCTION();
 
-        _zoomLevel -= e.y * 0.25f;
-        _zoomLevel = std::max(_zoomLevel, 0.25f);
-        calculateView();
+        //_zoomLevel -= e.y * 0.25f;
+        //_zoomLevel = std::max(_zoomLevel, 0.25f);
+        //calculateView();
         return false;
     }
 
     bool OrthographicalCameraController::onWindowResized(WindowResizeEvent& e) 
     {
         TEMPEST_PROFILE_FUNCTION();
-
-        _aspectRation = (float)e.getWidth() / (float)e.getHeight();
-        calculateView();
+        onResize(static_cast<float>(e.getWidth()), static_cast<float>(e.getHeight()));
         return false;
     }
 }

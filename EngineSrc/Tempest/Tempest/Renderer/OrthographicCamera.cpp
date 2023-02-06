@@ -10,7 +10,7 @@ namespace Tempest
     {
         TEMPEST_PROFILE_FUNCTION();
 
-        _viewProjectionMatrix = _projectionMatrix * _viewMatrix;
+        _viewProjectionMatrix = glm::identity<glm::mat4x4>();
     }
 
     void OrthographicCamera::setProjection(float left, float right, float top, float bottom)

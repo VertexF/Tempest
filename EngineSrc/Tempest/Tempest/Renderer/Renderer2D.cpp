@@ -41,6 +41,7 @@ namespace Tempest
         //Texture slot 0 is the white 1 by 1 texture we have at the beginning.
 
         glm::vec4 quadVertexPositions[4];
+        glm::vec4 textQuadVertexPositions[4];
 
         Renderer2D::Statistics stats;
     };
@@ -447,6 +448,117 @@ namespace Tempest
         for (uint32_t i = 0; i < 4; ++i)
         {
             renderer2DData.quadVertexBufferPtr->position = transform * renderer2DData.quadVertexPositions[i];
+            renderer2DData.quadVertexBufferPtr->colour = tint;
+            renderer2DData.quadVertexBufferPtr->texCoord = textureCoords[i];
+            renderer2DData.quadVertexBufferPtr->tilingFactor = tileFactor;
+            renderer2DData.quadVertexBufferPtr->textureIndex = textureIndex;
+            renderer2DData.quadVertexBufferPtr++;
+        }
+
+        renderer2DData.quadIndexCount += 6;
+
+        renderer2DData.stats.quadCount++;
+    }
+
+    void Renderer2D::drawRotatedQuad(const glm::mat4& transform, const glm::vec2& size, const ref<Texture2D> texture, float tileFactor, const glm::vec4& tint)
+    {
+        TEMPEST_PROFILE_FUNCTION();
+
+        constexpr glm::vec2 textureCoords[] = {
+                { 0.f, 0.f },
+                { 1.f, 0.f },
+                { 1.f, 1.f },
+                { 0.f, 1.f }
+        };
+
+        if (renderer2DData.quadIndexCount >= Renderer2DData::maxIndices)
+        {
+            flushAndReset();
+        }
+
+        int textureIndex = 0;
+
+        for (uint32_t i = 1; i < renderer2DData.textureSlotIndex; ++i)
+        {
+            if (*renderer2DData.textureSlots[i].get() == *texture.get())
+            {
+                textureIndex = i;
+            }
+        }
+
+        if (textureIndex == 0)
+        {
+            textureIndex = renderer2DData.textureSlotIndex;
+            renderer2DData.textureSlots[renderer2DData.textureSlotIndex] = texture;
+            renderer2DData.textureSlotIndex++;
+        }
+
+        glm::mat4 finalTransform = transform * glm::scale(glm::mat4x4(1.f), { size.x, size.y, 1.f });
+
+        for (uint32_t i = 0; i < 4; ++i)
+        {
+            renderer2DData.quadVertexBufferPtr->position = finalTransform * renderer2DData.quadVertexPositions[i];
+            renderer2DData.quadVertexBufferPtr->colour = tint;
+            renderer2DData.quadVertexBufferPtr->texCoord = textureCoords[i];
+            renderer2DData.quadVertexBufferPtr->tilingFactor = tileFactor;
+            renderer2DData.quadVertexBufferPtr->textureIndex = textureIndex;
+            renderer2DData.quadVertexBufferPtr++;
+        }
+
+        renderer2DData.quadIndexCount += 6;
+
+        renderer2DData.stats.quadCount++;
+    }
+
+    void Renderer2D::drawText(const glm::vec2& position, const glm::vec2& size, const stbtt_aligned_quad& texCoords, const ref<Texture2D> texture, float tileFactor, const glm::vec4& tint)
+    {
+        drawText(glm::vec3(position.x, position.y, 0.f), size, texCoords, texture, tileFactor, tint);
+    }
+
+    void Renderer2D::drawText(const glm::vec3& position, const glm::vec2& size, const stbtt_aligned_quad& texCoords, const ref<Texture2D> texture, float tileFactor, const glm::vec4& tint)
+    {
+        TEMPEST_PROFILE_FUNCTION();
+
+        glm::vec2 textureCoords[] = {
+                { texCoords.s0, texCoords.t1 },
+                { texCoords.s1, texCoords.t1 },
+                { texCoords.s1, texCoords.t0 },
+                { texCoords.s0, texCoords.t0 }
+        };
+
+        if (renderer2DData.quadIndexCount >= Renderer2DData::maxIndices)
+        {
+            flushAndReset();
+        }
+
+        int textureIndex = 0;
+
+        for (uint32_t i = 1; i < renderer2DData.textureSlotIndex; ++i)
+        {
+            if (*renderer2DData.textureSlots[i].get() == *texture.get())
+            {
+                textureIndex = i;
+            }
+        }
+
+        if (textureIndex == 0)
+        {
+            textureIndex = renderer2DData.textureSlotIndex;
+            renderer2DData.textureSlots[renderer2DData.textureSlotIndex] = texture;
+            renderer2DData.textureSlotIndex++;
+        }
+
+        glm::mat4x4 transform = glm::translate(glm::mat4x4(1.f), position) *
+            glm::scale(glm::mat4x4(1.f), { size.x, size.y, 1.f });
+
+        renderer2DData.textQuadVertexPositions[0] = { texCoords.x0, -texCoords.y1, 0.f, 1.f };
+        renderer2DData.textQuadVertexPositions[1] = { texCoords.x1, -texCoords.y1, 0.f, 1.f };
+        renderer2DData.textQuadVertexPositions[2] = { texCoords.x1, -texCoords.y0, 0.f, 1.f };
+        renderer2DData.textQuadVertexPositions[3] = { texCoords.x0, -texCoords.y0, 0.f, 1.f };
+
+        for (uint32_t i = 0; i < 4; ++i)
+        {
+            renderer2DData.quadVertexBufferPtr->position = transform * renderer2DData.textQuadVertexPositions[i];
             renderer2DData.quadVertexBufferPtr->colour = tint;
             renderer2DData.quadVertexBufferPtr->texCoord = textureCoords[i];
             renderer2DData.quadVertexBufferPtr->tilingFactor = tileFactor;

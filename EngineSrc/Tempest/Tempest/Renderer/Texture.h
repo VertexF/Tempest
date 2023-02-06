@@ -2,6 +2,9 @@
 #define TEXTURE_HDR
 
 #include "PreComp.h"
+
+#include <stb_image.h>
+
 #include "Tempest/Core/Core.h"
 
 namespace Tempest 
@@ -13,6 +16,8 @@ namespace Tempest
 
         virtual uint32_t getWidth() const = 0;
         virtual uint32_t getHeight() const = 0;
+
+        virtual uint32_t getRendererID() const = 0;
 
         virtual void setData(void* data, uint32_t size) = 0;
 
@@ -28,6 +33,7 @@ namespace Tempest
         virtual ~Texture2D() = default;
         static ref<Texture2D> create(const std::string &path);
         static ref<Texture2D> create(uint32_t width, uint32_t height);
+        static ref<Texture2D> create(uint32_t width, uint32_t height, int channel);
     };
 }
 

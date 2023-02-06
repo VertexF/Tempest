@@ -127,7 +127,7 @@ namespace Tempest
             const std::string& shaderSource = keyValue.second;
 
             // Create an empty vertex shader handle
-            unsigned int shader = glCreateShader(shaderType);
+            uint32_t shader = glCreateShader(shaderType);
 
             // Send the vertex shader source code to GL
 

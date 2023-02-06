@@ -11,7 +11,7 @@ class Game : public Tempest::Application
 public:
     Game() 
     {
-        pushLayer(new Game2D());
+        pushGameLayer(new game::Game2D());
     }
 
     ~Game() {}

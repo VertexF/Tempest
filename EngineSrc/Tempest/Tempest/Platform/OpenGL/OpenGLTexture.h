@@ -5,18 +5,22 @@
 #include "Tempest/Renderer/Texture.h"
 
 #include <gl/glew.h>
+#include <stb_image.h>
 
 namespace Tempest 
 {
     class OpenGLTexture2D : public Texture2D
     {
     public:
+        OpenGLTexture2D(uint32_t width, uint32_t height, uint32_t channels);
         OpenGLTexture2D(uint32_t width, uint32_t height);
         OpenGLTexture2D(const std::string &path);
         virtual ~OpenGLTexture2D();
 
         virtual uint32_t getWidth() const override { return _width; }
         virtual uint32_t getHeight() const override { return _height; }
+
+        virtual uint32_t getRendererID() const override;
 
         virtual void setData(void* data, uint32_t size) override;
 
@@ -34,6 +38,8 @@ namespace Tempest
 
         GLenum _internalFormat;
         GLenum _dataFormat;
+
+        stbi_uc* _imageData;
     };
 }
 

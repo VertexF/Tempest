@@ -77,14 +77,17 @@ namespace Tempest
         }
     }
 
+    bool ImGuiLayer::isFinished() const 
+    {
+        return false;
+    }
+
     void ImGuiLayer::begin()
     {
         TEMPEST_PROFILE_FUNCTION();
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
-
-        ImGui::DockSpaceOverViewport(ImGui::GetMainViewport(), ImGuiDockNodeFlags_NoDockingInCentralNode | ImGuiDockNodeFlags_PassthruCentralNode);
     }
 
     void ImGuiLayer::end()

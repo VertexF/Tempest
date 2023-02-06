@@ -87,7 +87,7 @@ namespace Tempest
         stbi_uc* imageData;
         {
             TEMPEST_PROFILE_SCOPE("WindowsWindow::init loading icon - stbi_load");
-            imageData = stbi_load("Assets/Textures/Ship.png", &width, &height, &channels, 0);
+            imageData = stbi_load("Assets/Textures/icon.png", &width, &height, &channels, 0);
         }
 
         GLFWimage icon = { width, height, imageData};
@@ -152,7 +152,7 @@ namespace Tempest
                 }
             });
 
-        glfwSetCharCallback(_window, [](GLFWwindow* wind, unsigned int character) 
+        glfwSetCharCallback(_window, [](GLFWwindow* wind, uint32_t character)
             {
                 WindowData& windowData = *(WindowData*)(glfwGetWindowUserPointer(wind));
 
@@ -222,6 +222,21 @@ namespace Tempest
         _context->swapBuffers();
     }
 
+    uint32_t WindowsWindow::getWidth() const 
+    { 
+        return _windowData.width; 
+    }
+
+    uint32_t WindowsWindow::getHeight() const 
+    { 
+        return _windowData.height; 
+    }
+
+    void WindowsWindow::setCallbackFunction(const EventCallbackFunc& callback)
+    {
+        _windowData.eventCallback = callback;
+    }
+
     void WindowsWindow::setVSync(bool vsync) 
     {
         TEMPEST_PROFILE_FUNCTION();
@@ -240,5 +255,10 @@ namespace Tempest
     bool WindowsWindow::isVSync() const 
     { 
         return _windowData.vSync;
+    }
+
+    void* WindowsWindow::getNativeWindow() const
+    { 
+        return _window; 
     }
 }

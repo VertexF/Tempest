@@ -1,4 +1,4 @@
-#include "WindowsInput.h"
+#include "Tempest/Core/Input.h"
 
 #include <glfw/glfw3.h>
 #include <glm/glm.hpp>
@@ -7,9 +7,7 @@
 
 namespace Tempest
 {
-    Input *Input::_input = new WindowsInput();
-
-    bool WindowsInput::isKeyPressedImpl(int keyCode)
+    bool Input::isKeyPressed(int keyCode)
     {
         auto window = static_cast<GLFWwindow*>(Application::get().getWindow().getNativeWindow());
         auto state = glfwGetKey(window, keyCode);
@@ -17,7 +15,7 @@ namespace Tempest
         return state == GLFW_PRESS || state == GLFW_REPEAT;
     }
 
-    bool WindowsInput::isMouseButtonPressedImpl(int button)
+    bool Input::isMouseButtonPressed(int button)
     {
         auto window = static_cast<GLFWwindow*>(Application::get().getWindow().getNativeWindow());
         auto state = glfwGetMouseButton(window, button);
@@ -25,7 +23,7 @@ namespace Tempest
         return state == GLFW_PRESS;
     }
 
-    glm::vec2 WindowsInput::getMousePositionImpl()
+    glm::vec2 Input::getMousePosition()
     {
         auto window = static_cast<GLFWwindow*>(Application::get().getWindow().getNativeWindow());
         double xPos, yPos = 0.0;
@@ -34,13 +32,37 @@ namespace Tempest
         return { static_cast<float>(xPos), static_cast<float>(yPos) };
     }
 
-    float WindowsInput::getMouseXImpl()
+    float Input::getMouseX()
     {
-        return getMousePositionImpl().x;
+        return getMousePosition().x;
     }
 
-    float WindowsInput::getMouseYImpl()
+    float Input::getMouseY()
     {
-        return getMousePositionImpl().y;
+        return getMousePosition().y;
+    }
+
+    float Input::getWorldCoordMouseX()
+    {
+        float screenWidth = static_cast<float>(Application::get().getWindow().getWidth());
+        float screenHeight = static_cast<float>(Application::get().getWindow().getHeight());
+        float halfScreenWidth = screenWidth / 2.f;
+
+        float incorrectScaleButCorrectCoord = (halfScreenWidth - getMousePosition().x);
+        float theOneScale = incorrectScaleButCorrectCoord / halfScreenWidth;
+        float result = theOneScale * ((screenWidth / screenHeight) * -Application::get().getCurrentLayerZoomLevel());
+
+        return result;
+    }
+
+    float Input::getWorldCoordMouseY() 
+    {
+        float halfScreenHeight = static_cast<float>(Application::get().getWindow().getHeight()) / 2.f;
+
+        float incorrectScaleButCorrectCoord = (halfScreenHeight - getMousePosition().y);
+        float theOneScale = incorrectScaleButCorrectCoord / halfScreenHeight;
+        float result = theOneScale * Application::get().getCurrentLayerZoomLevel();
+
+        return result;
     }
 }
