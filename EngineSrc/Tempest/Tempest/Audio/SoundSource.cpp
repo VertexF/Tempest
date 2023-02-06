@@ -39,7 +39,7 @@ namespace Tempest
             if (_stateFlag == AL_INITIAL || _stateFlag == AL_STOPPED)
             {
                 _buffer = slot;
-                alSourcei(_source, AL_BUFFER, (ALint)_buffer);
+                alSourcei(_source, AL_BUFFER, static_cast<ALint>(_buffer));
                 alSourcePlay(_source);
             }
         }

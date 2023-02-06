@@ -11,12 +11,11 @@ namespace Tempest
     class SoundBuffer 
     {
     public:
+        SoundBuffer() = default;
         ~SoundBuffer() = default;
 
         virtual uint32_t addSoundEffect(const char* filename) = 0;
         virtual void removeSoundEffect(const ALuint& buffer) = 0;
-
-        static ref<SoundBuffer> create();
     };
 }
 

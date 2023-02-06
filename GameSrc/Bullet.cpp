@@ -10,13 +10,10 @@ namespace game
     Bullet::Bullet(int id, bool isPlayer) : BaseEntity(id), _currentState(BULLET_STATE::READY)
     {
         collisionRect.position = ENTITY_MANAGER.get(entityID)->getPosition();
-
-        _soundDevice = Tempest::SoundDevice::create();
-        _soundBuffer = Tempest::SoundBuffer::create();
         _mySource = std::make_shared<Tempest::SoundSource>();
 
         _spriteSheetLevel = Tempest::Texture2D::create("Assets/Textures/ships.png");
-        _laserSoundBuffer = _soundBuffer->addSoundEffect("Assets/Audio/laser.wav");
+        _laserSoundBuffer = AUDIO_MANAGER.addSoundEffect("Assets/Audio/laser.wav");
 
         if(isPlayer)
             _bulletTexture = Tempest::SubTexture2D::createFromCoords(_spriteSheetLevel, { 1, 2 }, { 256, 256 });

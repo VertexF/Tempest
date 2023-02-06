@@ -13,6 +13,9 @@
 #include "Tempest/Renderer/Renderer.h"
 #include "Tempest/Renderer/RendererCommands.h"
 
+#include "../../GameSrc/Singleton.h"
+#include "../../GameSrc/Global.h"
+
 #include <GLFW/glfw3.h>
 
 namespace Tempest
@@ -34,6 +37,7 @@ namespace Tempest
         _imGuiLayer = new ImGuiLayer();
         pushLayer(_imGuiLayer);
         Renderer::init();
+        game::creatsGlobals();
     }
 
     Application::~Application()

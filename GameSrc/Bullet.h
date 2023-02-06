@@ -1,10 +1,11 @@
 #ifndef BULLET_HDR
 #define BULLET_HDR
 
-#include "Tempest/Core/TimeStep.h"
-#include "BaseEntity.h"
 
 #include <glm/glm.hpp>
+
+#include "BaseEntity.h"
+#include <Tempest.h>
 
 namespace game 
 {
@@ -37,8 +38,6 @@ namespace game
         Tempest::ref<Tempest::Texture2D> _spriteSheetLevel;
         Tempest::ref<Tempest::SubTexture2D> _bulletTexture;
 
-        Tempest::ref<Tempest::SoundDevice> _soundDevice;
-        Tempest::ref<Tempest::SoundBuffer> _soundBuffer;
         Tempest::ref<Tempest::SoundSource> _mySource;
 
         uint32_t _laserSoundBuffer = 0;

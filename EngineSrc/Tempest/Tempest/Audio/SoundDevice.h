@@ -10,9 +10,6 @@ namespace Tempest
     public:
         SoundDevice() = default;
         virtual ~SoundDevice() = default;
-
-        static ref<SoundDevice> create();
-    private:
     };
 }
 

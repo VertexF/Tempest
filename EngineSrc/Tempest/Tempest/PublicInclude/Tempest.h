@@ -39,6 +39,7 @@
 #include "Tempest/Audio/OpenALSoundDevice.h"
 #include "Tempest/Audio/SoundSource.h"
 #include "Tempest/Audio/SoundBuffer.h"
+#include "Tempest/Audio/Audio.h"
 
 //Collision
 #include "Tempest/Collision/Rect.h"

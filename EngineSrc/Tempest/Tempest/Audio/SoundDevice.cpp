@@ -5,8 +5,4 @@
 
 namespace Tempest 
 {
-    ref<SoundDevice> SoundDevice::create()
-    { 
-        return std::make_shared<OpenALSoundDevice>();
-    }
 }
