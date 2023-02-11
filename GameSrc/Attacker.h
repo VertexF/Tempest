@@ -28,7 +28,6 @@ namespace game
         void move(Tempest::TimeStep timeStep);
         void fire(Tempest::TimeStep timeStep);
 
-        virtual const glm::vec3 getBulletPosition() const override;
         virtual std::vector<BulletPartical::Partical> getBullets() const override;
         virtual int getID() const override;
 

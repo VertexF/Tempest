@@ -156,11 +156,6 @@ namespace game
     {
     }
 
-    const glm::vec3 Attacker::getBulletPosition() const
-    {
-        return glm::vec3(0.f);
-    }
-
     int Attacker::getID() const
     {
         return entityID;

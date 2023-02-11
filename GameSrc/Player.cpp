@@ -165,9 +165,6 @@ namespace game
             _smokeParticalProps.position.x -= 0.5f;
             _particalSystem.emit(_smokeParticalProps);
             _smokeEmitTime += _smokeInterval;
-
-            //_bulletParticalProps.position = glm::vec2(collisionRect.position.x + 0.4f, collisionRect.position.y);
-            //_bulletEmitter.emit(_bulletParticalProps);
         }
 
         _particalSystem.onUpdate(ts);
@@ -198,12 +195,6 @@ namespace game
         colour = { 1.f, 0.f, 0.f, 1.f };
         collisionRect.position = { 0.f, 0.f, 0.f };
         collisionRect.velocity = { 0.f, 0.f, 0.f };
-    }
-
-    const glm::vec3 Player::getBulletPosition() const
-    {
-        //_bulletEmitter.getParticalPool();
-        return glm::vec3(_bulletParticalProps.position.x, _bulletParticalProps.position.y, -0.4);
     }
 
     std::vector<BulletPartical::Partical> Player::getBullets() const

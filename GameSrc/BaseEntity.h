@@ -45,8 +45,7 @@ namespace game
 
         virtual glm::vec2 getHalfSpace() const;
 
-        virtual const glm::vec3 getBulletPosition() const = 0;
-        virtual std::vector<BulletPartical::Partical> getBullets() const { return std::vector<BulletPartical::Partical>(); };
+        virtual std::vector<BulletPartical::Partical> getBullets() const = 0;
         virtual int getID() const = 0;
         virtual bool isDead() const;
 

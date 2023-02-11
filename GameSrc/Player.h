@@ -37,7 +37,6 @@ namespace game
 
         float getRotation() { return (collisionRect.velocity.y); }
 
-        virtual const glm::vec3 getBulletPosition() const override;
         virtual std::vector<BulletPartical::Partical> getBullets() const;
         virtual int getID() const override;
 
