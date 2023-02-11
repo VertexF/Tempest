@@ -155,7 +155,6 @@ namespace game
         glm::vec2 emissionPoint = { collisionRect.position.x, collisionRect.position.y };
         glm::vec2 particalsPosition = glm::vec2(collisionRect.position.x - 0.4f, collisionRect.position.y);
         glm::vec2 particalsVelocity = glm::vec2(collisionRect.velocity.x, collisionRect.velocity.y);
-        float rotation = glm::radians(getRotation());
         _fireParticalProps.position = particalsPosition;
         _fireParticalProps.velocity.y = -particalsVelocity.y * 0.2f - 0.2f;
         _particalSystem.emit(_fireParticalProps);

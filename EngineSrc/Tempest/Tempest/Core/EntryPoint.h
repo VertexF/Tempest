@@ -16,7 +16,7 @@ extern Tempest::Application* Tempest::createApplication();
 //Here set up the logging function. Then start then engine and run it.
 //We also want to control how the life of the engine so it's not a 
 //smart pointer.
-int main(int argc, char** argv)
+int main(int /*argc*/, char** /*argv*/)
 {
     Tempest::Log::init();
     TEMPEST_PROFILE_BEGIN_SESSION("Startup", "TempestProfile_startup.json");

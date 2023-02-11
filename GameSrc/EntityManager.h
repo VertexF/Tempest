@@ -43,7 +43,7 @@ namespace game
         std::unordered_map<uint32_t, EntityType> _entities;
         std::vector<std::shared_ptr<BaseEntity>> _entityList;
 
-        uint32_t _playerID = -1;
+        uint32_t _playerID = 99999;
     };
 }
 

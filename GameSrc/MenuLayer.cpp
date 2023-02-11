@@ -80,12 +80,12 @@ namespace game
         return finished;
     }
 
-    bool MenuLayer::onKeyPressed(Tempest::PressedKeyEvent& e)
+    bool MenuLayer::onKeyPressed(Tempest::PressedKeyEvent& /*e*/)
     {
         return false;
     }
 
-    bool MenuLayer::onKeyReleased(Tempest::ReleasedKeyEvent& e)
+    bool MenuLayer::onKeyReleased(Tempest::ReleasedKeyEvent& /*e*/)
     {
         return false;
     }

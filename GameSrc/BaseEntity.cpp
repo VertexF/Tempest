@@ -42,14 +42,14 @@ namespace game
         collisionRect.position = pos;
     }
 
-    double BaseEntity::getMaxSpeed() const 
+    float BaseEntity::getMaxSpeed() const
     {
         return speed;
     }
 
-    void BaseEntity::setMaxSpeed(double speed) 
+    void BaseEntity::setMaxSpeed(float newSpeed) 
     {
-        this->speed = speed;
+        this->speed = newSpeed;
     }
 
     glm::vec2 BaseEntity::getSize() const 

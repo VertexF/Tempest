@@ -152,7 +152,7 @@ namespace game
         }
     }
 
-    void Attacker::fire(Tempest::TimeStep timeStep)
+    void Attacker::fire(Tempest::TimeStep /*timeStep*/)
     {
     }
 

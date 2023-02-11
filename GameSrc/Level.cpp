@@ -43,7 +43,7 @@ namespace game
         _textureMap['d'] = Tempest::SubTexture2D::createFromCoords(_spriteSheetLevel, { 4, 0 }, { 127, 128 });
 
         _mapWidth = MAP_WIDTH;
-        _mapHeight = strlen(MAP) / MAP_WIDTH;
+        _mapHeight = static_cast<uint32_t>(strlen(MAP)) / MAP_WIDTH;
     }
 
     void Level::onUpdate(Tempest::TimeStep ts)

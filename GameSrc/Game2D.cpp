@@ -64,14 +64,14 @@ namespace game
 
         char scoreText[13] = "Score : ";
         char intText[5];
-        sprintf(intText, "%d", _score);
-        strcat(scoreText, intText);
+        sprintf_s(intText, "%d", _score);
+        strcat_s(scoreText, intText);
 
         _scoreText->displayText({ _cameraController->getCameraPosition().x + 4.f, _cameraController->getCameraPosition().y + 4.4f, 0.1f }, { 1.f, 1.f }, _squareColour, scoreText);
 
         char livesText[13] = "Lives : ";
-        sprintf(intText, "%d", _playerLives);
-        strcat(livesText, intText);
+        sprintf_s(intText, "%d", _playerLives);
+        strcat_s(livesText, intText);
 
         _levelText->displayText({ _cameraController->getCameraPosition().x - 8.f, _cameraController->getCameraPosition().y + 4.4f, 0.1f }, { 1.f, 1.f }, _squareColour, livesText);
         if (ENTITY_MANAGER.isPlayerRemoved())
@@ -141,12 +141,12 @@ namespace game
         TEMPEST_PROFILE_FUNCTION();
     }
 
-    bool Game2D::onKeyPressed(Tempest::PressedKeyEvent& e)
+    bool Game2D::onKeyPressed(Tempest::PressedKeyEvent& /*e*/)
     {
         return false;
     }
 
-    bool Game2D::onKeyReleased(Tempest::ReleasedKeyEvent& e) 
+    bool Game2D::onKeyReleased(Tempest::ReleasedKeyEvent& /*e*/)
     {
         return false;
     }

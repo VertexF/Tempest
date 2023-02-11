@@ -81,7 +81,7 @@ namespace game
             float life = partical.lifeRemaining / partical.lifeTime;
             glm::vec4 colour = glm::lerp(partical.colourEnd, partical.colourBegin, life);
 
-            float size = glm::lerp(partical.endSize, partical.beginSize, life);
+            //float size = glm::lerp(partical.endSize, partical.beginSize, life);
             Tempest::Renderer2D::drawQuad({ partical.position.x, partical.position.y, -0.4f }, { 1.f, 1.f }, _bulletTexture, 1.f, colour);
         }
     }

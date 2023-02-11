@@ -9,12 +9,12 @@ namespace game
 {
     uint32_t EntityManager::instantiate(EntityType type)
     {
-        uint32_t ID = -1;
+        uint32_t ID = 99999;
         switch (type) 
         {
         case EntityType::PLAYER:
         {
-            _playerID = _entities.size();
+            _playerID = static_cast<uint32_t>(_entities.size());
             std::shared_ptr<Player> player = std::make_shared<Player>(_playerID);
             _entities.insert({ _playerID, EntityType::PLAYER });
             _entityList.push_back(player);
@@ -23,7 +23,7 @@ namespace game
         }
         case EntityType::ENEMY:
         {
-            ID = _entities.size();
+            ID = static_cast<uint32_t>(_entities.size());
             std::shared_ptr<Enemy> enemy = std::make_shared<Enemy>(ID);
             _entities.insert({ ID, EntityType::ENEMY });
             _entityList.push_back(enemy);
@@ -32,7 +32,7 @@ namespace game
         }
         case EntityType::ATTACKER:
         {
-            ID = _entities.size();
+            ID = static_cast<uint32_t>(_entities.size());
             std::shared_ptr<Attacker> attacker = std::make_shared<Attacker>(ID);
             _entities.insert({ ID, EntityType::ATTACKER });
             _entityList.push_back(attacker);
@@ -75,7 +75,7 @@ namespace game
     std::vector<std::shared_ptr<BaseEntity>> EntityManager::getEnemies()
     {
         std::vector<std::shared_ptr<BaseEntity>> enemiesList;
-        for (size_t i = 0; i < _entities.size(); i++)
+        for (uint32_t i = 0; i < _entities.size(); i++)
         {
             auto it = _entities.find(i);
             if (it != _entities.end() && (it->second == EntityType::ENEMY || it->second == EntityType::ATTACKER))
@@ -101,7 +101,7 @@ namespace game
             return;
         }
 
-        size_t toDeleteIndex = std::distance(_entities.begin(), it);
+        uint32_t toDeleteIndex = static_cast<uint32_t>(std::distance(_entities.begin(), it));
         EntityType entityType = it->second;
 
         std::swap(_entityList[toDeleteIndex], _entityList.back());

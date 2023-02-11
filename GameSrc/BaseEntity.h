@@ -37,8 +37,8 @@ namespace game
         virtual glm::vec3 getPosition() const;
         virtual void setPosition(const glm::vec3 &pos);
 
-        virtual double getMaxSpeed() const;
-        virtual void setMaxSpeed(double speed);
+        virtual float getMaxSpeed() const;
+        virtual void setMaxSpeed(float newSpeed);
 
         virtual glm::vec2 getSize() const;
         virtual void setSize(const glm::vec2 &newSize);

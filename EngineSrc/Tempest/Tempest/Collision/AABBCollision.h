@@ -98,7 +98,7 @@ namespace Tempest
             return true;
         }
 
-        static bool DynamicRectVsRect(const Rect& movingRect, const TimeStep timeStep, const Rect staticRect, glm::vec2& outContactPoint, glm::vec2& outContantNormal, float &contactTime) 
+        static bool DynamicRectVsRect(const Rect& movingRect, const TimeStep /*timeStep*/, const Rect staticRect, glm::vec2& outContactPoint, glm::vec2& outContantNormal, float& contactTime)
         {
             //Fix this later
             //if (movingRect.velocity == glm)

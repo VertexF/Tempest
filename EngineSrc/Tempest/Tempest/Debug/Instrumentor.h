@@ -114,7 +114,7 @@ namespace Tempest
             auto start = std::chrono::time_point_cast<std::chrono::microseconds>(_timePoint).time_since_epoch().count();
             auto end = std::chrono::time_point_cast<std::chrono::microseconds>(endPoint).time_since_epoch().count();
 
-            uint32_t threadID = std::hash<std::thread::id>{}(std::this_thread::get_id());
+            uint32_t threadID = static_cast<uint32_t>(std::hash<std::thread::id>{}(std::this_thread::get_id()));
             Instrumentor::get().writeProfile({ _name, start, end, threadID });
 
             _stopped = true;
