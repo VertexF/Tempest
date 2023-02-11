@@ -4,6 +4,7 @@
 #include "Tempest/Core/EntryPoint.h"
 
 #include "Game2D.h"
+#include "MenuLayer.h"
 
 //The client uses the application as a template to create the game.
 class Game : public Tempest::Application
@@ -12,6 +13,7 @@ public:
     Game() 
     {
         pushGameLayer(new game::Game2D());
+        pushGameLayer(new game::MenuLayer());
     }
 
     ~Game() {}

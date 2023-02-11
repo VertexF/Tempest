@@ -22,26 +22,28 @@ namespace game
     public:
         EntityManager() = default;
 
-        int instantiate(EntityType type);
+        uint32_t instantiate(EntityType type);
 
-        std::shared_ptr<BaseEntity> get(int id);
+        std::shared_ptr<BaseEntity> get(uint32_t id);
         std::shared_ptr<BaseEntity> getPlayer();
 
         std::vector<std::shared_ptr<BaseEntity>> getEnemies();
         std::vector<std::shared_ptr<BaseEntity>> getAllEntity();
 
-        void remove(int id);
+        void remove(uint32_t id);
 
-        bool isRemoved(int id);
+        bool isRemoved(uint32_t id);
         bool isPlayerRemoved();
-        bool isPlayer(int id) const;
+        bool isPlayer(uint32_t id) const;
 
         size_t size() const;
+        std::unordered_map<uint32_t, EntityType> getEntities();
+
     private:
-        std::unordered_map<int, EntityType> _entities;
+        std::unordered_map<uint32_t, EntityType> _entities;
         std::vector<std::shared_ptr<BaseEntity>> _entityList;
 
-        int _playerID = -1;
+        uint32_t _playerID = -1;
     };
 }
 

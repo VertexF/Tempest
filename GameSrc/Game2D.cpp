@@ -20,36 +20,16 @@ namespace game
         TEMPEST_PROFILE_FUNCTION();
         _cameraController = std::make_unique<Tempest::OrthographicalCameraController>(1280.f / 720.f);
 
-        _testText = std::make_unique<Tempest::TextRenderer>(128.f);
+        _scoreText = std::make_unique<Tempest::TextRenderer>(128.f);
+        _levelText = std::make_unique<Tempest::TextRenderer>(128.f);
+        _gameOverText = std::make_unique<Tempest::TextRenderer>(300.f);
 
         _backgroundTexture = Tempest::Texture2D::create("Assets/Textures/stars.png");
 
-        ENTITY_MANAGER.instantiate(EntityManager::EntityType::PLAYER);
-        ENTITY_MANAGER.instantiate(EntityManager::EntityType::ENEMY);
-        ENTITY_MANAGER.instantiate(EntityManager::EntityType::ATTACKER);
-        ENTITY_MANAGER.instantiate(EntityManager::EntityType::ATTACKER);
-        ENTITY_MANAGER.instantiate(EntityManager::EntityType::ATTACKER);
-        //Need this to stop thing exploding.
-        //ENTITY_MANAGER.instantiate(EntityManager::EntityType::ENEMY);
-        ENTITY_MANAGER.instantiate(EntityManager::EntityType::ENEMY);
-        ENTITY_MANAGER.instantiate(EntityManager::EntityType::ENEMY);
-        ENTITY_MANAGER.instantiate(EntityManager::EntityType::ENEMY);
-        ENTITY_MANAGER.instantiate(EntityManager::EntityType::ATTACKER);
-        ENTITY_MANAGER.instantiate(EntityManager::EntityType::ATTACKER);
-
-        for (uint32_t i = 0; i < static_cast<uint32_t>(ENTITY_MANAGER.size()); i++)
-        {
-            ENTITY_MANAGER.get(i)->init();
-        }
-
-        ENTITY_MANAGER.get(3)->setPosition( { 12.f, -4.f, -0.6f } );
-        ENTITY_MANAGER.get(4)->setPosition({ 12.f, 8.f, -0.6f });
-        ENTITY_MANAGER.get(5)->setPosition({ 9.f, -5.f, -0.6f });
-        ENTITY_MANAGER.get(6)->setPosition({ 12.f, 4.f, -0.6f });
-        ENTITY_MANAGER.get(7)->setPosition({ 15.f, -4.f, -0.6f });
-
-        ENTITY_MANAGER.get(3)->setPosition({ 15.f, 0.f, -0.6f });
-        ENTITY_MANAGER.get(4)->setPosition({ 15.f, 5.f, -0.6f });
+        ENTITY_MANAGER.get(ENTITY_MANAGER.instantiate(EntityManager::EntityType::PLAYER))->init();
+        ENTITY_MANAGER.get(ENTITY_MANAGER.instantiate(EntityManager::EntityType::ATTACKER))->init();
+        ENTITY_MANAGER.get(ENTITY_MANAGER.instantiate(EntityManager::EntityType::ENEMY))->init();
+        _playerLives = ENTITY_MANAGER.getPlayer()->getLives();
     }
 
     void Game2D::onAttach()
@@ -70,6 +50,7 @@ namespace game
 
         _totalTime += timeStep;
 
+        _cameraController->autoScroll(timeStep);
         _cameraController->onUpdate(timeStep);
 
         Tempest::Renderer2D::resetStats();
@@ -79,14 +60,21 @@ namespace game
 
         Tempest::Renderer2D::beginScene(_cameraController->getCamera());
 
-        Tempest::Renderer2D::drawQuad({ _cameraController->getCameraPosition().x, _cameraController->getCameraPosition().y, 0.5f }, { 20.f, 10.f }, _backgroundTexture);
+        Tempest::Renderer2D::drawQuad({ 0.f, 0.f, 0.5f }, { 40.f, 20.f }, _backgroundTexture);
 
-        _testText->displayText({ _cameraController->getCameraPosition().x - 6.f, _cameraController->getCameraPosition().y + 4.f, 0.1f}, { 1.f, 1.f }, _squareColour, std::string("Score : " + std::to_string(_score)).c_str());
-        if (ENTITY_MANAGER.isPlayerRemoved() == false)
-        {
-            ENTITY_MANAGER.getPlayer()->setVelocity(_cameraController->getCameraPosition());
-        }
-        else 
+        char scoreText[13] = "Score : ";
+        char intText[5];
+        sprintf(intText, "%d", _score);
+        strcat(scoreText, intText);
+
+        _scoreText->displayText({ _cameraController->getCameraPosition().x + 4.f, _cameraController->getCameraPosition().y + 4.4f, 0.1f }, { 1.f, 1.f }, _squareColour, scoreText);
+
+        char livesText[13] = "Lives : ";
+        sprintf(intText, "%d", _playerLives);
+        strcat(livesText, intText);
+
+        _levelText->displayText({ _cameraController->getCameraPosition().x - 8.f, _cameraController->getCameraPosition().y + 4.4f, 0.1f }, { 1.f, 1.f }, _squareColour, livesText);
+        if (ENTITY_MANAGER.isPlayerRemoved())
         {
             _isDead = true;
         }
@@ -98,19 +86,19 @@ namespace game
 
         if (_isDead == false && _hasWon == false)
         {
-            for (uint32_t i = 0; i < ENTITY_MANAGER.size(); i++)
+            auto test = ENTITY_MANAGER.getEntities();
+            for (auto iter = test.begin(); iter != test.end(); iter++) 
             {
-                if (ENTITY_MANAGER.get(i) != nullptr)
+                if (ENTITY_MANAGER.get(iter->first)) 
                 {
-                    ENTITY_MANAGER.get(i)->onUpdate(timeStep);
-                    if (ENTITY_MANAGER.get(i)->isDead())
+                    ENTITY_MANAGER.get(iter->first)->onUpdate(timeStep);
+                    if (ENTITY_MANAGER.get(iter->first)->isDead())
                     {
-                        if (ENTITY_MANAGER.isPlayer(i) == false)
+                        if (ENTITY_MANAGER.isPlayer(iter->first) == false) 
                         {
                             _score += 1000;
                         }
-                        ENTITY_MANAGER.remove(i);
-                        break;
+                        ENTITY_MANAGER.remove(iter->first);
                     }
                 }
             }
@@ -119,12 +107,21 @@ namespace game
         {
             if (_hasWon && _isDead == false)
             {
-                _testText->displayText({ _cameraController->getCameraPosition().x - 6.f, _cameraController->getCameraPosition().y, -0.9f }, { 4.f, 4.f }, { 0.f, 1.f, 1.f, 1.f }, "You win!");
+                _gameOverText->displayText({ _cameraController->getCameraPosition().x - 6.f, _cameraController->getCameraPosition().y, -0.9f }, { 4.f, 4.f }, { 0.f, 1.f, 1.f, 1.f }, "You win!");
             }
             else
             {
-                _testText->displayText({ _cameraController->getCameraPosition().x - 6.f, _cameraController->getCameraPosition().y, -0.9f }, { 4.f, 4.f }, { 0.f, 1.f, 1.f, 1.f }, "You lose!");
+                _gameOverText->displayText({ _cameraController->getCameraPosition().x - 6.f, _cameraController->getCameraPosition().y, -0.9f }, { 4.f, 4.f }, { 0.f, 1.f, 1.f, 1.f }, "You lose!");
             }
+        }
+
+        if (ENTITY_MANAGER.getPlayer())
+        {
+            _playerLives = ENTITY_MANAGER.getPlayer()->getLives();
+        }
+        else 
+        {
+            _playerLives = 0;
         }
 
         Tempest::Renderer2D::endScene();

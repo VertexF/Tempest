@@ -1,7 +1,6 @@
 #ifndef OPENAL_SOUND_DEVICE_HDR
 #define OPENAL_SOUND_DEVICE_HDR
 
-#define AL_LIBTYPE_STATIC
 #include <Al/alc.h>
 #include <sndfile.h>
 

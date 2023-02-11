@@ -6,8 +6,7 @@
 #include <memory>
 
 #include "BaseEntity.h"
-#include "Bullet.h"
-
+#include "BulletParticles.h"
 
 namespace 
 {
@@ -36,14 +35,15 @@ namespace game
         void onImGuiRender();
         void reset();
 
-        bool isDead() const;
         float getRotation() { return (collisionRect.velocity.y); }
 
         virtual const glm::vec3 getBulletPosition() const override;
+        virtual std::vector<BulletPartical::Partical> getBullets() const;
         virtual int getID() const override;
-    private:
-        std::unique_ptr<Bullet> _bullet;
 
+        virtual bool isDead() const override;
+        virtual uint32_t getLives() const override;
+    private:
         int _lives = 7;
 
         CURRENT_STATE _currentState;
@@ -57,9 +57,14 @@ namespace game
         Tempest::ref<Tempest::Texture2D> _spriteSheetLevel;
         Tempest::ref<Tempest::Texture2D> _astroid;
         Tempest::ref<Tempest::SubTexture2D> _shipTexture;
+        Tempest::scope<Tempest::SoundSource> _mySource;
+        uint32_t _laserSoundBuffer = 0;
 
         Tempest::ParticalProps _smokeParticalProps, _fireParticalProps;
         Tempest::ParticalSystem _particalSystem;
+
+        ParticalProps _bulletParticalProps;
+        BulletPartical _bulletEmitter;
 
         float _time = 0.f;
         float _smokeInterval = 0.4f;

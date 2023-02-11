@@ -4,7 +4,7 @@
 #include <glm/glm.hpp>
 
 #include "Global.h"
-#include "Bullet.h"
+#include "BulletParticles.h"
 
 namespace game
 {
@@ -29,6 +29,7 @@ namespace game
         void fire(Tempest::TimeStep timeStep);
 
         virtual const glm::vec3 getBulletPosition() const override;
+        virtual std::vector<BulletPartical::Partical> getBullets() const;
         virtual int getID() const override;
 
         virtual bool isDead() const override;
@@ -40,12 +41,16 @@ namespace game
         Tempest::TimeStep _movementTime;
         float _invisibilityTime = 0.1f;
 
-        std::unique_ptr<Bullet> _bullet;
         Tempest::ref<Tempest::Texture2D> _spriteSheetLevel;
         Tempest::ref<Tempest::SubTexture2D> _shipTexture;
+        Tempest::scope<Tempest::SoundSource> _mySource;
+        uint32_t _laserSoundBuffer = 0;
 
         Tempest::ParticalProps _smokeParticalProps, _fireParticalProps;
         Tempest::ParticalSystem _particalSystem;
+
+        ParticalProps _bulletParticalProps;
+        BulletPartical _bulletEmitter;
 
         float _time = 0.f;
         float _smokeInterval = 0.4f;

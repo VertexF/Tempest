@@ -10,7 +10,7 @@ namespace game
 #define ENTITY_MANAGER (Singleton<EntityManager>::getInstance())
 #define AUDIO_MANAGER (Singleton<Tempest::Audio>::getInstance())
 
-    void creatsGlobals();
+    void createGlobals();
 
     void destroyGlobals();
 }

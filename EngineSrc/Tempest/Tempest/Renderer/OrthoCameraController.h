@@ -17,6 +17,8 @@ namespace Tempest
         OrthographicalCameraController(float apsectRatio, bool rotation = false);
 
         void onUpdate(TimeStep ts);
+        //Game play code
+        void autoScroll(TimeStep ts);
         void onEvent(Event& e);
 
         void onResize(float width, float height);

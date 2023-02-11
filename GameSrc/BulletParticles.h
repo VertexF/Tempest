@@ -1,11 +1,13 @@
-#ifndef PARTICAL_SYSTEM_HDR
-#define PARTICAL_SYSTEM_HDR
+#ifndef BULLET_PARTICLES_HDR
+#define BULLET_PARTICLES_HDR
 
 #include <glm/glm.hpp>
 
 #include "Tempest/Core/TimeStep.h"
+#include "Tempest/Renderer/SubTexture2D.h"
+#include "Tempest/Renderer/Texture.h"
 
-namespace Tempest
+namespace game
 {
     struct ParticalProps
     {
@@ -16,12 +18,12 @@ namespace Tempest
         float lifeTime = 1.f;
     };
 
-    class ParticalSystem
+    class BulletPartical
     {
-    private:
+    public:
         struct Partical
         {
-            glm::vec2 position;
+            glm::vec2 position = { -99.f, -99.f };
             glm::vec2 velocity, velocityVariation;
             glm::vec4 colourBegin, colourEnd;
 
@@ -35,17 +37,22 @@ namespace Tempest
         };
 
     public:
-        ParticalSystem();
+        BulletPartical(bool isPlayer);
 
         void emit(const ParticalProps& particalProps);
 
-        void onUpdate(TimeStep ts);
+        void onUpdate(Tempest::TimeStep ts);
         void onRender();
 
         std::vector<Partical> getParticalPool() const;
     private:
         std::vector<Partical> _particalPool;
-        uint32_t _poolIndex = 999;
+
+        Tempest::ref<Tempest::Texture2D> _spriteSheetLevel;
+        Tempest::ref<Tempest::SubTexture2D> _bulletTexture;
+
+        uint32_t _poolIndex = 10;
     };
 }
-#endif // !PARTICAL_SYSTEM_HDR
+
+#endif //!BULLET_PARTICLES_HDR

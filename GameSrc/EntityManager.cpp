@@ -7,9 +7,9 @@
 
 namespace game 
 {
-    int EntityManager::instantiate(EntityType type)
+    uint32_t EntityManager::instantiate(EntityType type)
     {
-        int ID;
+        uint32_t ID = -1;
         switch (type) 
         {
         case EntityType::PLAYER:
@@ -31,6 +31,7 @@ namespace game
             break;
         }
         case EntityType::ATTACKER:
+        {
             ID = _entities.size();
             std::shared_ptr<Attacker> attacker = std::make_shared<Attacker>(ID);
             _entities.insert({ ID, EntityType::ATTACKER });
@@ -38,14 +39,19 @@ namespace game
             return ID;
             break;
         }
+        default:
+            TEMPEST_CORE_ASSERT("Entity type does not exists.", true);
+            return ID;
+        }
     }
 
-    std::shared_ptr<BaseEntity> EntityManager::get(int id)
+    std::shared_ptr<BaseEntity> EntityManager::get(uint32_t id)
     {
         auto it = _entities.find(id);
         if (it != _entities.end())
         {
-            return std::shared_ptr<BaseEntity>(_entityList[it->first]);
+            size_t index = std::distance(_entities.begin(), it);
+            return std::shared_ptr<BaseEntity>(_entityList[index]);
         }
 
         //This should be removed when I have a more complete system because this isn't an error.
@@ -86,24 +92,26 @@ namespace game
         return _entityList;
     }
 
-    void EntityManager::remove(int id) 
+    void EntityManager::remove(uint32_t id)
     {
         auto it = _entities.find(id);
-        if (it != _entities.end())
+        if (it == _entities.end())
         {
-            EntityType i = it->second;
-            int back = _entityList.back()->getID();
-
-            std::swap(_entityList[back], _entityList.back());
-            _entityList.pop_back();
-
-            _entities[back] = i;
-            _entities.erase(id);
+            TEMPEST_ERROR("This Entity with ID {0} does not exist.", id);
+            return;
         }
-        TEMPEST_ERROR("This Entity with ID {0} does not exist.", id);
+
+        size_t toDeleteIndex = std::distance(_entities.begin(), it);
+        EntityType entityType = it->second;
+
+        std::swap(_entityList[toDeleteIndex], _entityList.back());
+        _entityList.pop_back();
+
+        _entities[toDeleteIndex] = entityType;
+        _entities.erase(id);
     }
 
-    bool EntityManager::isRemoved(int id)
+    bool EntityManager::isRemoved(uint32_t id)
     {
         auto it = _entities.find(id);
         if (it != _entities.end())
@@ -123,7 +131,7 @@ namespace game
         return true;
     }
 
-    bool EntityManager::isPlayer(int id) const
+    bool EntityManager::isPlayer(uint32_t id) const
     {
         return(_playerID == id);
     }
@@ -131,5 +139,10 @@ namespace game
     size_t EntityManager::size() const
     {
         return _entityList.size();
+    }
+
+    std::unordered_map<uint32_t, EntityManager::EntityType> EntityManager::getEntities()
+    {
+        return _entities;
     }
 }

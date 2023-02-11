@@ -13,45 +13,45 @@ namespace game
         Singleton& operator=(const Singleton&) = delete;
         Singleton& operator=(Singleton&&) = delete;
 
-        static void createInstance() 
-        {
-            instance = new T();
-        }
-
-        static void destroyInstance() 
-        {
-            delete instance;
-            instance = nullptr;
-        }
-
         static T& getInstance() 
         {
-            if (instance == nullptr) 
+            if (_instance == nullptr) 
             {
                 createInstance();
             }
-            return *instance;
+            return *_instance;
         }
 
         //Destroys the old instance and creates the one passed in as a argument.
         static void setInstance(T* newInstance) 
         {
-            if (instance) 
+            if (_instance)
             {
                 destroyInstance();
             }
-            instance = newInstance;
+            _instance = newInstance;
         }
-
     private:
-        static T* instance;
-
         Singleton() {}
         ~Singleton() {}
+
+        static void createInstance()
+        {
+            _instance = new T();
+        }
+
+        static void destroyInstance()
+        {
+            delete _instance;
+            _instance = nullptr;
+        }
+
+
+        static T* _instance;
     };
 
     template <class T>
-    T* Singleton<T>::instance = nullptr;
+    T* Singleton<T>::_instance = nullptr;
 }
 
 #endif // !SINGLETON_HDR

@@ -3,7 +3,7 @@
 
 namespace game 
 {
-    void creatsGlobals() 
+    void createGlobals() 
     {
         ENTITY_MANAGER;
         AUDIO_MANAGER;

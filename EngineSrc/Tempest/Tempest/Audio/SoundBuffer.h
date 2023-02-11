@@ -1,7 +1,6 @@
 #ifndef SOUND_BUFFER_HDR
 #define SOUND_BUFFER_HDR
 
-#define AL_LIBTYPE_STATIC
 #include <AL/al.h>
 
 #include "Tempest/Core/Core.h"

@@ -5,6 +5,7 @@
 
 #include "OpenALSoundBuffer.h"
 #include "OpenALSoundDevice.h"
+#include "SoundSource.h"
 
 namespace Tempest 
 {

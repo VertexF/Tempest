@@ -12,10 +12,12 @@
 
 namespace game
 {
-    Player::Player(int id) : BaseEntity(id), _currentState(CURRENT_STATE::FLYING)
+    Player::Player(int id) : BaseEntity(id), _bulletEmitter(true), _currentState(CURRENT_STATE::FLYING)
     {
         _spriteSheetLevel = Tempest::Texture2D::create("Assets/Textures/ships.png");
         _astroid = Tempest::Texture2D::create("Assets/Textures/astroid.png");
+        _laserSoundBuffer = AUDIO_MANAGER.addSoundEffect("Assets/Audio/EnemyLaser.wav");
+        _mySource = std::make_unique<Tempest::SoundSource>();
 
         _shipTexture = Tempest::SubTexture2D::createFromCoords(_spriteSheetLevel, { 0, 3 }, { 256, 256 });
 
@@ -48,13 +50,26 @@ namespace game
         _fireParticalProps.colourEnd = { 254.f / 255.f, 212.f / 255.f, 123.f / 255.f , 1.f };
 
         _fireParticalProps.lifeTime = 1.f;
+
+        //Bullet
+        _bulletParticalProps.position = { 0.f, 0.f };
+
+        _bulletParticalProps.velocity = { 15.f, 0.f };
+        _bulletParticalProps.velocityVariation = { 0.f, 0.f };
+
+        _bulletParticalProps.beginSize = 1.0f;
+        _bulletParticalProps.endSize = 0.0f;
+        _bulletParticalProps.sizeVarition = 0.0f;
+
+        _bulletParticalProps.colourBegin = { 254.f / 255.f, 109.f / 255.f, 41.f / 255.f, 1.f };
+        _bulletParticalProps.colourEnd = { 254.f / 255.f, 212.f / 255.f, 123.f / 255.f , 1.f };
+
+        _bulletParticalProps.lifeTime = 0.5f;
     }
 
     void Player::init()
     {
         reset();
-        _bullet = std::make_unique<game::Bullet>(entityID, true);
-
         testRect.position = { 5.f, 0.f, 0.f };
     }
 
@@ -68,25 +83,58 @@ namespace game
     {
         TEMPEST_PROFILE_FUNCTION();
 
-        collisionRect.position = collisionRect.velocity;
         _time += ts;
+
+        if (Tempest::Input::isKeyPressed(TEMP_KEY_W))
+        {
+            collisionRect.velocity.y += 4.f * ts;
+        }
+        if (Tempest::Input::isKeyPressed(TEMP_KEY_S))
+        {
+            collisionRect.velocity.y -= 4.f * ts;
+        }
+
+        if (Tempest::Input::isKeyPressed(TEMP_KEY_A))
+        {
+            collisionRect.velocity.x -= 4.f * ts;
+        }
+        if (Tempest::Input::isKeyPressed(TEMP_KEY_D))
+        {
+            collisionRect.velocity.x += 4.f * ts;
+        }
+
+        if (Tempest::Input::isKeyPressed(TEMP_KEY_SPACE))
+        {
+            if (_time > _smokeEmitTime)
+            {
+                _bulletParticalProps.position = glm::vec2(collisionRect.position.x + 0.4f, collisionRect.position.y);
+                _bulletEmitter.emit(_bulletParticalProps);
+                _mySource->play(_laserSoundBuffer);
+            }
+        }
+
+        collisionRect.position = collisionRect.velocity;
 
         switch (_currentState)
         {
         case CURRENT_STATE::FLYING:
             for(const auto & ship : ENTITY_MANAGER.getEnemies())
             {
-                if (Tempest::AABBCollision::PointVsRect(ship->getBulletPosition(), collisionRect))
+                for (const auto& bullet : ship->getBullets())
                 {
-                    _lives -= 1;
-                    _currentState = CURRENT_STATE::DAMAGED;
+                    if (Tempest::AABBCollision::PointVsRect(bullet.position, collisionRect))
+                    {
+                        _lives -= 1;
+                        _currentState = CURRENT_STATE::DAMAGED;
+                        break;
+                    }
                 }
 
-                //const Rect& movingRect, const TimeStep timeStep, const Rect staticRect, glm::vec2& outContactPoint, glm::vec2& outContantNormal, float &contactTime
                 if (Tempest::AABBCollision::RectVsRect(collisionRect, ship->getCollisionRect()))
                 {
                     _lives -= 1;
                     _currentState = CURRENT_STATE::DAMAGED;
+                    break;
                 }
             }
             colour = { 1.f, 1.f, 1.f, 1.f };
@@ -118,11 +166,13 @@ namespace game
             _smokeParticalProps.position.x -= 0.5f;
             _particalSystem.emit(_smokeParticalProps);
             _smokeEmitTime += _smokeInterval;
+
+            //_bulletParticalProps.position = glm::vec2(collisionRect.position.x + 0.4f, collisionRect.position.y);
+            //_bulletEmitter.emit(_bulletParticalProps);
         }
 
         _particalSystem.onUpdate(ts);
-
-        _bullet->onUpdate(ts);
+        _bulletEmitter.onUpdate(ts);
 
         onRender();
     }
@@ -135,6 +185,7 @@ namespace game
         Tempest::Renderer2D::drawQuad({ testRect.position.x, testRect.position.y, -0.5f }, testRect.size, _astroid);
 
         _particalSystem.onRender();
+        _bulletEmitter.onRender();
 
     }
 
@@ -152,7 +203,13 @@ namespace game
 
     const glm::vec3 Player::getBulletPosition() const
     {
-        return _bullet->getPosition();
+        //_bulletEmitter.getParticalPool();
+        return glm::vec3(_bulletParticalProps.position.x, _bulletParticalProps.position.y, -0.4);
+    }
+
+    std::vector<BulletPartical::Partical> Player::getBullets() const
+    {
+        return _bulletEmitter.getParticalPool();
     }
 
     int Player::getID() const
@@ -163,5 +220,10 @@ namespace game
     bool Player::isDead() const
     {
         return (_lives <= 0);
+    }
+
+    uint32_t Player::getLives() const
+    {
+        return _lives;
     }
 }

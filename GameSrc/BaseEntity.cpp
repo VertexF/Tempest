@@ -74,6 +74,10 @@ namespace game
         return false;
     }
 
+    uint32_t BaseEntity::getLives() const 
+    {
+        return 0;
+    }
 
     Tempest::Rect BaseEntity::getCollisionRect() const 
     {

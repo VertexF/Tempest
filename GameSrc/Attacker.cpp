@@ -5,10 +5,12 @@
 
 namespace game
 {
-    Attacker::Attacker(int id) : BaseEntity(id), _lives(3)
+    Attacker::Attacker(int id) : BaseEntity(id), _bulletEmitter(false), _lives(3)
     {
         _spriteSheetLevel = Tempest::Texture2D::create("Assets/Textures/ships.png");
         _shipTexture = Tempest::SubTexture2D::createFromCoords(_spriteSheetLevel, { 0, 2 }, { 256, 256 });
+        _laserSoundBuffer = AUDIO_MANAGER.addSoundEffect("Assets/Audio/laser.wav");
+        _mySource = std::make_unique<Tempest::SoundSource>();
 
         //Smoke
         _smokeParticalProps.position = { 0.f, 0.f };
@@ -39,14 +41,26 @@ namespace game
         _fireParticalProps.colourEnd = { 254.f / 255.f, 212.f / 255.f, 123.f / 255.f , 1.f };
 
         _fireParticalProps.lifeTime = 1.f;
+
+        _bulletParticalProps.position = { 3.f, 0.f };
+
+        _bulletParticalProps.velocity = { -15.f, 0.f };
+        _bulletParticalProps.velocityVariation = { 0.f, 0.f };
+
+        _bulletParticalProps.beginSize = 1.0f;
+        _bulletParticalProps.endSize = 0.0f;
+        _bulletParticalProps.sizeVarition = 0.0f;
+
+        _bulletParticalProps.colourBegin = { 254.f / 255.f, 109.f / 255.f, 41.f / 255.f, 1.f };
+        _bulletParticalProps.colourEnd = { 254.f / 255.f, 212.f / 255.f, 123.f / 255.f , 1.f };
+
+        _bulletParticalProps.lifeTime = 0.5f;
     }
 
     void Attacker::init()
     {
         spawn();
         _currentState = CURRENT_STATE::FLYING;
-        _bullet = std::make_unique<Bullet>(entityID, false);
-        _bullet->setColour({ 1.0f, 0.5f, 0.0f, 1.f });
     }
 
     void Attacker::onRender()
@@ -55,6 +69,7 @@ namespace game
         Tempest::Renderer2D::drawQuad({ collisionRect.position.x, collisionRect.position.y, -0.5f }, collisionRect.size, _shipTexture, 1.f, colour);
 
         _particalSystem.onRender();
+        _bulletEmitter.onRender();
     }
 
     void Attacker::onUpdate(Tempest::TimeStep timeStep)
@@ -66,10 +81,13 @@ namespace game
         case CURRENT_STATE::FLYING:
             if (ENTITY_MANAGER.isPlayerRemoved() == false)
             {
-                if (Tempest::AABBCollision::PointVsRect(ENTITY_MANAGER.getPlayer()->getBulletPosition(), collisionRect))
+                for (const auto& bullet : ENTITY_MANAGER.getPlayer()->getBullets())
                 {
-                    _lives -= 1;
-                    _currentState = CURRENT_STATE::DAMAGED;
+                    if (Tempest::AABBCollision::PointVsRect(bullet.position, collisionRect))
+                    {
+                        _lives -= 1;
+                        _currentState = CURRENT_STATE::DAMAGED;
+                    }
                 }
             }
 
@@ -104,9 +122,13 @@ namespace game
             _smokeParticalProps.position.x -= 0.5f;
             _particalSystem.emit(_smokeParticalProps);
             _smokeEmitTime += _smokeInterval;
+            _bulletParticalProps.position = glm::vec2(collisionRect.position.x - 0.4f, collisionRect.position.y);
+            _bulletEmitter.emit(_bulletParticalProps);
+            _mySource->play(_laserSoundBuffer);
         }
 
         _particalSystem.onUpdate(timeStep);
+        _bulletEmitter.onUpdate(timeStep);
 
         onRender();
     }
@@ -132,17 +154,21 @@ namespace game
 
     void Attacker::fire(Tempest::TimeStep timeStep)
     {
-        _bullet->onUpdate(timeStep);
     }
 
     const glm::vec3 Attacker::getBulletPosition() const
     {
-        return _bullet->getPosition();
+        return glm::vec3(0.f);
     }
 
     int Attacker::getID() const
     {
         return entityID;
+    }
+
+    std::vector<BulletPartical::Partical> Attacker::getBullets() const
+    {
+        return _bulletEmitter.getParticalPool();
     }
 
     bool Attacker::isDead() const

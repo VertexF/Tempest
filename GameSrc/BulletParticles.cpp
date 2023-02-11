@@ -1,5 +1,5 @@
 #include "PreComp.h"
-#include "ParticalSystem.h"
+#include "BulletParticles.h"
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/compatibility.hpp>
@@ -7,15 +7,22 @@
 #include "Tempest/Core/Random.h"
 #include "Tempest/Renderer/Renderer2D.h"
 
-namespace Tempest
+namespace game
 {
-    ParticalSystem::ParticalSystem()
+    BulletPartical::BulletPartical(bool isPlayer)
     {
         TEMPEST_PROFILE_FUNCTION();
-        _particalPool.resize(1000);
+        _particalPool.resize(11);
+
+        _spriteSheetLevel = Tempest::Texture2D::create("Assets/Textures/ships.png");
+
+        if (isPlayer)
+            _bulletTexture = Tempest::SubTexture2D::createFromCoords(_spriteSheetLevel, { 1, 2 }, { 256, 256 });
+        else
+            _bulletTexture = Tempest::SubTexture2D::createFromCoords(_spriteSheetLevel, { 1, 3 }, { 256, 256 });
     }
 
-    void ParticalSystem::emit(const ParticalProps& particalProps)
+    void BulletPartical::emit(const ParticalProps& particalProps)
     {
         TEMPEST_PROFILE_FUNCTION();
         Partical& partical = _particalPool[_poolIndex];
@@ -39,7 +46,7 @@ namespace Tempest
         _poolIndex = --_poolIndex % _particalPool.size();
     }
 
-    void ParticalSystem::onUpdate(TimeStep ts)
+    void BulletPartical::onUpdate(Tempest::TimeStep ts)
     {
         TEMPEST_PROFILE_FUNCTION();
         for (auto& partical : _particalPool)
@@ -61,7 +68,7 @@ namespace Tempest
         }
     }
 
-    void ParticalSystem::onRender()
+    void BulletPartical::onRender()
     {
         TEMPEST_PROFILE_FUNCTION();
         for (auto& partical : _particalPool)
@@ -73,14 +80,13 @@ namespace Tempest
 
             float life = partical.lifeRemaining / partical.lifeTime;
             glm::vec4 colour = glm::lerp(partical.colourEnd, partical.colourBegin, life);
-            colour.a = colour.a * life;
 
             float size = glm::lerp(partical.endSize, partical.beginSize, life);
-            Renderer2D::drawRotatedQuad({ partical.position.x, partical.position.y, -0.8f }, { size, size }, partical.rotation, colour);
+            Tempest::Renderer2D::drawQuad({ partical.position.x, partical.position.y, -0.4f }, { 1.f, 1.f }, _bulletTexture, 1.f, colour);
         }
     }
 
-    std::vector<ParticalSystem::Partical> ParticalSystem::getParticalPool() const
+    std::vector<BulletPartical::Partical> BulletPartical::getParticalPool() const
     {
         return _particalPool;
     }

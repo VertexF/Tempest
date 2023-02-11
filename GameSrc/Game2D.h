@@ -31,7 +31,9 @@ namespace game
         bool onKeyReleased(Tempest::ReleasedKeyEvent& e);
     private:
         Tempest::scope<Tempest::OrthographicalCameraController> _cameraController;
-        Tempest::scope<Tempest::TextRenderer> _testText;
+        Tempest::scope<Tempest::TextRenderer> _scoreText;
+        Tempest::scope<Tempest::TextRenderer> _levelText;
+        Tempest::scope<Tempest::TextRenderer> _gameOverText;
 
         glm::vec4 _squareColour;
         Tempest::ref<Tempest::Texture2D> _backgroundTexture;
@@ -47,6 +49,7 @@ namespace game
         bool _isDead = false;
 
         int _score = 0;
+        uint32_t _playerLives = 0;
         float _totalTime = 0.f;
 
         std::vector<float> _xPos;

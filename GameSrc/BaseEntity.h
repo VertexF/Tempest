@@ -6,6 +6,8 @@
 
 #include <Tempest.h>
 
+#include "BulletParticles.h"
+
 namespace game
 {
     class BaseEntity
@@ -44,8 +46,11 @@ namespace game
         virtual glm::vec2 getHalfSpace() const;
 
         virtual const glm::vec3 getBulletPosition() const = 0;
+        virtual std::vector<BulletPartical::Partical> getBullets() const { return std::vector<BulletPartical::Partical>(); };
         virtual int getID() const = 0;
         virtual bool isDead() const;
+
+        virtual uint32_t getLives() const;
 
         Tempest::Rect getCollisionRect() const;
 
