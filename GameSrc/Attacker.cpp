@@ -7,8 +7,8 @@ namespace game
 {
     Attacker::Attacker(int id) : BaseEntity(id), _bulletEmitter(false), _lives(3)
     {
-        _spriteSheetLevel = Tempest::Texture2D::create("Assets/Textures/ships.png");
-        _shipTexture = Tempest::SubTexture2D::createFromCoords(_spriteSheetLevel, { 0, 2 }, { 256, 256 });
+        TEMPEST_PROFILE_FUNCTION();
+        _shipTexture = Tempest::SubTexture2D::createFromCoords(RESOURCE_MANAGER.getSpriteSheet(ResourceManager::SPRITESHEET_TYPE::SHIP), {0, 2}, {256, 256});
         _laserSoundBuffer = AUDIO_MANAGER.addSoundEffect("Assets/Audio/laser.wav");
         _mySource = std::make_unique<Tempest::SoundSource>();
 

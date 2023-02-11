@@ -41,7 +41,6 @@ namespace game
         Tempest::TimeStep _movementTime;
         float _invisibilityTime = 0.1f;
 
-        Tempest::ref<Tempest::Texture2D> _spriteSheetLevel;
         Tempest::ref<Tempest::SubTexture2D> _shipTexture;
         Tempest::scope<Tempest::SoundSource> _mySource;
         uint32_t _laserSoundBuffer = 0;

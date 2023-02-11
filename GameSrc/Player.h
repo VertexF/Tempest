@@ -54,7 +54,6 @@ namespace game
         Tempest::Rect testRect;
         //Test stuff
 
-        Tempest::ref<Tempest::Texture2D> _spriteSheetLevel;
         Tempest::ref<Tempest::Texture2D> _astroid;
         Tempest::ref<Tempest::SubTexture2D> _shipTexture;
         Tempest::scope<Tempest::SoundSource> _mySource;

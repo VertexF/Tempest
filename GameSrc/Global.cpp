@@ -7,6 +7,7 @@ namespace game
     {
         ENTITY_MANAGER;
         AUDIO_MANAGER;
+        RESOURCE_MANAGER;
     }
 
     void destroyGlobals() 

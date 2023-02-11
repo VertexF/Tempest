@@ -14,12 +14,12 @@ namespace game
 {
     Player::Player(int id) : BaseEntity(id), _bulletEmitter(true), _currentState(CURRENT_STATE::FLYING)
     {
-        _spriteSheetLevel = Tempest::Texture2D::create("Assets/Textures/ships.png");
+        TEMPEST_PROFILE_FUNCTION();
         _astroid = Tempest::Texture2D::create("Assets/Textures/astroid.png");
         _laserSoundBuffer = AUDIO_MANAGER.addSoundEffect("Assets/Audio/EnemyLaser.wav");
         _mySource = std::make_unique<Tempest::SoundSource>();
 
-        _shipTexture = Tempest::SubTexture2D::createFromCoords(_spriteSheetLevel, { 0, 3 }, { 256, 256 });
+        _shipTexture = Tempest::SubTexture2D::createFromCoords(RESOURCE_MANAGER.getSpriteSheet(ResourceManager::SPRITESHEET_TYPE::SHIP), { 0, 3 }, { 256, 256 });
 
         //Smoke
         _smokeParticalProps.position = { 0.f, 0.f };

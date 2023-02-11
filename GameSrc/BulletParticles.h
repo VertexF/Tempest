@@ -48,7 +48,6 @@ namespace game
     private:
         std::vector<Partical> _particalPool;
 
-        Tempest::ref<Tempest::Texture2D> _spriteSheetLevel;
         Tempest::ref<Tempest::SubTexture2D> _bulletTexture;
 
         uint32_t _poolIndex = 10;

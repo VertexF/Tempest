@@ -6,6 +6,7 @@
 
 #include "Tempest/Core/Random.h"
 #include "Tempest/Renderer/Renderer2D.h"
+#include "Global.h"
 
 namespace game
 {
@@ -14,12 +15,10 @@ namespace game
         TEMPEST_PROFILE_FUNCTION();
         _particalPool.resize(11);
 
-        _spriteSheetLevel = Tempest::Texture2D::create("Assets/Textures/ships.png");
-
         if (isPlayer)
-            _bulletTexture = Tempest::SubTexture2D::createFromCoords(_spriteSheetLevel, { 1, 2 }, { 256, 256 });
+            _bulletTexture = Tempest::SubTexture2D::createFromCoords(RESOURCE_MANAGER.getSpriteSheet(ResourceManager::SPRITESHEET_TYPE::SHIP), { 1, 2 }, { 256, 256 });
         else
-            _bulletTexture = Tempest::SubTexture2D::createFromCoords(_spriteSheetLevel, { 1, 3 }, { 256, 256 });
+            _bulletTexture = Tempest::SubTexture2D::createFromCoords(RESOURCE_MANAGER.getSpriteSheet(ResourceManager::SPRITESHEET_TYPE::SHIP), { 1, 3 }, { 256, 256 });
     }
 
     void BulletPartical::emit(const ParticalProps& particalProps)
